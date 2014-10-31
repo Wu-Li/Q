@@ -1,0 +1,21 @@
+.tray {
+    position: fixed;
+    width: 10vh;
+    left: 31vw;
+    top: 15vh;
+    z-index: 10;
+    background: rgba(100,100,100,.5);
+    border: groove rgba(0,0,0,0);
+    border-radius: 1vh;
+    box-shadow: 10px 3px 50px 5px rgba(50,50,0,.2);
+}
+.tray button.btn {
+    position: relative;
+    float: right;
+    width: 6vh;
+    height: 6vh;
+    margin: 1vh;
+    background: none;
+    color: rgba(240,240,240,.8);
+    font-size: 32px;
+}

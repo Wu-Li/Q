@@ -1,0 +1,16 @@
+{
+    "contents" : "function load_map(container,query) {\n  window.onerror = alert;\n  idea = MAPJS.content(query),\n  imageInsertController = new MAPJS.ImageInsertController(\"http://localhost:4999?u=\"),\n\tmapModel = new MAPJS.MapModel(MAPJS.DOMRender.layoutCalculator, []);\n\tcontainer.domMapWidget(console, mapModel, false, imageInsertController);\n\t$('body').mapToolbarWidget(mapModel);\n\t$('body').attachmentEditorWidget(mapModel);\n\t$(\"[data-mm-action='export-image']\").click(function () {\n\t\tMAPJS.pngExport(idea).then(function (url) {\n\t\t\twindow.open(url, '_blank');\n\t\t});\n\t});\n\tmapModel.setIdea(idea);\n\t$('#linkEditWidget').linkEditWidget(mapModel);\n\twindow.mapModel = mapModel;\n\t$('.arrow').click(function () {\n\t\t$(this).toggleClass('active');\n\t});\n\timageInsertController.addEventListener('imageInsertError', function (reason) {\n\t\tconsole.log('image insert error', reason);\n\t});\n\tcontainer.on('drop', function (e) {map\n\t\tvar dataTransfer = e.originalEvent.dataTransfer;\n\t\te.stopPropagation();\n\t\te.preventDefault();\n\t\tif (dataTransfer && dataTransfer.files && dataTransfer.files.length > 0) {\n\t\t\tvar fileInfo = dataTransfer.files[0];\n\t\t\tif (/\\.mup$/.test(fileInfo.name)) {\n\t\t\t\tvar oFReader = new FileReader();\n\t\t\t\toFReader.onload = function (oFREvent) {\n\t\t\t\t\tmapModel.setIdea(MAPJS.content(JSON.parse(oFREvent.target.result)));\n\t\t\t\t};\n\t\t\t\toFReader.readAsText(fileInfo, 'UTF-8');\n\t\t\t}\n\t\t}\n\t});\n  return mapModel;\n};\n\nvar models = {};\n\n$( function () { \n  //JSON Binding for saving maps to Mongo\n  $(\"#save\").click( function( event ) {\n      var activemap = $(\".active > .qmap\");   \n      var mapid = activemap.attr(\"id\");\n      var mapjson = models[mapid].getIdea();\n      var query = $(\"#query\");\n      query.val(JSON.stringify(mapjson));\n  });\n  \n  $(\"#load\").click( function( event ) {\n      var query =  $(\"#query\").val();\n      var load = $.parseJSON( query );\n      var activemap = $(\".active > .qmap\");   \n      var mapid = activemap.attr(\"id\");\n      activemap.text(\"\");\n      models[mapid] = load_map(activemap,load);\n  });\n  //container.mapModel = load_map($(\".active > .qmap\"),$.parseJSON($(\"#qsave\").val()))\n}());",
+    "created" : 1414045706965.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1653492481",
+    "id" : "6FA3DE32",
+    "lastKnownWriteTime" : 1414046071,
+    "path" : "~/Google Drive/Workspace/Q/www/js/Q.js",
+    "project_path" : "www/js/Q.js",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "js"
+}

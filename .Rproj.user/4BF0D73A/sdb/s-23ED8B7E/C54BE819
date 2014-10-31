@@ -1,0 +1,16 @@
+{
+    "contents" : "ul#tabs {\n    background: radial-gradient(ellipse at center, #ffffee 20%,#ddddbb 100%);\n}  \n\n#tabs:before {\n  background:linear-gradient(90deg, \n    rgba(0,0,0,0) 0%, rgba(0,0,0,0) 12%,\n    rgba( 150,   0,   50, .15) 12%, rgba( 150,   0,  50, .15) 23%,\n  \trgba( 200,   0,    0, .15) 23%, rgba( 200,   0,   0, .15) 34%,\n  \trgba( 150,  50,    0, .15) 34%, rgba( 150,  50,   0, .15) 45%,\n  \trgba(  50, 150,   50, .15) 45%, rgba(  50, 150,  50, .15) 56%,\n  \trgba(   0, 200,    0, .15) 56%, rgba(   0, 200,   0, .15) 67%,\n  \trgba(   0, 150,   50, .15) 67%, rgba(   0, 150,  50, .15) 78%,\n  \trgba(  50,  50,  150, .15) 78%, rgba(  50,  50, 150, .15) 89%,\n  \trgba(   0,   0,  200, .15) 89%, rgba(   0,   0, 200, .15) 100%);\n}\n\n#Views.qmap {    background:rgba( 150,   0,  50, .15); }\n#Styles.qmap {   background:rgba( 200,   0,   0, .15);  }\n#Names.qmap {    background:rgba( 150,  50,   0, .15); }\n#Data.qmap {     background:rgba(  50, 150,  50, .15); }\n#Sources.qmap {  background:rgba(   0, 200,   0, .15);  }\n#Classes.qmap {  background:rgba(   0, 150,  50, .15); }\n#Units.qmap {    background:rgba(  50,  50, 150, .15); }\n#Formulae.qmap { background:rgba(   0,   0, 200, .15);  }  ",
+    "created" : 1414041833628.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2107904042",
+    "id" : "C54BE819",
+    "lastKnownWriteTime" : 1414041907,
+    "path" : "~/Google Drive/Workspace/Q/www/css/styles.css",
+    "project_path" : "www/css/styles.css",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "css"
+}

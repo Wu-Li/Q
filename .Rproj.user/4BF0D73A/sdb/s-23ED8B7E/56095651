@@ -1,0 +1,16 @@
+{
+    "contents" : "\n# This is the server logic for a Shiny web application.\n# You can find out more about building applications with Shiny here:\n# \n# http://www.rstudio.com/shiny/\n#\n\noptions(\"shiny.launch.browser\"=T)\nlibrary(shiny)\nlibrary(pryr)\nlibrary(RMongo)\n\nshinyServer(function(input, output, session) {\n  cat(\"\\014\")\n  qbase <- mongoDbConnect(\"qbase\")\n  \n  #Console\n  lines <- c()\n  output$console <- renderUI ({\n    prompt <- input$prompt\n    if(prompt !=\"\"){switch(prompt,\n       \"clear\" = {\n            lines <<- c()\n            updateTextInput( session, \"prompt\", value = \"\")          \n            p(lines,id=\"out\")\n       },\n       {#default\n           results <<- eval( parse( text=prompt ))\n           lines <<- c(lines,paste0(\"> \",prompt),toString(results))\n           print(lines)\n           updateTextInput( session, \"prompt\", value = \"\")\n           p(lines)\n       }\n    )}\n  })\n\n  \n})",
+    "created" : 1414026520495.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "286786897",
+    "id" : "56095651",
+    "lastKnownWriteTime" : 1414042152,
+    "path" : "~/Google Drive/Workspace/Q/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

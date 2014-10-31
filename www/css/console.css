@@ -1,0 +1,119 @@
+/***Console***/
+
+div#console {
+  position: absolute;
+  bottom: 0;
+  font-family: monospace;
+}
+
+/***Database***/
+
+#query {
+    position: absolute;
+    left: 0;
+    top: 0vh;
+    width: 30vw;
+    background:none;
+    border:none;
+}
+#qbase {
+    position: absolute;
+    left: 0;
+    top: 35px;
+    width: 28vw;
+    /*white-space:nowrap;*/
+}
+#query,#qbase {
+    /*
+    display:none;
+    /**/
+}
+
+/***Console Out***/
+
+div#fadeup {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 55px;
+    width: 32vw;
+    background: linear-gradient(00deg, rgba(68,68,68,0) 70%, rgba(68,68,68,1) 98%);
+    z-index: 1;
+}
+div#faderight {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 55px;
+    width: 32vw;
+    background: linear-gradient(90deg, rgba(68,68,68,0) 90%, rgba(68,68,68,1) 100%);
+    z-index: 1;
+}
+ol#out {
+  position:absolute;
+  top:10vh;
+  bottom:50px;
+  left: 0px;
+  width: 32vw;
+  color:rgb(240,240,240);
+  list-style-type: none;
+  margin-left:5px;
+}
+ol#out li {
+  margin:0;
+  width: 31.5vw;
+}
+
+form#console {
+    z-index:10;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 68vw;    
+    margin:0;
+    padding:5px;
+    border-style: none;
+    background: #444;
+    font-size: calc( 0.6vw + 4px );;
+    line-height: calc( .6vw + 10px);
+}
+
+form#console #prompt-box {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width:100vw;
+    height: 5vh;
+}
+form#console #prompt-box label  {
+    position: absolute;
+    top:25%;
+    left: .5vh;
+    font-size: 4vh;
+    color: #ddd;
+    z-index: 1;
+    font-weight: bold;
+    font-family: monospace;
+}
+form#console #prompt {
+    border-radius:0;
+    padding-left:26px;
+    font-family: monospace;
+    font-size: 2.5vh;
+    line-height: 6vh;
+    color:#ddd;
+    height: 5vh;
+    background: #888;
+    border: 2px solid #888;
+    border-top: 3px solid #aaa !important;
+    margin: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width:100%;
+    max-width: 100%;
+    z-index: 0;
+    box-sizing:border-box;
+}
