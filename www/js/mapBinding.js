@@ -3,7 +3,7 @@ function buildMap(container,mapId,mapJSON) {
     var idea = MAPJS.content(mapJSON),
         mapModel = new MAPJS.MapModel(MAPJS.DOMRender.layoutCalculator, []),
         imageInsertController = new MAPJS.ImageInsertController("http://localhost:4999?u=");
-    
+        
     mapModel.id = mapId;
         
     container.domMapWidget(console, mapModel, false, imageInsertController);
@@ -40,14 +40,14 @@ function buildMap(container,mapId,mapJSON) {
         }
     });
     container.on('active', function (e) {
-        window.mapModel = models[this.id];
+        window.mapModel = Q.models[this.id];
     })
     return mapModel;
 };
 
 function saveMap(container) { 
       var mapId = container.attr("id");
-      var mapJSON = models[mapId].getIdea();
+      var mapJSON = Q.models[mapId].getIdea();
       var query = $("#query");
       query.val(JSON.stringify(mapJSON));
       query.trigger('change');
@@ -56,7 +56,7 @@ function saveMap(container) {
 function loadMap(container,mapJSON) {
       var mapId = container.attr("id");
       container.text("");
-      models[mapId] = buildMap(container,mapId,mapJSON);
+      Q.models[mapId] = buildMap(container,mapId,mapJSON);
 };
 
 var mapBinding = new Shiny.InputBinding();
@@ -66,8 +66,8 @@ $.extend(mapBinding, {
         return $(".qmap");
 	},
 	getValue: function(el) {
-        if (models[el.id]) {
-		    idea = models[el.id].getIdea();
+        if (Q.models[el.id]) {
+		    idea = Q.models[el.id].getIdea();
         } else {idea = "";}
         return idea;
 	},

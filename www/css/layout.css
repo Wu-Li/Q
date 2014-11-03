@@ -1,0 +1,65 @@
+body {overflow:hidden;}
+
+*:focus{ outline: 0; }
+
+.container-fluid {
+    background:#444;
+    height:100vh;
+    width:100vw;
+    position:absolute;
+    z-index:0;
+    padding: 0;
+    margin: 0;
+}
+
+span#Q {
+    z-index: 20;
+    position: absolute;
+    padding: 10px;
+    line-height: 7vh;
+    font-size: 7vh;
+    font-family: serif;
+    font-weight: 200;  
+    color: #777;  
+    text-shadow: none;
+}
+
+/***Prompt***/
+
+#prompt-box {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width:100vw;
+    height: 5vh;
+    font-family: monospace;
+}
+#prompt-box label  {
+    position: absolute;
+    top:25%;
+    left: .5vh;
+    font-size: 4vh;
+    color: #ddd;
+    z-index: 1;
+    font-weight: bold;
+}
+#prompt {
+    border-radius:0;
+    padding-left:3vh;
+    font-size: 2.5vh;
+    line-height: 5vh;
+    color:#ddd;
+    height: 5vh;
+    background: #888;
+    border: 2px solid #888;
+    border-top: 3px solid #aaa !important;
+    margin: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width:100%;
+    max-width: 100%;
+    z-index: 0;
+    box-sizing:border-box;
+}

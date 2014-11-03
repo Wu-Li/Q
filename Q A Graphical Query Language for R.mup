@@ -1,0 +1,155 @@
+{
+  "title": "Q\nA Graphical Query Language for R",
+  "id": 1,
+  "formatVersion": 2,
+  "ideas": {
+    "24": {
+      "title": "JS (Client)",
+      "id": 36,
+      "attr": {
+        "style": {
+          "background": "#000000"
+        }
+      },
+      "ideas": {
+        "2": {
+          "title": "MAPJS",
+          "id": 33,
+          "attr": {
+            "style": {
+              "background": "#333399"
+            }
+          },
+          "ideas": {
+            "1": {
+              "title": "MapModel",
+              "id": 34,
+              "attr": {
+                "style": {
+                  "background": "#800000"
+                }
+              }
+            }
+          }
+        },
+        "12": {
+          "title": "Q",
+          "id": 32,
+          "attr": {
+            "style": {
+              "background": "#333399"
+            }
+          },
+          "ideas": {
+            "1": {
+              "title": "Console",
+              "id": 22,
+              "ideas": {},
+              "attr": {
+                "style": {
+                  "background": "#800000"
+                }
+              }
+            },
+            "2": {
+              "title": "options",
+              "id": 48,
+              "attr": {
+                "style": {
+                  "background": "transparent"
+                }
+              }
+            },
+            "3": {
+              "title": "maps[]",
+              "id": 28,
+              "ideas": {},
+              "attr": {
+                "style": {}
+              }
+            },
+            "0.75": {
+              "title": "QBase",
+              "id": 49,
+              "attr": {
+                "style": {
+                  "background": "#333399"
+                }
+              }
+            },
+            "0.875": {
+              "title": "Inspector",
+              "id": 41,
+              "attr": {
+                "style": {
+                  "background": "#333399"
+                }
+              }
+            },
+            "1.5": {
+              "title": "View",
+              "id": 52,
+              "attr": {
+                "style": {
+                  "background": "#800000"
+                }
+              }
+            },
+            "2.5": {
+              "title": "console",
+              "id": 46,
+              "attr": {
+                "style": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "-2": {
+      "title": "R (Server)",
+      "id": 37,
+      "ideas": {
+        "2": {
+          "title": "MongoDB",
+          "id": 40,
+          "attr": {
+            "style": {
+              "background": "#800000"
+            }
+          },
+          "ideas": {
+            "1": {
+              "title": "qbase",
+              "id": 43,
+              "attr": {
+                "style": {
+                  "background": "#333399"
+                }
+              },
+              "ideas": {
+                "1": {
+                  "title": "Document",
+                  "id": 44,
+                  "ideas": {}
+                }
+              }
+            }
+          }
+        }
+      },
+      "attr": {
+        "style": {
+          "background": "#000000"
+        }
+      }
+    }
+  },
+  "links": [],
+  "attr": {
+    "style": {
+      "background": "transparent"
+    },
+    "progress": "in-progress"
+  }
+}

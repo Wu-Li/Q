@@ -1,0 +1,84 @@
+
+/***Sidebar***/
+
+#sidebar {
+    z-index:10;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 33vw;    
+    margin:0;
+    padding:0;
+    border-style: none;
+    background: #444;
+}
+
+/***Console***/
+
+#console-panel {
+    position: absolute;
+    top: 4vh;
+    left: 0;
+    width:100%;
+    bottom: 50px;
+    overflow:hidden;
+}
+#fadeup,#faderight {
+    position: absolute;
+    top: 0;
+    width:100%;
+    bottom: 5px;
+    left: 0;
+    z-index: -1;
+    pointer-events:none;
+}
+#fadeup {    background: linear-gradient(00deg, rgba(68,68,68,0) 70%, rgba(68,68,68,1)  98%);}
+#faderight { background: linear-gradient(90deg, rgba(68,68,68,0) 90%, rgba(68,68,68,1) 100%);}
+
+#console {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding:0;
+    margin:0;
+    list-style-type: none;
+    font-family: monospace;
+    background: none;
+    border: none;
+    z-index:-2;
+}
+#console pre {
+    font-size:1.09vw;
+    line-height:1.7vw;
+    width:111%;
+    margin:0;
+    padding:0;
+    background:none;
+    border:none;
+    color: rgb(240,240,240);
+}
+#console .in {
+    color:rgb(220,220,220);
+    margin-top:1vh;
+}
+#console .warning {
+    color:yellow;
+}
+#console .error {
+    color:red;
+}
+
+/***Database***/
+
+#query {
+    width: 95%;
+    background: rgba(200,200,200,.2);
+    color:white;
+    border: none;
+}
+#qbase {
+    width: 95%;
+}

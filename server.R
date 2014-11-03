@@ -1,64 +1,91 @@
-options("shiny.launch.browser"=T)
+setwd('C:/Users/WuLiMammoth/Google Drive/Workspace/Q')
+options(width=55)
 library(shiny)
+options("shiny.launch.browser"=T)
 library(pryr)
 library(jsonlite)
 library(rmongodb)
 library(xtable)
+library(stargazer)
+library(highlight)
 
 shinyServer(function(input, output, session) {
     cat("\014")
     
     #Console
     values <- reactiveValues(prompt = NA)
-    observe({
-        if (input$submit > 0) { 
-            values$prompt <- isolate(input$prompt) 
-        }
-    })
-    lines <- c()
-    output$console <- renderUI ({
-        
+    observe({ if (input$submit > 0) { 
+        values$prompt <- isolate(input$prompt) 
+    } })
+    types   <- c('in')
+    results <- c('')
+    output$console <- renderUI ({ 
         prompt <- values$prompt
-        
-        switch(prompt,
-          "clear" = {
-               lines <<- c()
-               updateTextInput( session, "prompt", value = "")          
-               tags$li(lines,id="out")
-           },
-           "map" = {
-               q <- fromJSON(input$query)
-               print(q)
-               lines <<- c(lines,paste0("> ",prompt),q)
-               updateTextInput( session, "prompt", value = "")          
-               lapply(lines, function(x) tags$li(x))
-           },
-           {#default5
-               if(prompt !="") {
-                   results <<- tryCatch(
-                       { capture.output({ eval( parse( text=prompt )) }) },
-                       warning = function(w) 
-                           { c(w,capture.output({ eval( parse( text=prompt )) })) },
-                       error = function(e) 
-                           { print(e) })
-                   lines <<- c(lines,paste0("> ",prompt),toString(results),"\r\n")
-                   updateTextInput( session, "prompt", value = "")
-                   lapply(lines, function(x) tags$li(x))
-               } else { lapply(lines, function(x) tags$li(x)) }           
-           } 
-        )
+        switch(
+            prompt,{
+                if(prompt !="") {
+                    results <<- c(results,paste0("> ",prompt))
+                    types <<- c(types,'in')
+                    tryCatch({
+                        r <- capture.output({
+                                eval( parse(text=prompt), sys.frame() )
+                            })
+                        lapply(r,function(x) {
+                            results <<- c(results,x)
+                            types <<- c(types,'out')
+                        })   
+                        
+                    },
+                    warning = function(w) {
+                        r <- capture.output({eval(parse(text=prompt))})
+                        results <<- c(results,toString(w))
+                        types <<- c(types,'warning')
+                        lapply(r,function(x) {
+                            results <<- c(results,x)
+                            types <<- c(types,'out')
+                        })
+                    },
+                    error = function(e) {
+                        results <<- c(results,toString(e))
+                        types <<- c(types,'error')
+                    },
+                    finally = {
+                        out <<- data.frame(results,stringsAsFactors=F)
+                    })
+                    updateTextInput( session, "prompt", value = "")
+                    mapply(function(x,y) tags$pre(x,class=y), results, types, SIMPLIFY=F)
+                }           
+            },
+            "clear" = {
+                cat("\014")
+                types   <<- c('in')
+                results <<- c('')
+                updateTextInput( session, "prompt", value = "")
+                results
+            },
+            "exit" = {
+                stopApp(returnValue = NULL)
+            },
+            "@" = {
+                query <- capture.output({fromJSON(input$query)})
+                lapply(query,function(x) {
+                    results <<- c(results,x)
+                    types <<- c(types,'map')
+                })
+                mapply(function(x,y) tags$pre(x,class=y), results, types, SIMPLIFY=F)
+            }
+        ) 
     })
     
     #QBase
-     qbase <- mongo.create()
-     dbstats <- c()
-     if (mongo.is.connected(qbase)){
-         output$qbase <- renderUI({ 
-             query = input$query
-             if(query != ""){
-                 q <- fromJSON(query)
-                 mongo.insert(qbase, "qbase", query)
-             }
-         })
-     }
+    qbase <- mongo.create()
+    dbstats <- c()
+    if (mongo.is.connected(qbase)){
+        output$qbase <- renderUI({ 
+            query = input$query
+            if(query != ""){
+                mongo.insert(qbase, "qbase", query)
+            }
+        })
+    }
 })
