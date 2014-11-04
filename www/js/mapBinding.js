@@ -75,12 +75,11 @@ $.extend(mapBinding, {
 		loadMap(el, value);
 	},
 	subscribe: function(el, callback){
-		$(el).on("change.mapBinding", function(e){
-				callback();
-		});
+        var subscribe = function(e) { callback(); }
+		Q.models[el.id].addEventListener('layoutChangeComplete', subscribe);
 	},
 	unsubscribe: function(el) {
-		$(el).off(".mapBinding");
+		Q.models[el.id].removeEventListener('layoutChangeComplete', subscribe);
 	}
 });
 

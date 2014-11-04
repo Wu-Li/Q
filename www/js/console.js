@@ -8,7 +8,7 @@ $( function () {
   
   $("#prompt").keydown( function(e) {
         switch (e.keyCode) {
-            case 13://enter
+                case 13://enter
                 var entry = this.value;
                 if (entry) {
                     Q.lines.push(entry);

@@ -31,10 +31,7 @@ mapInput <- function(inputId,
                  tags$script(paste0(
                      'loadMap($("#',inputId,'"),',value,');'
                  )),
-                 tags$div(id = paste0(inputId,"-tray"),class="tray",
-                          div(class='save',actionButton(paste0(inputId,"-save"),"",icon=icon("save"))),
-                          div(class='load',actionButton(paste0(inputId,"-load"),"",icon=icon("external-link")))
-                 )
+                 tags$div(id = paste0(inputId,"-tray"),class="tray")
         )
     )
 }

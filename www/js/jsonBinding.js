@@ -11,12 +11,11 @@ $.extend(jsonBinding, {
 		$(el).val(JSON.stringify(value));
 	},
 	subscribe: function(el, callback){
-		$(el).on("change.jsonBinding", function(e){
-				callback();
-		})
+        var subscribe = function(e) { callback(); }
+		el.addEventListener("change", subscribe)
 	},
 	unsubscribe: function(el) {
-		$(el).off(".jsonBinding");
+		el.removeEventListener("change", subscribe);
 	}
 });
 
