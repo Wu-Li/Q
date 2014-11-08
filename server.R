@@ -46,6 +46,9 @@ shinyServer(function(input, output, session) {
                         if (substr(prompt, 1, 1)=='?') {
                             values$help <- substring(prompt,2)
                         } else {
+                            map <<- isolate(values$activeMap)
+                            prompt <- gsub("@(?=\\S)", "map$", prompt, perl=T) 
+                            prompt <- gsub("@", "map", prompt)
                             p <- eval( parse(text=prompt), sys.frame() )
                             print(class(p))
                             lapply(capture.output(p),function(x) {
@@ -61,13 +64,6 @@ shinyServer(function(input, output, session) {
                         types   <<- c('in')
                         results <<- c('')
                     },"exit" = { stopApp(returnValue = NULL) 
-                    },"@" = {
-                        map <- isolate(values$activeMap)
-                        lapply(map,function(x) {
-                            print(x)
-                            results <<- c(results,x)
-                            types <<- c(types,'map')
-                        })
                     }
                 )
 
