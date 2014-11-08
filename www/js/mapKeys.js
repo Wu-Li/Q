@@ -30,6 +30,8 @@ $( function () {
             case 192://`
                 if (e.shiftKey) {
                     $("#prompt").val(this.textContent);
+                    $("#prompt").attr("value", this.textContent);
+                    $("#prompt").trigger('change');
                 }
                 $("#prompt").focus();
                 break;

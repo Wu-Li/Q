@@ -22,21 +22,14 @@ $( function () {
                     Q.li = (Q.lines.length - 1);
                 } else { Q.li--; }
                 this.value = Q.lines[Q.li];
-                break;
+                return false;
             case 40://down
                 if (Q.lines.length == 0) {break;}
                 if (Q.li == Q.lines.length - 1) {
                     Q.li = 0;
                 } else { Q.li++; }
                 this.value = Q.lines[Q.li];
-                break;
-            case 192://`
-                if (e.shiftKey) {
-                    $(".active .qmap .selected ").val($("#prompt").val());
-                    $(".active .qmap .selected span").text($("#prompt").val());
-                }
-                $(".active .qmap .selected").focus();
-                break;
+                return false;
         }
   });
   

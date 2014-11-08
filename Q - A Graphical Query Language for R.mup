@@ -1,0 +1,111 @@
+{
+  "title": "Q -\nA Graphical Query Language for R",
+  "id": 1,
+  "formatVersion": 2,
+  "ideas": {
+    "2": {
+      "title": "Graph Model",
+      "id": 24
+    },
+    "12": {
+      "title": "Database",
+      "id": 19,
+      "ideas": {
+        "1": {
+          "title": "Query Language",
+          "id": 21,
+          "ideas": {},
+          "attr": {
+            "style": {}
+          }
+        },
+        "0.5": {
+          "title": "Data Structure",
+          "id": 23,
+          "attr": {
+            "style": {}
+          }
+        }
+      },
+      "attr": {
+        "style": {}
+      }
+    },
+    "0.5": {
+      "title": "Interface",
+      "id": 18,
+      "ideas": {
+        "1": {
+          "title": "Panels",
+          "id": 2,
+          "ideas": {
+            "1": {
+              "title": "Console",
+              "id": 5,
+              "ideas": {
+                "1": {
+                  "title": "Filter",
+                  "id": 28
+                }
+              }
+            },
+            "2": {
+              "title": "Plot",
+              "id": 6,
+              "attr": {
+                "style": {}
+              }
+            },
+            "3": {
+              "title": "Database",
+              "id": 7
+            },
+            "4": {
+              "title": "Help",
+              "id": 8
+            }
+          },
+          "attr": {
+            "style": {},
+            "position": [
+              84.9896240234375,
+              -83.99303436279297,
+              1
+            ]
+          }
+        },
+        "4": {
+          "title": "Maps",
+          "id": 25,
+          "ideas": {
+            "1": {
+              "title": "Tray",
+              "id": 26
+            }
+          }
+        },
+        "9": {
+          "title": "Inspector",
+          "id": 27
+        },
+        "14": {
+          "title": "Prompt",
+          "id": 4,
+          "attr": {
+            "style": {}
+          }
+        }
+      },
+      "attr": {
+        "style": {}
+      }
+    }
+  },
+  "links": [],
+  "attr": {
+    "style": {
+      "background": "transparent"
+    },
+    "progress": "in-progress"
+  }
+}
