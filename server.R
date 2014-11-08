@@ -24,6 +24,7 @@ shinyServer(function(input, output, session) {
         help = NA,
         plot = NA,
         saveJSON = NA,
+        saveRO = NA,
         insert = NA,
         activeMap = NA
     )
@@ -61,11 +62,9 @@ shinyServer(function(input, output, session) {
                         results <<- c('')
                     },"exit" = { stopApp(returnValue = NULL) 
                     },"@" = {
-                        activetab <<- isolate(input$tabs)
-                        query <- capture.output({
-                            isolate(eval(parse(text = paste0('input$',activetab))))
-                        })
-                        lapply(query,function(x) {
+                        map <- isolate(values$activeMap)
+                        lapply(map,function(x) {
+                            print(x)
                             results <<- c(results,x)
                             types <<- c(types,'map')
                         })
@@ -85,9 +84,10 @@ shinyServer(function(input, output, session) {
                 results <<- c(results,toString(e))
                 types <<- c(types,'error')
             })
-            updateTextInput( session, "prompt", value = "")
             updateTabsetPanel(session, "panels", selected = "console")
-            mapply(function(x,y) tags$pre(x,class=y), results, types, SIMPLIFY=F) 
+            updateTextInput( session, "prompt", value = "")
+            div(mapply(function(x,y) tags$pre(x,class=y), results, types, SIMPLIFY=F),
+            tags$script('Q.panels.console.trigger("change");')) 
         }
     })
 
@@ -119,7 +119,8 @@ shinyServer(function(input, output, session) {
     observe({
         if (input$save > 0) {
             values$saveJSON <- isolate(values$activeMap)
-            values$insert <- mongo.insert(qbase,'qbase.test',values$saveJSON)
+            values$saveRO <- fromJSON(values$saveJSON)
+            values$insert <- mongo.insert(qbase,'qbase.test',values$saveRO)
             updateTabsetPanel(session, "panels", selected = "database")
         }
     })

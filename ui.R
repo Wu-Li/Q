@@ -18,7 +18,10 @@ shinyUI(fluidPage(id="page",title="LSpace",
         tags$link(rel="stylesheet",href="css/colors.css"),
         
         #JS
+        tags$script(src = "js/lib/jquery-2.0.2.min.js"),
+        tags$script(src = "js/lib/jquery.nicescroll.min.js"),
         tags$script(src = "js/console.js")
+        
     ),    
     
     #Begin Layout
@@ -37,8 +40,8 @@ shinyUI(fluidPage(id="page",title="LSpace",
                                 plotOutput("plot")       
                         ),
                        tabPanel("",value="console",icon=icon("chevron-right"),
+                                div(id="fadeup"),
                                 div(id="console-panel",
-                                    div(id="fadeup"),
                                     uiOutput("console")
                                 )
                        )
