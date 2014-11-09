@@ -46,25 +46,30 @@ shinyServer(function(input, output, session) {
                         if (substr(prompt, 1, 1)=='?') {
                             values$help <- substring(prompt,2)
                         } else {
-                            map <<- isolate(values$activeMap)
-                            prompt <- gsub("@(?=\\S)", "map$", prompt, perl=T) 
-                            prompt <- gsub("@", "map", prompt)
-                            p <- eval( parse(text=prompt), sys.frame() )
-                            print(class(p))
+                            consoleMap <<- isolate(values$activeMap)
+                            if (grepl("@",prompt)) {
+                                prompt <- gsub("@(?=[A-z])", "consoleMap$", prompt, perl=T) 
+                                prompt <- gsub("@", "consoleMap", prompt)    
+                                p <- eval( parse(text=prompt), sys.frame() )
+                                mapJSON <<- gsub("\\[","",gsub("]","",toJSON(consoleMap)))
+                                updateTextInput(session, "consoleMap", value = mapJSON)
+                            } else {
+                                p <- eval( parse(text=prompt), sys.frame() )
+                            }
+                            #print(class(p))
                             lapply(capture.output(p),function(x) {
                                 results <<- c(results,x)
                                 types <<- c(types,'out')
                             })  
                             if ('ggplot' %in% class(p)) { 
                                 values$plot <- p
-                            } 
+                            }
                         }
                     },"clear" = {
                         cat("\014")
                         types   <<- c('in')
                         results <<- c('')
-                    },"exit" = { stopApp(returnValue = NULL) 
-                    }
+                    },"exit" = { stopApp(returnValue = NULL) }
                 )
 
             }, warning = function(w){
@@ -80,7 +85,7 @@ shinyServer(function(input, output, session) {
                 results <<- c(results,toString(e))
                 types <<- c(types,'error')
             })
-            updateTabsetPanel(session, "panels", selected = "console")
+            #updateTabsetPanel(session, "panels", selected = "console")
             updateTextInput( session, "prompt", value = "")
             div(mapply(function(x,y) tags$pre(x,class=y), results, types, SIMPLIFY=F),
             tags$script('Q.panels.console.trigger("change");')) 
@@ -114,8 +119,7 @@ shinyServer(function(input, output, session) {
     
     observe({
         if (input$save > 0) {
-            values$saveJSON <- isolate(values$activeMap)
-            values$saveRO <- fromJSON(values$saveJSON)
+            values$saveRO <- isolate(values$activeMap)
             values$insert <- mongo.insert(qbase,'qbase.test',values$saveRO)
             updateTabsetPanel(session, "panels", selected = "database")
         }
@@ -134,7 +138,7 @@ shinyServer(function(input, output, session) {
                     tags$li(paste0("collections: ",mongo.get.database.collections(qbase,"test"))),
                     tags$li(paste0("count: ",mongo.count(qbase,"qbase.test"))),
                     tags$li("save: "),
-                    tags$ul( lapply(values$saveJSON, function(x) tags$li(paste0("",x)) )),
+                    tags$ul( lapply(values$saveRO, function(x) tags$li(paste0("",x)) )),
                     tags$li(paste0("insert: ",values$insert))
                 ),
                 tags$li("Database Errors"),

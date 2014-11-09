@@ -2,7 +2,6 @@ options("shiny.launch.browser"=T)
 
 library(shiny)
 
-source('R/jsonBinding.R')
 source('R/mapBinding.R')
 
 shinyUI(fluidPage(id="page",title="LSpace",
@@ -33,7 +32,8 @@ shinyUI(fluidPage(id="page",title="LSpace",
                                 uiOutput("help")
                        ),
                        tabPanel("",value="database",icon=icon("code-fork"),
-                                jsonInput("query"),
+                                textInput("consoleMap","console map:"),
+                                textInput("query","save JSON:"),
                                 uiOutput("database")
                        ),
                        tabPanel("",value="plot",icon=icon("bar-chart-o"),

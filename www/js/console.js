@@ -15,6 +15,8 @@ $( function () {
       cursorborder:'groove rgba(200,200,200,0.25)',
       cursor:'radial-gradient(ellipse at center, #ffffee 40%,#ddbbbb 100%)'
   });
+  Q.console.map = $("#consoleMap");
+  
   
   Q.panels.console.on('change', function() { 
       if(Q.console.height() > Q.panels.console.height()){

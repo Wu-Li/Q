@@ -13,7 +13,7 @@ body {overflow:hidden;}
 }
 
 span#Q {
-    z-index: 20;
+    z-index: 50;
     position: absolute;
     padding: 10px;
     line-height: 7vh;

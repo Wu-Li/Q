@@ -43,7 +43,7 @@
     width:100%;
     bottom: 5px;
     left: 0;
-    z-index: -1;
+    z-index: 45;
     pointer-events:none;
     background: linear-gradient(00deg, rgba(68,68,68,0) 70%, rgba(68,68,68,1)  98%);
 }
@@ -58,7 +58,7 @@
     font-family: monospace;
     background: none;
     border: none;
-    z-index:-2;
+    z-index:40;
 }
 #console pre {
     font-size:1.09vw;
@@ -98,12 +98,33 @@
 
 #query {
     position: absolute;
-    bottom: 5.5vh;
+    bottom: 6vh;
     width: 96%;
     margin: 0 1%;
     background: rgba(200,200,200,.2);
     color: white;
     border: none;
+}
+label[for="query"] {
+    position: absolute;
+    bottom: 8.5vh;
+    left: 1vh;
+    color: gray;
+}
+#consoleMap {
+    position: absolute;
+    bottom: 12vh;
+    width: 96%;
+    margin: 0 1%;
+    background: rgba(200,200,200,.2);
+    color: white;
+    border: none;
+}
+label[for="consoleMap"] {
+    position: absolute;
+    bottom: 14.5vh;
+    left: 1vh;
+    color: gray;
 }
 #database {
     position: absolute;
