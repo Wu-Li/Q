@@ -1,0 +1,164 @@
+cat("\014")
+library(shiny)
+library(rmongodb)
+library(ggplot2)
+library(pryr)
+library(jsonlite)
+
+shinyServer(function(input, output, session) {
+  print("--New Session--")    
+  
+  values <- reactiveValues(
+    prompt = NA,
+    error = NA,
+    help = NA,
+    plot = NA,
+    saveRO = NA,
+    insert = NA,
+    activeMap = NA
+  )
+  observe({ 
+    values$activeMap <- eval(parse(text = paste0('input$',input$tabs)))
+  })
+  observe({
+    options(width=input$panelWidth)
+  })
+  
+  #Console    
+  types   <- c('in')
+  results <- c('')
+  output$console <- renderUI ({
+    if (input$submit > 0) {
+      prompt <- isolate(input$prompt)
+      results <<- c(results,paste0("> ",prompt))
+      types <<- c(types,'in')
+      tryCatch({
+        switch(
+          prompt,{
+            if (substr(prompt, 1, 1)=='?') {
+              values$help <- prompt
+            } else {
+              consoleMap <<- isolate(values$activeMap)
+              if (grepl("@",prompt)) {
+                prompt <- gsub("@(?=[A-z])", "consoleMap$", prompt, perl=T) 
+                prompt <- gsub("@", "consoleMap", prompt)    
+                p <- eval( parse(text=prompt), sys.frame() )
+                mapJSON <<- gsub("\\[","",gsub("]","",toJSON(consoleMap)))
+                updateTextInput(session, "consoleMap", value = mapJSON)
+                #updateMapInput(session, "Queries", value = mapJSON)
+              } else {
+                p <- eval( parse(text=prompt), sys.frame() )
+              }
+              print(class(p))
+              lapply(capture.output(p),function(x) {
+                results <<- c(results,x)
+                types <<- c(types,'out')
+              })  
+              if ('ggplot' %in% class(p)) { 
+                values$plot <- p
+              }
+            }
+          },"clear" = {
+            cat("\014")
+            types   <<- c('in')
+            results <<- c('')
+          },"exit" = { stopApp(returnValue = NULL) }
+        )
+        
+      }, warning = function(w){
+        p <- capture.output({eval(parse(text=prompt), sys.frame() )})
+        results <<- c(results,toString(w))
+        types <<- c(types,'warning')
+        lapply(p,function(x) {
+          results <<- c(results,x)
+          types <<- c(types,'out')
+        })
+        if ('ggplot' %in% class(p)) { values$plot <- p } 
+      }, error = function(e) {
+        results <<- c(results,toString(e))
+        types <<- c(types,'error')
+      })
+      updateTabsetPanel(session, "panels", selected = "console")
+      updateTextInput( session, "prompt", value = "")
+      div(mapply(function(x,y) tags$pre(x,class=y), results, types, SIMPLIFY=F),
+          tags$script('Q.panels.console.trigger("change");')) 
+    }
+  })
+  
+  #Plot
+  output$plot <- renderPlot({
+    # ggplot(mtcars, aes(wt, mpg)) + geom_line()
+    if(is.na(values$plot)){
+      
+    } else {
+      updateTabsetPanel(session, "panels", selected = "plot")
+      print(values$plot)
+      isolate(values$plot)
+    }
+  })
+  
+  #Help
+  output$help <- renderUI({
+      if (!is.na(values$help)) {
+          updateTabsetPanel(session, "panels", selected = "help")
+          url <- capture.output(eval( 
+              parse(text=values$help), 
+              sys.frame() 
+          ))
+          print(url <- substring(url,6,nchar(url)-1))
+          tags$iframe(src=url)
+      } else {
+          url <- capture.output(eval(
+              parse(text='help.start(browser=print)'), 
+              sys.frame() 
+          ))[2]
+          print(url <- substring(url,2,nchar(url)-10))
+          tags$iframe(src=url)
+     }
+  })        
+  
+  #Database
+  qbase <- mongo.create() #Local
+#   qbase <- mongo.create( #MongoLab.com
+#     host = "ds051110.mongolab.com:51110/qbase", 
+#     username="qsys",password="snooze4u",`
+#     db="qbase")
+  
+  observe({
+    if (input$save > 0) {
+      values$saveRO <- isolate(values$activeMap)
+      values$insert <- mongo.insert(qbase,'qbase.test',values$saveRO)
+      updateTabsetPanel(session, "panels", selected = "database")
+    }
+  })
+  if (mongo.is.connected(qbase)){
+    output$database <- renderUI({ 
+      tags$ul(
+        tags$li("Database Status"),
+        tags$ul(
+          tags$li(paste0("connected: ",mongo.is.connected(qbase))),
+          #tags$li(paste0("primary: ",mongo.get.primary(qbase))),
+          tags$li(paste0("socket: ",mongo.get.socket(qbase))),
+          tags$li("databases:"),
+          tags$ul( lapply(mongo.get.databases(qbase), function(x) tags$li(paste0("",x)) )),
+          tags$li(paste0("collections: ",mongo.get.database.collections(qbase,"test"))),
+          tags$li(paste0("count: ",mongo.count(qbase,"qbase.test"))),
+          tags$li("save: "),
+          tags$ul( lapply(values$saveRO, function(x) tags$li(paste0("",x)) )),
+          tags$li(paste0("insert: ",values$insert))
+        ),
+        tags$li("Database Errors"),
+        tags$ul(
+          tags$li(paste0("last error: ",mongo.get.last.err(qbase,"qbase.test"))),
+          tags$li(paste0("prev error: ",mongo.get.prev.err(qbase,"qbase.test"))),
+          tags$li(paste0("error: ",mongo.get.err(qbase))),
+          tags$li(paste0("server error: ",mongo.get.server.err(qbase))),
+          tags$li(paste0("server error string: ",mongo.get.server.err.string(qbase)))
+        ),
+        tags$li("Active Map"),
+        tags$ul( lapply(values$activeMap, function(x) tags$li(paste0("",x)) ))
+      ) 
+    }) 
+  }
+  
+})
