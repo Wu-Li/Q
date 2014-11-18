@@ -6,8 +6,8 @@ Q.li = 0;
 Q.panels = {};
 
 $( function () { 
+  $("#tabs i").after("<br>");
   
-  $("#tabs i").after("<br>")
   //Console
   Q.console = $("#console");
   Q.console.map = $("#consoleMap");
@@ -21,10 +21,11 @@ $( function () {
       if(Q.console.height() > Q.panels.console.height()){
         Q.console.css("position","relative");
         Q.panels.console.nice.resize();
-        Q.panels.console.nice.doScrollTo(Q.console.height());      
+        Q.panels.console.nice.doScrollTo(Q.console.height());    
       } else {
         Q.console.css("position","absolute");
       }
+      $("pre.in").before("<hr>");
   }); 
   
   //Prompt
@@ -43,7 +44,7 @@ $( function () {
                 if (entry) {
                     Q.lines.push(entry);
                     Q.li = 0;
-                    submit.click();
+                    if(entry!='sometotalfaglovingbullshit'){submit.click();}
                 }
                 break;
             case 38://up
@@ -78,13 +79,23 @@ $( function () {
     },
     stop: function (event, ui) {
         var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-        c = w - ui.size.width;
-        $("#panels + .tab-content").css("width",c);
+        var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        var ph = $("#panelHeight");
         var pw = $("#panelWidth");
+        c = w - ui.size.width;
         pw.val(c/8);
+        ph.val(h);
         Shiny.onInputChange("panelWidth",pw.val());
-         $('.iframeCover').remove();
+        Shiny.onInputChange("panelHeight",ph.val());
+        $("#panels + .tab-content").css("width",c);
+        $('.iframeCover').remove();
     }
   });
-  
+  $('.tab-content').resize( function() {
+        var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        var ph = $("#panelHeight");
+        ph.val(h);
+        Shiny.onInputChange("panelHeight",ph.val());
+  });
+
 });

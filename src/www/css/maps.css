@@ -58,11 +58,11 @@
     height: auto !important;
 }
 
-.tab-content>.tab-pane, .pill-content>.pill-pane {
+.tab-content > .tab-pane {
     display: block;
     visibility: hidden;
 }
-.tab-content>.active, .pill-content>.active {
+.tab-content > .tab-pane.active {
     display: block;
     visibility: visible;
 }
@@ -158,4 +158,20 @@
 }
 #load {
     margin-left: 8vh;
+}
+
+
+/***Tray***/
+.tray {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 60;
+    background: rgba(200,200,200,.2);
+    border: groove rgba(0,0,0,0);
+    border-top-right-radius: 1vh;
+    box-shadow: 3px -5px 50px 5px rgba(50,50,0,.15);
+    height: 12vh;
+    pointer-events:none;
 }

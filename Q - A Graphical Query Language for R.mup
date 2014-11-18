@@ -12,11 +12,21 @@
       "id": 19,
       "ideas": {
         "1": {
-          "title": "Query Language",
+          "title": "Query Model",
           "id": 21,
           "ideas": {},
           "attr": {
             "style": {}
+          }
+        },
+        "2": {
+          "title": "Query Language",
+          "id": 43,
+          "ideas": {
+            "1": {
+              "title": "$(name)",
+              "id": 44
+            }
           }
         },
         "0.5": {
@@ -24,6 +34,47 @@
           "id": 23,
           "attr": {
             "style": {}
+          },
+          "ideas": {
+            "1": {
+              "title": "Node",
+              "id": 36,
+              "attr": {
+                "style": {
+                  "background": "#000000"
+                }
+              },
+              "ideas": {
+                "1": {
+                  "title": "name",
+                  "id": 38,
+                  "ideas": {
+                    "1": {
+                      "title": "node",
+                      "id": 60,
+                      "attr": {
+                        "style": {
+                          "background": "#ffffff"
+                        }
+                      }
+                    }
+                  }
+                },
+                "2": {
+                  "title": "path",
+                  "id": 39,
+                  "ideas": {}
+                },
+                "3": {
+                  "title": "value",
+                  "id": 40
+                },
+                "4": {
+                  "title": "kids",
+                  "id": 41
+                }
+              }
+            }
           }
         }
       },
@@ -42,12 +93,7 @@
             "1": {
               "title": "Console",
               "id": 5,
-              "ideas": {
-                "1": {
-                  "title": "Filter",
-                  "id": 28
-                }
-              }
+              "ideas": {}
             },
             "2": {
               "title": "Plot",
@@ -71,7 +117,8 @@
               84.9896240234375,
               -83.99303436279297,
               1
-            ]
+            ],
+            "collapsed": true
           }
         },
         "4": {
@@ -79,14 +126,130 @@
           "id": 25,
           "ideas": {
             "1": {
-              "title": "Tray",
-              "id": 26
+              "title": "Queries",
+              "id": 45,
+              "ideas": {
+                "1": {
+                  "title": "default drop off for queries that don't specify a context",
+                  "id": 59
+                }
+              }
+            },
+            "2": {
+              "title": "Data",
+              "id": 46
+            },
+            "3": {
+              "title": "Units",
+              "id": 47
+            },
+            "4": {
+              "title": "Formula",
+              "id": 48
+            },
+            "5": {
+              "title": "Views",
+              "id": 49,
+              "ideas": {
+                "1": {
+                  "title": "coffeescript",
+                  "id": 66
+                },
+                "2": {
+                  "title": "rCharts",
+                  "id": 67,
+                  "ideas": {
+                    "1": {
+                      "title": "D3",
+                      "id": 68
+                    },
+                    "2": {
+                      "title": "...",
+                      "id": 69
+                    }
+                  }
+                }
+              },
+              "attr": {
+                "collapsed": true,
+                "style": {}
+              }
+            },
+            "6": {
+              "title": "Styles",
+              "id": 50,
+              "ideas": {
+                "1": {
+                  "title": "SASS",
+                  "id": 65
+                }
+              },
+              "attr": {
+                "collapsed": true,
+                "style": {}
+              }
+            },
+            "7": {
+              "title": "Tests",
+              "id": 51,
+              "ideas": {
+                "1": {
+                  "title": "input domains",
+                  "id": 62
+                },
+                "2": {
+                  "title": "output ranges",
+                  "id": 63
+                },
+                "3": {
+                  "title": "data validation",
+                  "id": 64
+                }
+              },
+              "attr": {
+                "collapsed": true,
+                "style": {}
+              }
+            },
+            "8": {
+              "title": "Names",
+              "id": 52,
+              "ideas": {
+                "1": {
+                  "title": "Namespace hierarchies",
+                  "id": 56
+                }
+              }
+            },
+            "9": {
+              "title": "Sources",
+              "id": 53,
+              "ideas": {
+                "2": {
+                  "title": "Data Connections",
+                  "id": 55
+                },
+                "3": {
+                  "title": "R packages",
+                  "id": 57,
+                  "attr": {
+                    "style": {}
+                  }
+                },
+                "4": {
+                  "title": "js Libraries",
+                  "id": 58,
+                  "attr": {
+                    "style": {}
+                  }
+                }
+              },
+              "attr": {
+                "collapsed": true,
+                "style": {}
+              }
             }
           }
-        },
-        "9": {
-          "title": "Inspector",
-          "id": 27
         },
         "14": {
           "title": "Prompt",
@@ -98,6 +261,60 @@
       },
       "attr": {
         "style": {}
+      }
+    },
+    "-1": {
+      "title": "Brings R to the touch screen and smartpad",
+      "id": 29,
+      "attr": {
+        "style": {
+          "background": "#808080"
+        }
+      }
+    },
+    "-2": {
+      "title": "Built on the principles of R, console driven, visual results, low barrier to entry without sacrificing depth",
+      "id": 30,
+      "attr": {
+        "style": {
+          "background": "#808080"
+        }
+      }
+    },
+    "-3": {
+      "title": "Stores code in a graph database",
+      "id": 31,
+      "attr": {
+        "style": {
+          "background": "#808080"
+        }
+      }
+    },
+    "-13": {
+      "title": "Visual syntax",
+      "id": 32,
+      "attr": {
+        "style": {
+          "background": "#808080"
+        }
+      }
+    },
+    "-23": {
+      "title": "Rapid prototyping",
+      "id": 33,
+      "attr": {
+        "style": {
+          "background": "#808080"
+        }
+      }
+    },
+    "-33": {
+      "title": "A better Graphing Calculator",
+      "id": 35,
+      "attr": {
+        "style": {
+          "background": "#808080"
+        }
       }
     }
   },

@@ -38,7 +38,7 @@ shinyUI(
                     tabPanel("Units",value="Units",icon=icon("cogs",class='fa-2x'),mapInput("Units")),
                     tabPanel("Data",value="Data",icon=icon("table",class='fa-2x'),
                              mapInput("Data",
-                                      value='{"title":"Data","id":1,"formatVersion":2,"ideas":{"10":{"title":"ggplot(mtcars, aes(wt, mpg)) + geom_line()","id":6,"attr":{"style":{}}}},"links":[]}'
+                                      value='{"title":"Data","id":1,"formatVersion":2,"ideas":{"10":{"title":"ggplot(mtcars, aes(wt, mpg)) + geom_line(aes(colour=hp,size=disp))","id":6,"attr":{"style":{}}}},"links":[]}'
                              )
                     ),
                     tabPanel("Queries",value="Queries",icon=icon("crosshairs",class='fa-2x'),mapInput("Queries"))    
@@ -62,6 +62,7 @@ shinyUI(
                              textInput("consoleMap","console map:"),
                              textInput("query","save JSON:"),
                              numericInput("panelWidth","width",64),
+                             numericInput("panelHeight","height",950),
                              uiOutput("database")
                     ),
                     tabPanel("",value="plot",icon=icon("bar-chart-o"),

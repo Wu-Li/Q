@@ -1,8 +1,7 @@
-library(shiny)
+#library(shiny)
 
 setwd('C:/Users/WuLiMammoth/Google Drive/Workspace/Q/src')
 
 options(shiny.launch.browser=T)
 options(width=64)
-
-help.start(browser=print)
+options(browser=print)

@@ -56,59 +56,56 @@ function saveMap(container) {
 var mapBinding = new Shiny.InputBinding();
 $.extend(mapBinding, {
   find: function(scope) { return $(".qmap"); },  
-  getNode: function getNode(el, qpid) {
+  getNode: function (el, qpid) {
     var mapIdea = Q.models[el.id].getIdea();
-    if (qpid == 1) { var nodeIdea = mapIdea; } 
-    else { var nodeIdea = mapIdea.findSubIdeaById(qpid); }
+    var nodeIdea;
+    if (qpid == 1) { nodeIdea = mapIdea; } 
+    else { nodeIdea = mapIdea.findSubIdeaById(qpid); }
     if (nodeIdea) {
-      var node = {
-            name: nodeIdea.title,
-            value: nodeIdea.title,
-            qpid: qpid,
-            path: 'domain.user.project.' + mapIdea.title + '/' + nodeIdea.id,
-            kids: mapIdea.getSubTreeIds(qpid)
-        };
+      var subIdeas = nodeIdea.sortedSubIdeas();
+      if (subIdeas.length > 0) { 
+          var node = {};
+          var children = []; 
+          subIdeas.forEach( function(idea) { 
+            children.push(mapBinding.getNode(el,idea.id));
+          });
+          node[nodeIdea.title] = children;
+      } else { var node = nodeIdea.title; }
       return node;
     } else {return null;}
   },
-  getNodeValue: function getNodeValue(el, qpid) {
-    var mapIdea = Q.models[el.id].getIdea();
-    if (qpid == 1) { var nodeIdea = mapIdea; } 
-    else { var nodeIdea = mapIdea.findSubIdeaById(qpid); }
-    if (nodeIdea) {
-      var value = nodeIdea.title;
-      return value;
+  getNodeValue: function(el, qpid) {
+    var node = mapBinding.getNode(el, qpid);
+    if (node) {
+      return node.value;
     } else {return null;}
   },
-  getNodeChildren: function getNodeChildren(el, qpid) {
-    var mapIdea = Q.models[el.id].getIdea();
-    if (qpid == 1) { var nodeIdea = mapIdea; } 
-    else { var nodeIdea = mapIdea.findSubIdeaById(qpid); }
-    if (nodeIdea) {
-      var childIdeas = nodeIdea.sortedSubIdeas();
-      var childNodes = [];
-      childIdeas.forEach(function (idea) {
-        childNodes.push(getNode(el, idea.id));
+  getChildren: function(el, qpid) {
+    var node = mapBinding.getNode(el, qpid);
+    if (node) {
+      var children = [];
+      node.kids.forEach(function (kid){
+          children.push(mapBinding.getNode(el,kid));
       });
-      return childNodes;
+      return children;
     } else {return null;}
   },
-  getNodeWithChildren: function getNodeWithChildren(el, qpid) {
-    var mapIdea = Q.models[el.id].getIdea();
-    if (qpid == 1) { var nodeIdea = mapIdea; } 
-    else { var nodeIdea = mapIdea.findSubIdeaById(qpid); }
-    if (nodeIdea) {
-      var node = getNode(el, qpid);
-      node.kids.forEach(function(qpid){
-          node.children.push(getNodeWithChildren(el, qpid));
+  getMap: function(el, qpid) {
+    var node = mapBinding.getNode(el, qpid);
+    if (node) {
+      var children = [];
+      node.kids.forEach(function(kid){
+          children.push(mapBinding.getMap(el, kid));
       });
+      if (children.length > 0) { node.children = children; }
+      return node;
     } else {return null;}
   },
   getValue: function(el) {
     if (Q.models[el.id]) {
-      idea = Q.models[el.id].getIdea();
-    } else {idea = "";}
-    return idea;
+      qmap = mapBinding.getNode(el,1);
+      return JSON.stringify(qmap);
+    } else { return null; }
   },
   setValue: function(el, value) {
     el.text("");
