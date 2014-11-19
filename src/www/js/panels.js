@@ -44,7 +44,6 @@ $( function () {
                 if (entry) {
                     Q.lines.push(entry);
                     Q.li = 0;
-                    if(entry!='sometotalfaglovingbullshit'){submit.click();}
                 }
                 break;
             case 38://up
