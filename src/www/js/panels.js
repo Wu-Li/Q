@@ -44,7 +44,10 @@ $( function () {
                 if (entry) {
                     Q.lines.push(entry);
                     Q.li = 0;
+<<<<<<< HEAD
                     $('#submit').click();
+=======
+>>>>>>> origin/master
                 }
                 break;
             case 38://up
@@ -102,5 +105,16 @@ $( function () {
         $('.iframeCover').remove();
     }
   });
+<<<<<<< HEAD
   $(window).resize();
 });
+=======
+  $('.tab-content').resize( function() {
+        var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        var ph = $("#panelHeight");
+        ph.val(h);
+        Shiny.onInputChange("panelHeight",ph.val());
+  });
+
+});
+>>>>>>> origin/master
