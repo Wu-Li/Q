@@ -18,6 +18,7 @@ $( function () {
       railalign:'left'
   });
   Q.panels.console.on('change', function() { 
+      $("pre.in").before("<hr>");
       if(Q.console.height() > Q.panels.console.height()){
         Q.console.css("position","relative");
         Q.panels.console.nice.resize();
@@ -25,7 +26,6 @@ $( function () {
       } else {
         Q.console.css("position","absolute");
       }
-      $("pre.in").before("<hr>");
   }); 
   
   //Prompt
@@ -44,7 +44,7 @@ $( function () {
                 if (entry) {
                     Q.lines.push(entry);
                     Q.li = 0;
-                    if(entry!='sometotalfaglovingbullshit'){submit.click();}
+                    $('#submit').click();
                 }
                 break;
             case 38://up
@@ -64,6 +64,17 @@ $( function () {
         }
   });
   Q.prompt.focus();
+  
+  $(window).resize( function() {
+        var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+        var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        var ph = $("#panelHeight");
+        var pw = $("#panelWidth");
+        var c = w - $('#prompt-box + .tabs-above').width();
+        pw.val(c/8);
+        ph.val(h);
+        $("#panels + .tab-content").css("width",c);
+  });
   
   $("#prompt-box + .tabs-above").resizable({
     alsoResize: "#tabs, .active .qmap, #prompt-box + .tabs-above",
@@ -91,11 +102,5 @@ $( function () {
         $('.iframeCover').remove();
     }
   });
-  $('.tab-content').resize( function() {
-        var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-        var ph = $("#panelHeight");
-        ph.val(h);
-        Shiny.onInputChange("panelHeight",ph.val());
-  });
-
+  $(window).resize();
 });

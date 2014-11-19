@@ -34,8 +34,3 @@ mapInput <- function(inputId,
         )
     )
 }
-# updateMapInput <- function (session, inputId, label = NULL, value = NULL) 
-# {
-#     message <- list(label = label, value = value)
-#     session$sendInputMessage(inputId, message)
-# }

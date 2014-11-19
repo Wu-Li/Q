@@ -1,5 +1,3 @@
-#library(shiny)
-
 setwd('C:/Users/WuLiMammoth/Google Drive/Workspace/Q/src')
 
 options(shiny.launch.browser=T)

@@ -94,7 +94,7 @@ body {overflow:hidden;
     overflow:visible;
 }
 #panels a {
-    background: rgba(68,68,68,0.9);
+    background: rgba(69,69,69,0.8);
     margin: -10px -13px -10px -20px;
     padding: 30px 33px 20px;
     border-radius:0;
@@ -160,9 +160,8 @@ body {overflow:hidden;
     z-index:0;
 }
 #console pre {
- 
-    font-size:1.5vh;
-    line-height:2vh;
+    font-size: 14px;
+    line-height: 16px;
     word-break: normal;
     word-wrap:normal;
     white-space:pre-wrap;
@@ -207,7 +206,7 @@ hr {
 
 /***Database***/
 
-#database {
+#database, #environments {
     position: absolute;
     top:15vh;
     width:96%;
