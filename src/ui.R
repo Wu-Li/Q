@@ -53,15 +53,12 @@ shinyUI(
                                  uiOutput("help")
                              )
                     ),
-                    tabPanel("",value="environments",icon=icon("asterisk"),
-                             uiOutput("environments")
-                    ),
                     tabPanel("",value="database",icon=icon("code-fork"),
+                             uiOutput("database"),
                              textInput("consoleMap","console map:"),
                              textInput("query","save JSON:"),
                              numericInput("panelWidth","width",64),
-                             numericInput("panelHeight","height",950),
-                             uiOutput("database")
+                             numericInput("panelHeight","height",950)
                     ),
                     tabPanel("",value="plot",icon=icon("bar-chart-o"),
                              plotOutput("plot")       

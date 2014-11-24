@@ -4,11 +4,24 @@ library(ggplot2)
 library(pryr)
 library(jsonlite)
 library(gridExtra)
-
+options(width=64)
+options(browser=print)
 shinyServer(function(input, output, session) {
   cat("\014")
-  print("--New Session--")    
-  
+  print("--New Session--")
+  observe({ ME <<- session })
+  observe({ SE <<- environment(session$sendInputMessage) })
+  observe({
+    Queries <<- tryCatch({input$Queries[[1]]},error={input$Queries})
+    Data    <<- tryCatch({input$Data[[1]]},error={input$Data})
+    Units   <<- tryCatch({input$Units[[1]]},error={input$Units})
+    Formula <<- tryCatch({input$Formula[[1]]},error={input$Formula})
+    Views   <<- tryCatch({input$Views[[1]]},error={input$Views})
+    Styles  <<- tryCatch({input$Styles[[1]]},error={input$Styles})
+    Tests   <<- tryCatch({input$Tests[[1]]},error={input$Tests})
+    Names   <<- tryCatch({input$Names[[1]]},error={input$Names})
+    Sources <<- tryCatch({input$Sources[[1]]},error={input$Sources})
+  })
   values <- reactiveValues(
     prompt = NA,
     error = NA,
@@ -16,39 +29,15 @@ shinyServer(function(input, output, session) {
     plot = NA,
     saveRO = NA,
     insert = NA,
+    activeTab = NA,
     activeMap = NA,
-    panelHeight = NA
+    panelHeight = NA,
+    isPlot = F
   )
   observe({ 
-    sessionData <<- session$clientData  
+    values$activeMap <<- eval( parse(text = paste0('input$',input$tabs)))
   })
-  observe({ 
-    mapJSON <<- eval(parse(text = paste0('input$',input$tabs)))
-    mj <<- unbox(mapJSON)
-    qmap  <<- fromJSON(mapJSON)
     
-    evalNode <<- function(node) {
-      atts <- attributes(node)
-      for (a in atts) {
-        #print(a)
-      }
-    }
-    #       tryCatch({
-    #         capture.output ({ eval( parse(text=node), sys.frame() ) })
-    #       }, error = function (e) {
-    #         node
-    #       })
-    #       for (child in node.children) {
-    #         
-    #       }
-    #   
-    #     }
-    #     values$activeMap <- rapply(as.list(qmap),evalNode)
-    
-    values$activeMap <- qmap
-  })
-  
-  
   #Console    
   observe({ options(width=input$panelWidth) })
   types   <- NULL
@@ -61,16 +50,15 @@ shinyServer(function(input, output, session) {
       if (!is.na(prompt) && prompt != '') {
         mw <<- paste0('width:',8*as.integer(options('width')),'px;')
         panel <- 'console'
-        
         results <<- c(results,paste0("> ",prompt))
         types   <<- c(types,'in')
         widths  <<- c(widths,mw)
         classes <<- c(classes,'')
-                
         tryCatch({
           switch(
             prompt,{
               if (substr(prompt, 1, 1)=='?') {
+                panel <- 'help'
                 values$help <- prompt
               } else {
                 consoleMap <<- isolate(values$activeMap)
@@ -104,6 +92,7 @@ shinyServer(function(input, output, session) {
           )
         }, warning = function(w){
           p <- capture.output({eval(parse(text=prompt), sys.frame() )})
+          w <- sub('simpleWarning in eval(expr, envir, enclos)','warning',w,fixed=T)
           results <<- c(results,toString(w))
           types <<- c(types,'warning')
           widths <<- c(widths,mw)
@@ -140,18 +129,17 @@ shinyServer(function(input, output, session) {
   source('R/plotTheme.R')
   panelWidth  <- function(){ as.integer(input$panelWidth)*8 }
   panelHeight <- function(){ as.integer(input$panelHeight)*.85 }
-  output$plot <- renderPlot({
-    isPlot <- try(!is.na(values$plot),silent=T)
-    if(isPlot){
-      print(values$plot)
-      isolate(values$plot)
-    }
-  } + theme_console(), bg='transparent', width=panelWidth, height=panelHeight)
+  output$plot <- renderPlot({ 
+      values$plot
+    } + theme_console(), 
+        bg='transparent', 
+        width=panelWidth, 
+        height=panelHeight
+  )
   
   #Help
   output$help <- renderUI({
     if (!is.na(values$help)) {
-      updateTabsetPanel(session, "panels", selected = "help")
       url <- capture.output(eval( 
         parse(text=values$help), 
         sys.frame() 
@@ -168,56 +156,36 @@ shinyServer(function(input, output, session) {
     }
   })        
   
-  #Environments
-  output$environments <- renderUI({  
-    div(
-      tags$li("Global Environment",style='display:inline-flex;',
-              tags$ul( lapply(ls(sys.frame()), function(x) tags$li(paste0("",x)) ))
-      ),hr(),br(),
-      tags$li("Session Data",style='display:inline-flex;',
-                 tags$ul( lapply(names(sessionData), function(x) tags$li(paste0("",x)) )),
-                 tags$ul( lapply(reactiveValuesToList(sessionData), function(x) tags$li(paste0("",x)) ))
-      )
-    )
-  })
-  
   #Database
   #qbase <- mongo.create() #Local
-    qbase <- mongo.create( #MongoLab.com
-      host = "ds051110.mongolab.com:51110/qbase", 
-      username="qsys",password="snooze4u",
-      db="qbase")
-  
-  observe({
-    if (input$save > 0) {
+  qbase <- mongo.create(host="ds051110.mongolab.com:51110/qbase",username="qsys",password="snooze4u",db="qbase")
+  observe({ if (input$save > 0) {
       values$saveRO <- isolate(values$activeMap)
       values$insert <- mongo.insert(qbase,'qbase.test',values$saveRO)
       updateTabsetPanel(session, "panels", selected = "database")
-    }
-  })
+  }})
   if (mongo.is.connected(qbase)){
     output$database <- renderUI({ 
       div(
-        tags$li("Database Status:",style='display:inline-flex;',tags$ul(
+        tags$li("Database:",style='display:inline-flex;',tags$ul(
           tags$li(paste0("connected: ",mongo.is.connected(qbase))),
           #tags$li(paste0("primary: ",mongo.get.primary(qbase))),
-          tags$li(paste0("socket: ",mongo.get.socket(qbase))),
           tags$li("databases:"),
           tags$ul( lapply(mongo.get.databases(qbase), function(x) tags$li(paste0("",x)) )),
           tags$li(paste0("collections: ",mongo.get.database.collections(qbase,"test"))),
           tags$li(paste0("count: ",mongo.count(qbase,"qbase.test"))),
-          tags$li("save: "),
+          tags$li(paste0("insert: ",values$insert)),
           tags$ul( lapply(values$saveRO, function(x) tags$li(paste0("",x)) )),
-          tags$li(paste0("insert: ",values$insert))
-        )),hr(),br(),
-        tags$li("Database Errors:",style='display:inline-flex;',tags$ul(
           tags$li(paste0("last error: ",mongo.get.last.err(qbase,"qbase.test"))),
-          tags$li(paste0("prev error: ",mongo.get.prev.err(qbase,"qbase.test"))),
+          #tags$li(paste0("prev error: ",mongo.get.prev.err(qbase,"qbase.test"))),
           tags$li(paste0("error: ",mongo.get.err(qbase))),
-          tags$li(paste0("server error: ",mongo.get.server.err(qbase))),
+          #tags$li(paste0("server error: ",mongo.get.server.err(qbase))),
           tags$li(paste0("server error string: ",mongo.get.server.err.string(qbase)))
         )),hr(),br(),
-        tags$li("Active Map:",style='display:inline-flex;',tags$ul(
+        tags$li("Environment",style='display:inline-flex;',
+                tags$ul( lapply(ls(sys.frame()), function(x) tags$li(paste0("",x)) ))
+        ),hr(),br(),
+        tags$li("Map:",style='display:inline-flex;',tags$ul(
           tags$ul( lapply(values$activeMap, function(x) tags$li(paste0("",x)) ))
         )),hr(),br()
       )

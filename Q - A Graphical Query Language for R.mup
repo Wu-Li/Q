@@ -14,7 +14,240 @@
         "1": {
           "title": "Query Model",
           "id": 21,
-          "ideas": {},
+          "ideas": {
+            "1": {
+              "title": "fromMap",
+              "id": 70,
+              "ideas": {
+                "1": {
+                  "title": "parent\nchild[1]\n...\nchild[i]",
+                  "id": 71,
+                  "ideas": {
+                    "1": {
+                      "title": "case",
+                      "id": 72,
+                      "ideas": {
+                        "1": {
+                          "title": "x no children",
+                          "id": 73,
+                          "ideas": {
+                            "1": {
+                              "title": "class(x)",
+                              "id": 75,
+                              "ideas": {
+                                "1": {
+                                  "title": "numeric",
+                                  "id": 76,
+                                  "ideas": {
+                                    "2": {
+                                      "title": "2:5",
+                                      "id": 102,
+                                      "ideas": {
+                                        "1": {
+                                          "title": "42",
+                                          "id": 108,
+                                          "ideas": {
+                                            "1": {
+                                              "title": "c(44,126)",
+                                              "id": 106,
+                                              "ideas": {}
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "attr": {
+                                        "style": {}
+                                      }
+                                    }
+                                  },
+                                  "attr": {
+                                    "style": {
+                                      "background": "#333333"
+                                    }
+                                  }
+                                },
+                                "2": {
+                                  "title": "string",
+                                  "id": 77,
+                                  "attr": {
+                                    "style": {
+                                      "background": "#333333"
+                                    }
+                                  },
+                                  "ideas": {
+                                    "1": {
+                                      "title": "x",
+                                      "id": 111,
+                                      "ideas": {
+                                        "1": {
+                                          "title": "Queries",
+                                          "id": 112,
+                                          "ideas": {
+                                            "1": {
+                                              "title": "Hello World!",
+                                              "id": 114
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "4": {
+                                  "title": "object",
+                                  "id": 79,
+                                  "attr": {
+                                    "style": {
+                                      "background": "#333333"
+                                    }
+                                  },
+                                  "ideas": {
+                                    "1": {
+                                      "title": "$Queries",
+                                      "id": 115,
+                                      "ideas": {
+                                        "1": {
+                                          "title": "...",
+                                          "id": 116
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "14": {
+                                  "title": "function ",
+                                  "id": 78,
+                                  "ideas": {
+                                    "1": {
+                                      "title": "-> evaluation",
+                                      "id": 82,
+                                      "ideas": {},
+                                      "attr": {
+                                        "style": {
+                                          "background": "#333333"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "attr": {
+                                    "style": {
+                                      "background": "transparent"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "2": {
+                          "title": "x has children",
+                          "id": 74,
+                          "ideas": {
+                            "1": {
+                              "title": "class(x)",
+                              "id": 84,
+                              "ideas": {
+                                "1": {
+                                  "title": "numeric",
+                                  "id": 85,
+                                  "ideas": {
+                                    "1": {
+                                      "title": "-> as.integer(x)",
+                                      "id": 89,
+                                      "ideas": {
+                                        "1": {
+                                          "title": "-> parent[x]",
+                                          "id": 90,
+                                          "attr": {
+                                            "style": {
+                                              "background": "#ffff99"
+                                            }
+                                          },
+                                          "ideas": {
+                                            "1": {
+                                              "title": "<- children",
+                                              "id": 93,
+                                              "attr": {
+                                                "style": {
+                                                  "background": "#333333"
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "2": {
+                                  "title": "string",
+                                  "id": 86,
+                                  "ideas": {
+                                    "1": {
+                                      "title": "-> parent$x",
+                                      "id": 92,
+                                      "ideas": {
+                                        "1": {
+                                          "title": "<- children",
+                                          "id": 94,
+                                          "attr": {
+                                            "style": {
+                                              "background": "#333333"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "attr": {
+                                        "style": {
+                                          "background": "#ffff99"
+                                        }
+                                      }
+                                    }
+                                  }
+                                },
+                                "3": {
+                                  "title": "object",
+                                  "id": 87,
+                                  "ideas": {
+                                    "1": {
+                                      "title": "properties = children",
+                                      "id": 96,
+                                      "ideas": {},
+                                      "attr": {
+                                        "style": {
+                                          "background": "#333333"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "attr": {
+                                    "style": {
+                                      "background": "#333333"
+                                    }
+                                  }
+                                },
+                                "4": {
+                                  "title": "function",
+                                  "id": 88,
+                                  "ideas": {
+                                    "1": {
+                                      "title": "-> as.class(evaluation)",
+                                      "id": 98,
+                                      "ideas": {}
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
           "attr": {
             "style": {}
           }
@@ -42,7 +275,8 @@
               "attr": {
                 "style": {
                   "background": "#000000"
-                }
+                },
+                "collapsed": true
               },
               "ideas": {
                 "1": {

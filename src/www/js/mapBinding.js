@@ -1,8 +1,7 @@
 function buildMap(container,mapJSON) {
-  
   var idea = MAPJS.content(mapJSON),
-  mapModel = new MAPJS.MapModel(MAPJS.DOMRender.layoutCalculator, []),
-  imageInsertController = new MAPJS.ImageInsertController("http://localhost:4999?u=");
+      mapModel = new MAPJS.MapModel(MAPJS.DOMRender.layoutCalculator, []),
+      imageInsertController = new MAPJS.ImageInsertController("http://localhost:4999?u=");
   
   mapModel.id = container.attr('id');
   
@@ -55,57 +54,63 @@ function saveMap(container) {
 
 var mapBinding = new Shiny.InputBinding();
 $.extend(mapBinding, {
-  find: function(scope) { return $(".qmap"); },  
-  getNode: function (el, qpid) {
-    var mapIdea = Q.models[el.id].getIdea();
-    var nodeIdea;
-    if (qpid == 1) { nodeIdea = mapIdea; } 
-    else { nodeIdea = mapIdea.findSubIdeaById(qpid); }
-    if (nodeIdea) {
-      var subIdeas = nodeIdea.sortedSubIdeas();
-      if (subIdeas.length > 0) { 
-          var node = {};
-          var children = []; 
-          subIdeas.forEach( function(idea) { 
-            children.push(mapBinding.getNode(el,idea.id));
-          });
-          node[nodeIdea.title] = children;
-      } else { var node = nodeIdea.title; }
-      return node;
-    } else {return null;}
+  find: function(scope) { return $(".qmap"); },
+  hasGrandChildren: function(idea) {
+    var subIdeas = idea.sortedSubIdeas();
+    var gc = false;
+    subIdeas.forEach(function(childIdea) {
+      if(childIdea.sortedSubIdeas().length > 0) {
+        gc = true;
+      }
+    });
+    return gc;
   },
-  getNodeValue: function(el, qpid) {
-    var node = mapBinding.getNode(el, qpid);
-    if (node) {
-      return node.value;
-    } else {return null;}
-  },
-  getChildren: function(el, qpid) {
-    var node = mapBinding.getNode(el, qpid);
-    if (node) {
-      var children = [];
-      node.kids.forEach(function (kid){
-          children.push(mapBinding.getNode(el,kid));
-      });
-      return children;
-    } else {return null;}
-  },
-  getMap: function(el, qpid) {
-    var node = mapBinding.getNode(el, qpid);
-    if (node) {
-      var children = [];
-      node.kids.forEach(function(kid){
-          children.push(mapBinding.getMap(el, kid));
-      });
-      if (children.length > 0) { node.children = children; }
-      return node;
-    } else {return null;}
+  getNode: function (idea) {
+    var subIdeas = idea.sortedSubIdeas();
+    if (subIdeas.length == 0) { 
+        var node = idea.title;
+    } else if (subIdeas.length == 1) {
+        var node = {};
+        subIdeas.forEach(function(childIdea) {
+          node[idea.title] = mapBinding.getNode(childIdea);
+        });
+    } else if (!(mapBinding.hasGrandChildren(idea))) {
+        var node = {};
+        node[idea.title] = [];
+        subIdeas.forEach(function(childIdea) {
+          node[idea.title].push(mapBinding.getNode(childIdea));
+        });
+    } else {
+        var node = {};
+        var values = [];
+        node[idea.title] = {};
+        subIdeas.forEach(function(childIdea) {
+            var childNode = mapBinding.getNode(childIdea);
+            if (typeof(childNode) == 'string') {
+              values.push(childNode);
+            } else {
+              var gcNames = Object.getOwnPropertyNames(childNode);
+              gcNames.forEach(function(name) {
+                node[idea.title][name] = childNode[name];
+              });
+            }
+            if (values.length > 0) {
+              var i = 1;
+              values.forEach(function(value){
+                node[idea.title][i] = value;
+                i++;
+              });
+            }
+        });
+    } 
+    return node;
   },
   getValue: function(el) {
-    if (Q.models[el.id]) {
-      qmap = mapBinding.getNode(el,1);
-      return JSON.stringify(qmap);
-    } else { return null; }
+    if (Q.models[el.id]){ 
+      var idea = Q.models[el.id].getIdea();
+      var node = mapBinding.getNode(idea);
+      return node;
+    } else { return 'Map not found.'; }
   },
   setValue: function(el, value) {
     el.text("");
@@ -119,5 +124,4 @@ $.extend(mapBinding, {
     Q.models[el.id].removeEventListener('layoutChangeComplete', subscribe);
   }
 });
-
 Shiny.inputBindings.register(mapBinding);

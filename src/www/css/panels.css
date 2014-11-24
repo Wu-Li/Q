@@ -208,72 +208,35 @@ hr {
 
 #database, #environments {
     position: absolute;
-    top:15vh;
+    top:12vh;
     width:96%;
     margin: 0 1%;
     color:rgb(200,200,200);
 }
-#consoleMap {
+#database ~ label {
+  position: absolute;
+  color: gray;
+  left 1vh;
+}
+#database ~ input {
     position: absolute;
-    bottom: 19vh;
-    width: 96%;
+    width: 95%;
     margin: 0 1%;
     background: rgba(200,200,200,.2);
     color: white;
     border: none;
-}
-label[for="consoleMap"] {
-    position: absolute;
-    bottom: 21.5vh;
-    left: 1vh;
-    color: gray;
-}
-#query {
-    position: absolute;
-    bottom: 13vh;
-    width: 96%;
-    margin: 0 1%;
-    background: rgba(200,200,200,.2);
-    color: white;
-    border: none;
-}
-label[for="query"] {
-    position: absolute;
-    bottom: 15.5vh;
-    left: 1vh;
-    color: gray;
 }
 
-#panelWidth {
-    position: absolute;
-    bottom: 7vh;
-    width: 96%;
-    margin: 0 1%;
-    background: rgba(200,200,200,.2);
-    color: white;
-    border: none;
-}
-label[for="panelWidth"] {
-    position: absolute;
-    bottom: 9.5vh;
-    left: 1vh;
-    color: gray;
-}
-#panelHeight {
-    position: absolute;
-    bottom: 1vh;
-    width: 96%;
-    margin: 0 1%;
-    background: rgba(200,200,200,.2);
-    color: white;
-    border: none;
-}
-label[for="panelHeight"] {
-    position: absolute;
-    bottom: 3.5vh;
-    left: 1vh;
-    color: gray;
-}
+label[for="consoleMap"]  { bottom: 9.5vh; }
+#consoleMap              { bottom: 7vh; }
+label[for="query"]       { bottom: 3.5vh; }
+#query                   { bottom: 1vh; }
+
+label[for="panelWidth"]  { bottom: 9.5vh; }
+#panelWidth              { bottom: 7vh; }
+label[for="panelHeight"] { bottom: 3.5vh; }
+#panelHeight             { bottom: 1vh; }
+label[for="panelWidth"], #panelWidth, label[for="panelHeight"], #panelHeight { display:none; }
 
 #help iframe {
     position: relative;

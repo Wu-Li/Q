@@ -39,26 +39,26 @@ $( function () {
   });
   Q.prompt.keydown( function(e) {
         switch (e.keyCode) {
-                case 13://enter
+            case 13://enter
                 var entry = this.value;
                 if (entry) {
                     Q.lines.push(entry);
                     Q.li = 0;
-<<<<<<< HEAD
                     $('#submit').click();
-=======
->>>>>>> origin/master
                 }
                 break;
+            case 9://tab
+                $('#tabs + .tab-content .active .qmap .selected').focus();
+                return false;
             case 38://up
-                if (Q.lines.length == 0) {break;}
+                if (Q.lines.length == 0) { break; }
                 if (Q.li == 0) {
                     Q.li = (Q.lines.length - 1);
                 } else { Q.li--; }
                 this.value = Q.lines[Q.li];
                 return false;
             case 40://down
-                if (Q.lines.length == 0) {break;}
+                if (Q.lines.length == 0) { break; }
                 if (Q.li == Q.lines.length - 1) {
                     Q.li = 0;
                 } else { Q.li++; }
@@ -105,16 +105,13 @@ $( function () {
         $('.iframeCover').remove();
     }
   });
-<<<<<<< HEAD
   $(window).resize();
-});
-=======
+
   $('.tab-content').resize( function() {
         var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
         var ph = $("#panelHeight");
         ph.val(h);
         Shiny.onInputChange("panelHeight",ph.val());
   });
-
 });
->>>>>>> origin/master
+
