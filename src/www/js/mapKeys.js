@@ -1,4 +1,5 @@
 $( function () { 
+  /*
   $(".save button").click( function( event ) {
         var container = $(".active > .qmap");   
         saveMap(container);
@@ -11,6 +12,7 @@ $( function () {
         mapBinding.setValue(container, mapJSON);
         Shiny.onInputChange(mapId,mapJSON);
   });
+  */
   $("#tabs > li > a").click( function (e){
         var mapId = '#' + (this.text).trim();
         $(mapId).trigger('active');

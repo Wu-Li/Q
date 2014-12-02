@@ -1,147 +1,164 @@
+cat("\014")
 library(shiny)
 library(rmongodb)
 library(ggplot2)
 library(pryr)
 library(jsonlite)
 library(gridExtra)
-options(width=64)
-options(browser=print)
 shinyServer(function(input, output, session) {
-  cat("\014")
-  print("--New Session--")
-  observe({ ME <<- session })
-  observe({ SE <<- environment(session$sendInputMessage) })
-  observe({
-    Queries <<- tryCatch({input$Queries[[1]]},error={input$Queries})
-    Data    <<- tryCatch({input$Data[[1]]},error={input$Data})
-    Units   <<- tryCatch({input$Units[[1]]},error={input$Units})
-    Formula <<- tryCatch({input$Formula[[1]]},error={input$Formula})
-    Views   <<- tryCatch({input$Views[[1]]},error={input$Views})
-    Styles  <<- tryCatch({input$Styles[[1]]},error={input$Styles})
-    Tests   <<- tryCatch({input$Tests[[1]]},error={input$Tests})
-    Names   <<- tryCatch({input$Names[[1]]},error={input$Names})
-    Sources <<- tryCatch({input$Sources[[1]]},error={input$Sources})
+  console <- new.env()
+  .Q$clear <- function() {
+    cat("\014")
+    console$.results <- NULL
+    console$.types   <- NULL
+    console$.hovers  <- NULL 
+    console$.widths  <- NULL
+  }
+  .Q$clear()
+  .Q$exit <- function() { stopApp(returnValue = NULL) }
+  observe({ console$.ME <- session })
+  observe({ console$.SE <- environment(session$sendInputMessage) })
+  print("--Session--")
+  
+  
+  ###Maps###
+  getMap <- function(inputId) {
+    map <- eval( parse(text = paste0('input$',inputId)))
+    if ('list' %in% class(map)) { 
+      map <- rapply(map, 
+                    function(node) tryCatch(
+                        { eval( parse(text = node) ) },
+                        error = function(e) { e } ), 
+                    how = 'replace') 
+    } 
+  }
+  active <- reactiveValues( map = NA )
+  observe({ 
+    map <- getMap(input$tabs)
+    if (is.null(map)) { map <- input$tabs }
+    active$map <- map
   })
-  values <- reactiveValues(
-    prompt = NA,
-    error = NA,
+  observe({
+    console$Queries <- getMap('Queries')[[1]]
+    console$Data    <- getMap('Data')[[1]]
+    console$Units   <- getMap('Units')[[1]]
+    console$Formula <- getMap('Formula')[[1]]
+    console$Views   <- getMap('Views')[[1]]
+    console$Styles  <- getMap('Styles')[[1]]
+    console$Tests   <- getMap('Tests')[[1]]
+    console$Names   <- getMap('Names')[[1]]
+    console$Sources <- getMap('Sources')[[1]]
+  })
+  
+  
+  ###Panel Controller###
+  prompt <- reactiveValues(
+    keywords = c('clear','exit'),
+    panel = 'console',
+    console = NA,
+    javascript = NA,
     help = NA,
-    plot = NA,
-    saveRO = NA,
-    insert = NA,
-    activeTab = NA,
-    activeMap = NA,
-    panelHeight = NA,
-    isPlot = F
+    plot = NA
   )
   observe({ 
-    values$activeMap <<- eval( parse(text = paste0('input$',input$tabs)))
-  })
-    
-  #Console    
-  observe({ options(width=input$panelWidth) })
-  types   <- NULL
-  results <- NULL
-  widths  <- NULL
-  classes <- NULL
-  output$console <- renderUI ({
     if (input$submit > 0) {
-      prompt <- isolate(input$prompt)
-      if (!is.na(prompt) && prompt != '') {
-        mw <<- paste0('width:',8*as.integer(options('width')),'px;')
-        panel <- 'console'
-        results <<- c(results,paste0("> ",prompt))
-        types   <<- c(types,'in')
-        widths  <<- c(widths,mw)
-        classes <<- c(classes,'')
-        tryCatch({
-          switch(
-            prompt,{
-              if (substr(prompt, 1, 1)=='?') {
-                panel <- 'help'
-                values$help <- prompt
+      entry <- isolate(input$prompt)
+      if (!is.na(entry) && entry != '') {
+        if (entry %in% prompt$keywords) { entry <- paste0('.Q$',entry,'()') }
+        switch(substr(entry, 1, 1), { #R
+            .Q$toConsole(paste0("> ",entry),'in','expression')
+            tryCatch({
+              console$.map <- isolate(active$map)
+              if (grepl("@",entry)) {
+                entry <- gsub("@(?=\\()", ".draw", entry, perl=T) 
+                entry <- gsub("@(?=[A-Za-z])", ".map[[1]]$", entry, perl=T) 
+                entry <- gsub("@(?=[[])", ".map[[1]]", entry, perl=T) 
+                entry <- gsub("@", ".map", entry)
+              } 
+              entry <- eval( parse(text=entry), console )
+              if ('ggplot' %in% class(entry)) { 
+                prompt$plot <- entry
+                prompt$panel <- 'plot'
               } else {
-                consoleMap <<- isolate(values$activeMap)
-                if (grepl("@",prompt)) {
-                  prompt <- gsub("@(?=[A-Za-z])", "consoleMap$", prompt, perl=T) 
-                  prompt <- gsub("@", "consoleMap", prompt)    
-                  p <- eval( parse(text=prompt), sys.frame() )
-                  mapJSON <<- gsub("\\[","",gsub("]","",toJSON(consoleMap)))
-                  updateTextInput(session, "consoleMap", value = mapJSON)
-                } else {
-                  p <- eval( parse(text=prompt), sys.frame() )
-                }
-                lapply(capture.output(p),function(x) {
-                  results <<- c(results,x)
-                  types   <<- c(types,'out')
-                  widths  <<- c(widths,mw)
-                  classes <<- c(classes,paste0(class(p),collapse=' '))
-                })  
-                if ('ggplot' %in% class(p)) { 
-                  values$plot <- p
-                  panel <- 'plot'
-                } 
+                .Q$toConsole(capture.output(entry),'out',paste0(class(entry),collapse=' '))  
+                prompt$panel <- 'console'
               }
-            },"clear" = {
-              cat("\014")
-              types   <<- NULL
-              results <<- NULL
-              widths  <<- NULL
-              classes <<- NULL
-            },"exit" = { stopApp(returnValue = NULL) }
-          )
-        }, warning = function(w){
-          p <- capture.output({eval(parse(text=prompt), sys.frame() )})
-          w <- sub('simpleWarning in eval(expr, envir, enclos)','warning',w,fixed=T)
-          results <<- c(results,toString(w))
-          types <<- c(types,'warning')
-          widths <<- c(widths,mw)
-          classes <<- c(classes,'warning')
-          lapply(p,function(x) {
-            results <<- c(results,x)
-            types   <<- c(types,'out')
-            widths  <<- c(widths,mw)
-            classes <<- c(classes,paste0(class(p),collapse=' '))
-          })
-          if ('ggplot' %in% class(p)) { values$plot <- p } 
-        }, error = function(e) {
-          #e <- capture.output(e)
-          e <- toString(e)
-          e <- sub(' in eval(expr, envir, enclos)','',e,fixed=T)
-          e <- sub(' in parse(text = prompt)','',e,fixed=T)
-          results <<- c(results,e)
-          types   <<- c(types,'error')
-          widths  <<- c(widths,mw)
-          classes <<- c(classes,'error')
-        })
-        updateTabsetPanel(session, "panels", selected = panel)
-        updateTextInput( session, "prompt", value = "")
-        div(mapply(function(w,x,y,z) tags$pre(w,class=x,style=y,title=z), results, types, widths, classes, SIMPLIFY=F),
-            tags$script('Q.panels.console.trigger("change");')) 
-      } else {
-        div(mapply(function(w,x,y,z) tags$pre(w,class=x,style=y,title=z), results, types, widths, classes, SIMPLIFY=F),
-            tags$script('Q.panels.console.trigger("change");')) 
+            },
+            warning = function(w){
+              w <- sub('simpleWarning in eval(expr, envir, enclos)','warning',w,fixed=T)
+              .Q$toConsole(w,'warning','warning')
+              entry <- suppressWarnings( eval(parse(text=entry), console ) )
+              .Q$toConsole(caputure.output(entry),'out',paste0(class(entry),collapse=' ')) }, 
+            error = function(e) {
+              e <- sub(' in eval(expr, envir, enclos)','',e,fixed=T)
+              e <- sub(' in parse(text = entry)','',e,fixed=T)
+              .Q$toConsole(e,'error','error') }
+            )
+          },
+         '$' = {
+             .Q$toConsole(entry,'in','javascript')
+             entry <- substring(entry, 2)
+             .Q$updateJS(session,'JS',entry)
+             prompt$panel <- 'console'
+             },
+         '?' = { 
+            .Q$toConsole(entry,'in','help')
+            prompt$panel <- 'help'
+            prompt$help <- entry }
+        )
+        updateTextInput(session, "prompt", value = "")
+        updateTabsetPanel(session, "panels", selected = prompt$panel)
       }
     }
   })
+
+  ##Console##
+  observe({ options(width=input$panelWidth) })
+  .Q$toConsole <- function(lines,type,hover){
+    mw <- paste0('width:',8*as.integer(options('width')),'px;')
+    lapply(lines,function(line) {
+      console$.results <- c(console$.results,line)
+      console$.types   <- c(console$.types,type)
+      console$.hovers  <- c(console$.hovers,hover)
+      console$.widths  <- c(console$.widths,mw)
+    })
+  }
+  observe({ 
+    console$.js <- input$JS
+    .Q$toConsole(input$JS,'out','javascript') 
+  })
+  observe({ 
+    .Q$toConsole(input$jserr,'error','javascript error') 
+  })
+  output$console <- renderUI({
+    input$JS
+    input$prompt
+    div(mapply(function(w,x,y,z) tags$pre(w,class=x,title=y,style=z), 
+               console$.results, 
+               console$.types, 
+               console$.hovers, 
+               console$.widths,
+               SIMPLIFY=F),
+        tags$script('Q.panels.console.trigger("change");')) 
+  })
   
-  #Plot
+  ##Plot##
   source('R/plotTheme.R')
   panelWidth  <- function(){ as.integer(input$panelWidth)*8 }
   panelHeight <- function(){ as.integer(input$panelHeight)*.85 }
-  output$plot <- renderPlot({ 
-      values$plot
-    } + theme_console(), 
+  output$plot <- renderPlot({
+      prompt$plot
+    } + .Q$theme_console(), 
         bg='transparent', 
         width=panelWidth, 
         height=panelHeight
   )
   
-  #Help
+  ##Help##
   output$help <- renderUI({
-    if (!is.na(values$help)) {
+    if (!is.na(prompt$help)) {
       url <- capture.output(eval( 
-        parse(text=values$help), 
+        parse(text=prompt$help), 
         sys.frame() 
       ))
       print(url <- substring(url,6,nchar(url)-1))
@@ -156,17 +173,19 @@ shinyServer(function(input, output, session) {
     }
   })        
   
-  #Database
-  #qbase <- mongo.create() #Local
+  ##Database##
+  #qbase <- mongo.create()
   qbase <- mongo.create(host="ds051110.mongolab.com:51110/qbase",username="qsys",password="snooze4u",db="qbase")
+  qb <- reactiveValues(
+    saveRO = NA,
+    insert = NA
+  )
   observe({ if (input$save > 0) {
-      values$saveRO <- isolate(values$activeMap)
-      values$insert <- mongo.insert(qbase,'qbase.test',values$saveRO)
-      updateTabsetPanel(session, "panels", selected = "database")
+      qb$saveRO <- isolate(active$map)
+      qb$insert <- mongo.insert(qbase,'qbase.test',qb$saveRO)
   }})
   if (mongo.is.connected(qbase)){
-    output$database <- renderUI({ 
-      div(
+    output$database <- renderUI({ div(
         tags$li("Database:",style='display:inline-flex;',tags$ul(
           tags$li(paste0("connected: ",mongo.is.connected(qbase))),
           #tags$li(paste0("primary: ",mongo.get.primary(qbase))),
@@ -174,8 +193,8 @@ shinyServer(function(input, output, session) {
           tags$ul( lapply(mongo.get.databases(qbase), function(x) tags$li(paste0("",x)) )),
           tags$li(paste0("collections: ",mongo.get.database.collections(qbase,"test"))),
           tags$li(paste0("count: ",mongo.count(qbase,"qbase.test"))),
-          tags$li(paste0("insert: ",values$insert)),
-          tags$ul( lapply(values$saveRO, function(x) tags$li(paste0("",x)) )),
+          tags$li(paste0("insert: ",qb$insert)),
+          tags$ul( lapply(qb$saveRO, function(x) tags$li(paste0("",x)) )),
           tags$li(paste0("last error: ",mongo.get.last.err(qbase,"qbase.test"))),
           #tags$li(paste0("prev error: ",mongo.get.prev.err(qbase,"qbase.test"))),
           tags$li(paste0("error: ",mongo.get.err(qbase))),
@@ -183,13 +202,11 @@ shinyServer(function(input, output, session) {
           tags$li(paste0("server error string: ",mongo.get.server.err.string(qbase)))
         )),hr(),br(),
         tags$li("Environment",style='display:inline-flex;',
-                tags$ul( lapply(ls(sys.frame()), function(x) tags$li(paste0("",x)) ))
-        ),hr(),br(),
-        tags$li("Map:",style='display:inline-flex;',tags$ul(
-          tags$ul( lapply(values$activeMap, function(x) tags$li(paste0("",x)) ))
-        )),hr(),br()
-      )
-    }) 
+                tags$ul( lapply(ls(console), function(x) tags$li(paste0("",x)) ))
+        ),hr(),br()
+        #tags$li("Map:",style='display:inline-flex;',tags$ul(
+        #  tags$ul( lapply(active$map, function(x) tags$li(paste0("",x)) ))
+        #)),hr(),br()
+    )}) 
   }
-  
 })

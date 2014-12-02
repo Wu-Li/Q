@@ -1,0 +1,18 @@
+@media only screen and (max-height: 500px) {
+  .fa-2x {
+    font-size: 1em !important;
+  }
+  button > .fa {
+    font-size: .5em;
+  }
+  .btn {
+    padding: .5vh;
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    padding-right: 0px !important;
+    padding-left: 0px !important;
+  }
+}

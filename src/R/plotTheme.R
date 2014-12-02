@@ -1,4 +1,4 @@
-theme_console <- function(base_size=16,base_family="") {
+.Q$theme_console <- function(base_size=16,base_family="") {
   theme_grey(base_size=base_size,base_family=base_family) %+replace%
     theme(
       axis.line=element_blank(), 

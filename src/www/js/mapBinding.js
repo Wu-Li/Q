@@ -6,8 +6,8 @@ function buildMap(container,mapJSON) {
   mapModel.id = container.attr('id');
   
   container.domMapWidget(console, mapModel, false, imageInsertController);
-  $('body').mapToolbarWidget(mapModel);
-  $('body').attachmentEditorWidget(mapModel);
+  container.mapToolbarWidget(mapModel);
+  container.attachmentEditorWidget(mapModel);
   
   $("[data-mm-action='export-image']").click(function () {
     MAPJS.pngExport(idea).then(function (url) {
@@ -44,6 +44,7 @@ function buildMap(container,mapJSON) {
   return mapModel;
 };
 
+/*
 function saveMap(container) { 
   var mapId = container.attr("id");
   var mapJSON = Q.models[mapId].getIdea();
@@ -51,6 +52,7 @@ function saveMap(container) {
   query.val(JSON.stringify(mapJSON));
   query.trigger('change');
 };
+*/
 
 var mapBinding = new Shiny.InputBinding();
 $.extend(mapBinding, {

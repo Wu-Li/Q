@@ -1,9 +1,9 @@
-
 var Q = Q || {};
 Q.models = {};
 Q.lines = [];
 Q.li = 0;
 Q.panels = {};
+Q.js = '';
 
 $( function () { 
   $("#tabs i").after("<br>");
@@ -90,6 +90,8 @@ $( function () {
             var d = $('<div class="iframeCover" style="z-index:99;position:absolute;width:100%;top:0px;left:0px;height:' + $(element).height() + 'px"></div>');
             $(element).append(d);
         });
+        var w = $("#plot img").width();
+        $("#plot img").width(w);
     },
     stop: function (event, ui) {
         var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
@@ -102,6 +104,7 @@ $( function () {
         Shiny.onInputChange("panelWidth",pw.val());
         Shiny.onInputChange("panelHeight",ph.val());
         $("#panels + .tab-content").css("width",c);
+        $("#plot img").width('95%');
         $('.iframeCover').remove();
     }
   });

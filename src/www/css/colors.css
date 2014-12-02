@@ -15,12 +15,12 @@
   	rgba(  50,  50,  225, .2) 88.88%, rgba(  50,  50, 225, .2) 100%);
 }
 
-#Queries.qmap {background:rgba( 205, 255, 255, .2); }
-#Data.qmap {    background:rgba( 225,  75,  50, .2); }
-#Units.qmap {   background:rgba( 200, 125,  75, .2);  }
-#Formula.qmap {    background:rgba( 175, 175, 100, .2); }
-#Views.qmap {     background:rgba( 150, 225, 125, .2); }
-#Styles.qmap {  background:rgba( 125, 200, 150, .2);  }
-#Tests.qmap {  background:rgba( 100, 150, 175, .2); }
-#Names.qmap {    background:rgba(  75, 100, 200, .2); }
-#Sources.qmap { background:rgba(  50,  50, 225, .2);  }  
+#Queries.qmap { background:rgba( 205, 255, 255, .2); }
+#Data.qmap    { background:rgba( 225,  75,  50, .2); }
+#Units.qmap   { background:rgba( 200, 125,  75, .2); }
+#Formula.qmap { background:rgba( 175, 175, 100, .2); }
+#Views.qmap   { background:rgba( 150, 225, 125, .2); }
+#Styles.qmap  { background:rgba( 125, 200, 150, .2); }
+#Tests.qmap   { background:rgba( 100, 150, 175, .2); }
+#Sources.qmap { background:rgba(  75, 100, 200, .2); }
+#Names.qmap   { background:rgba(  50,  50, 225, .2); }  

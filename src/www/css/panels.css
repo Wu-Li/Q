@@ -214,11 +214,13 @@ hr {
     color:rgb(200,200,200);
 }
 #database ~ label {
+  display:none;
   position: absolute;
   color: gray;
   left 1vh;
 }
 #database ~ input {
+    display:none;
     position: absolute;
     width: 95%;
     margin: 0 1%;
@@ -227,10 +229,7 @@ hr {
     border: none;
 }
 
-label[for="consoleMap"]  { bottom: 9.5vh; }
-#consoleMap              { bottom: 7vh; }
-label[for="query"]       { bottom: 3.5vh; }
-#query                   { bottom: 1vh; }
+#JS                      { bottom: 1vh; }
 
 label[for="panelWidth"]  { bottom: 9.5vh; }
 #panelWidth              { bottom: 7vh; }

@@ -1,4 +1,4 @@
-mapInput <- function(inputId, 
+.Q$mapInput <- function(inputId, 
     value = paste0('{"title": "',inputId,'","id": 1,"formatVersion": 2, "ideas": {  } }')) 
 {
     tagList(
@@ -18,8 +18,12 @@ mapInput <- function(inputId,
         tags$div(id=inputId, class="qmap", value=value,
                  tags$script(paste0(
                     'mapBinding.setValue($("#',inputId,'"),',value,');'
-                 )),
-                 tags$div(id = paste0(inputId,"-tray"),class="tray")
+                 ))
         )        
     )
+}
+
+.Q$getMapLayout <- function(inputId) {
+  tags$script(paste0('var layout = Q.models["',inputId,'"].getCurrentLayout();
+                      $("#consoleMap").val(layout);'))
 }
