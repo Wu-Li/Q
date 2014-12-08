@@ -75,7 +75,7 @@ body {overflow:hidden;
 }
 
 /***Sidebar***/
-#prompt-box + .tabs-above {
+.tabs-above:first-child {
     position:relative;
     float:left;
 }
@@ -99,7 +99,7 @@ body {overflow:hidden;
     padding: 30px 33px 20px;
     border-radius:0;
 }
-#panels + .tab-content{
+#panels + .tab-content {
     z-index: 10;
     position: absolute;
     top: 0;
@@ -173,6 +173,9 @@ body {overflow:hidden;
     border:none;
     color: rgb(240,240,240);
 }
+#console pre.js-out {
+    white-space:pre-line;
+}
 #console div pre:first-child {
     margin-top: 5vh;
 }
@@ -195,6 +198,7 @@ hr {
     visibility:hidden;
 }
 
+
 /***Plot***/
 #plot img {
     position: absolute;
@@ -204,24 +208,30 @@ hr {
     height: auto;
 }
 
-/***Database***/
+/***Configuration***/
 
-#database, #environments {
+#config-panel {
     position: absolute;
     top:12vh;
     width:96%;
     margin: 0 1%;
     color:rgb(200,200,200);
 }
-#database ~ label {
-  display:none;
-  position: absolute;
-  color: gray;
-  left 1vh;
+#config-panel .table-bordered td {
+  border-left: none;
+  border-right: 1px dashed rgba(168,168,168,.1);
+  border-top:1px solid rgba(168,168,168,.1);
 }
-#database ~ input {
-    display:none;
-    position: absolute;
+#config-panel .table-bordered {
+  border: none;
+  width: 100%;
+}
+#config-panel .table-bordered th {
+  border:none;
+}
+#config-panel label {  }
+#config-panel input {
+    position: relative;
     width: 95%;
     margin: 0 1%;
     background: rgba(200,200,200,.2);
@@ -229,14 +239,9 @@ hr {
     border: none;
 }
 
-#JS                      { bottom: 1vh; }
 
-label[for="panelWidth"]  { bottom: 9.5vh; }
-#panelWidth              { bottom: 7vh; }
-label[for="panelHeight"] { bottom: 3.5vh; }
-#panelHeight             { bottom: 1vh; }
-label[for="panelWidth"], #panelWidth, label[for="panelHeight"], #panelHeight { display:none; }
 
+/***Help***/
 #help iframe {
     position: relative;
     width: 100%;
@@ -244,3 +249,5 @@ label[for="panelWidth"], #panelWidth, label[for="panelHeight"], #panelHeight { d
     border: none;
     top:10vh;
 }
+#help-panel { display: none; }
+.active #help-panel { display: block; }

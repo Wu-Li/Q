@@ -27,6 +27,12 @@ $( function () {
         Q.console.css("position","absolute");
       }
   }); 
+  $("#Data").niceScroll({
+      cursorwidth:'1px',
+      cursorborder:'groove rgba(200,200,200,0.25)',
+      railalign:'right',
+      cursoropacitymax:.5
+  });
   
   //Prompt
   Q.prompt = $("#prompt");
@@ -73,21 +79,23 @@ $( function () {
         var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
         var ph = $("#panelHeight");
         var pw = $("#panelWidth");
-        var c = w - $('#prompt-box + .tabs-above').width();
+        var c = w - $('.tabs-above:first-child').width();
         pw.val(c/8);
         ph.val(h);
         $("#panels + .tab-content").css("width",c);
   });
   
-  $("#prompt-box + .tabs-above").resizable({
-    alsoResize: "#tabs, .active .qmap, #prompt-box + .tabs-above",
+  $(".tabs-above:first-child").resizable({
+    alsoResize: "#tabs, .active .qmap, .tabs-above:first-child",
     handles:"w",
     minWidth: 300,
     containment: 'parent',
     animate:true,
+    distance:10,
     start: function (event, ui){
         $("#help").each(function (index, element) {
-            var d = $('<div class="iframeCover" style="z-index:99;position:absolute;width:100%;top:0px;left:0px;height:' + $(element).height() + 'px"></div>');
+            var d = $('<div class="iframeCover" style="z-index:99;position:absolute;width:100%;top:0px;left:0px;height:' +
+                       $(element).height() + 'px"></div>');
             $(element).append(d);
         });
         var w = $("#plot img").width();

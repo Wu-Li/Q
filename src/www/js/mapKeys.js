@@ -1,23 +1,8 @@
 $( function () { 
-  /*
-  $(".save button").click( function( event ) {
-        var container = $(".active > .qmap");   
-        saveMap(container);
-  });
-  $(".load button").click( function( event ) {
-        var container = $(".active > .qmap");   
-        var mapId = container.attr('id');
-        var map =  $("#query").val();
-        var mapJSON = $.parseJSON( map );
-        mapBinding.setValue(container, mapJSON);
-        Shiny.onInputChange(mapId,mapJSON);
-  });
-  */
   $("#tabs > li > a").click( function (e){
         var mapId = '#' + (this.text).trim();
         $(mapId).trigger('active');
   });
-
   $(".mapjs-node span").keydown (function (e) {
         switch (e.keyCode) {
              case 186://:
@@ -35,4 +20,9 @@ $( function () {
                 break;
         }
   });
+  
+  $(".mapjs-node span").on('change', function(){
+    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"MathExample"]);
+  })
+
 });

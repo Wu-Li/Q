@@ -44,16 +44,6 @@ function buildMap(container,mapJSON) {
   return mapModel;
 };
 
-/*
-function saveMap(container) { 
-  var mapId = container.attr("id");
-  var mapJSON = Q.models[mapId].getIdea();
-  var query = $("#query");
-  query.val(JSON.stringify(mapJSON));
-  query.trigger('change');
-};
-*/
-
 var mapBinding = new Shiny.InputBinding();
 $.extend(mapBinding, {
   find: function(scope) { return $(".qmap"); },

@@ -1,11 +1,12 @@
-.Q$jsInput <- function(inputId) {
+.Q$jsInput <- function(inputId,label) {
   tagList(
     singleton(
       tags$head(
         tags$script(src="js/jsBinding.js")
       )
     ),
-    tags$input(id=inputId, class="jsInput")
+    tags$label(label, `for` = inputId),
+    tags$input(id=inputId,type='text',class="jsInput")
   )        
 }
 .Q$updateJS <- function(session, inputId, value = NULL) {

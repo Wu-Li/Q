@@ -1505,7 +1505,7 @@ MAPJS.MapModel = function (layoutCalculatorArg, selectAllTitles, clipboardProvid
 			if (activated.length === 0) {
 				activatedNodes = [currentlySelectedIdeaId];
 			} else {
-				activatedNodes = activated;
+			    activatedNodes = activated;
 			}
 			self.dispatchEvent('activatedNodesChanged', _.difference(activatedNodes, wasActivated), _.difference(wasActivated, activatedNodes));
 		},
@@ -1525,7 +1525,7 @@ MAPJS.MapModel = function (layoutCalculatorArg, selectAllTitles, clipboardProvid
 		updateCurrentLayout = function (newLayout) {
 			self.dispatchEvent('layoutChangeStarting');
 			applyLabels(newLayout);
-
+            
 			_.each(currentLayout.connectors, function (oldConnector, connectorId) {
 				var newConnector = newLayout.connectors[connectorId];
 				if (!newConnector || newConnector.from !== oldConnector.from || newConnector.to !== oldConnector.to) {
@@ -1572,7 +1572,9 @@ MAPJS.MapModel = function (layoutCalculatorArg, selectAllTitles, clipboardProvid
 						self.dispatchEvent('nodeLabelChanged', newNode);
 					}
 				}
+                
 			});
+             
 			_.each(newLayout.connectors, function (newConnector, connectorId) {
 				var oldConnector = currentLayout.connectors[connectorId];
 				if (!oldConnector || newConnector.from !== oldConnector.from || newConnector.to !== oldConnector.to) {
@@ -3201,9 +3203,10 @@ jQuery.fn.updateNodeContent = function (nodeContent, resourceTranslator) {
 	var MAX_URL_LENGTH = 25,
 		self = jQuery(this),
 		textSpan = function () {
-			var span = self.find('[data-mapjs-role=title]');
+            var span = self.find('[data-mapjs-role=title]');    
 			if (span.length === 0) {
 				span = jQuery('<span>').attr('data-mapjs-role', 'title').appendTo(self);
+                span.addClass('node-title');
 			}
 			return span;
 		},
@@ -3254,8 +3257,9 @@ jQuery.fn.updateNodeContent = function (nodeContent, resourceTranslator) {
 			element.text(text.trim());
 			self.data('title', title);
 			element.css({'max-width': '', 'min-width': ''});
-			if ((domElement.scrollWidth - nodeTextPadding) > domElement.offsetWidth) {
-				element.css('max-width', domElement.scrollWidth + 'px');
+            MathJax.Hub.Queue(["Typeset",MathJax.Hub],domElement);
+            if ((domElement.scrollWidth - nodeTextPadding) > domElement.offsetWidth) {
+    			element.css('max-width', domElement.scrollWidth + 'px'); 
 			}
 			else {
 				var height = domElement.offsetHeight;
@@ -3436,17 +3440,18 @@ jQuery.fn.editNode = function (shouldSelectAll) {
 			node.shadowDraggable();
 		},
 		finishEditing = function () {
-      var content = textBox.innerText();
+            var content = textBox.innerText();
 			if (content === unformattedText) {
-				return cancelEditing();
+                content = unformattedText;
+                //return cancelEditing();
 			}
 			clear();
 			result.resolve(content);
 		},
 		cancelEditing = function () {
-			clear();
-			textBox.text(originalText);
-			result.reject();
+            clear();
+            textBox.text(unformattedText);
+            result.reject();
 		},
 		keyboardEvents = function (e) {
 			var ENTER_KEY_CODE = 13,
@@ -3525,11 +3530,12 @@ jQuery.fn.updateReorderBounds = function (border, box) {
 		};
 
 	jQuery.fn.createNode = function (node) {
-		return jQuery('<div>')
+		var newNode = jQuery('<div>')
 			.attr({'id': nodeKey(node.id), 'tabindex': 0, 'data-mapjs-role': 'node' })
 			.css({display: 'block', position: 'absolute'})
 			.addClass('mapjs-node')
 			.appendTo(this);
+        return newNode;
 	};
 	jQuery.fn.createConnector = function (connector) {
 		return MAPJS.createSVG()

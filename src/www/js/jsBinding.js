@@ -16,7 +16,13 @@ $.extend(jsBinding, {
   receiveMessage: function(el, value){
     try {
       $.globalEval("var v = " + value);
-      if ( typeof(v) == 'object' ) { v = JSON.stringify(v); }
+      if ( typeof(v) == 'object' ) { 
+          try {
+              v = JSON.stringify(v); 
+          } catch(e) {
+              v = v.innerHTML;
+          }
+      }
       $(el).val(v);
       $(el).trigger('change');
     } catch(e) { 

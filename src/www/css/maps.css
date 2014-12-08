@@ -21,7 +21,7 @@
     overflow: hidden !important;
     border-bottom: none;
 }
-#prompt-box + .tabs-above {
+.tabs-above:first-child {
     position: relative;
     float: right;
     right: 1vh;
@@ -67,11 +67,9 @@
     display: block;
     visibility: visible;
 }
-#help-panel { display: none; }
-.active #help-panel { display: block; }
 
 #tabs.nav > li {
-    width: 11.11%;    
+    width: 14.28%;    
     height: 10vh;
     z-index:100;
     margin:0;
@@ -135,6 +133,30 @@
     box-shadow: inset 1px 1px 10px black;
 }
 
+/***Tables***/
+
+#Data {
+    position:absolute;
+    top:10vh;
+    bottom:0;
+    width:100%;
+    padding-bottom:10vh;
+}
+.tab-pane table.data {
+    width: 100%;
+    font-size: 12px;
+    position: relative;
+}
+#Data .table-bordered{
+    border:none;
+}
+.table-bordered th, .table-bordered td {
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(50,50,50,.1);   
+}
+
+
 /***Tray***/
 #global-tray {
   right: 1vh;
@@ -146,8 +168,9 @@
   height: 3vh;
   pointer-events: none;
 }
-#global-tray button {
+#global-tray button.btn {
   pointer-events:auto;
+  text-shadow:none;
 }
 #save, #load {
   position: relative;
@@ -156,8 +179,8 @@
   width: 10%;
   height: 8vh;
   bottom: 5.3vh;
-  margin: 1vh .5vh 0 -.4vh;
-  background: rgba(50,50,50,.1);
+  margin: 1.1vh .4vh 0 -.4vh;
+  background: rgba(125,125,125,.5);
   color: rgba(20,20,20,.4);
   font-size: 32px;
   border:1px groove rgba(200,200,200,.2);
