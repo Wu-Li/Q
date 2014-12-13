@@ -5,11 +5,6 @@ $( function () {
   });
   $(".mapjs-node span").keydown (function (e) {
         switch (e.keyCode) {
-             case 186://:
-                $(this).siblings().remove();
-                $(this).parent().append("<p>"+this.textContent+":</p>");
-                $(this).text("");
-                break;
             case 192://`
                 if (e.shiftKey) {
                     $("#prompt").val(this.textContent);
@@ -20,9 +15,5 @@ $( function () {
                 break;
         }
   });
-  
-  $(".mapjs-node span").on('change', function(){
-    MathJax.Hub.Queue(["Typeset",MathJax.Hub,"MathExample"]);
-  })
 
 });

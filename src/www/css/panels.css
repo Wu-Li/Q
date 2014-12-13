@@ -1,105 +1,49 @@
-body {overflow:hidden;
-      background:#444;}
-
-*:focus{ outline: 0; }
-
-.container-fluid {
-    height:100vh;
-    width:100vw;
-    position:absolute;
-    z-index:0;
-    padding: 0;
-    margin: 0;
-}
-
-#panels.nav > li:first-child {
-    z-index: 150;
-    position: relative;
-    padding: 0px;
-    margin:0;
-    float:left;
-    
-    
-}
-#panels.nav > li:first-child > a { 
-    line-height: 7vh !important;
-    font-size: 7vh !important;
-    font-family: serif;
-    font-weight: 200;  
-    color: #777;  
-    text-shadow: none;
-    padding: 10px 18px 0px 40px;
-    margin: 0 -13px -5px -20px;
-    background:none;
-}
-
-
-/***Prompt***/
-
-#prompt-box {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width:100vw;
-    height: 5vh;
-    font-family: monospace;
-}
-#prompt-box label  {
-    position: absolute;
-    top:25%;
-    left: .5vh;
-    font-size: 4vh;
-    color: #ddd;
-    z-index: 1;
-    font-weight: bold;
-}
-#prompt {
-    border-radius:0;
-    padding-left:3vh;
-    font-size: 2.5vh;
-    line-height: 3vh;
-    color:#ddd;
-    height: 5vh;
-    background: #888;
-    border: 2px solid #888;
-    border-top: 3px solid #aaa !important;
-    margin: 0;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width:100%;
-    max-width: 100%;
-    z-index: 0;
-    box-sizing:border-box;
-}
-
 /***Sidebar***/
-.tabs-above:first-child {
-    position:relative;
-    float:left;
-}
-#panels {
-    z-index: 10;
-    position: absolute;
+#panels.nav {
+    z-index: 50;
+    position: relative;
     top: 0;
     right: 0;
     padding: 0;
+    margin: 0;
     height: 0;
     border-style: none;
     background: #444;
-    overflow: hidden;
-    margin-left: 1vw;
-    right: 1vw;
-    overflow:visible;
 }
-#panels a {
-    background: rgba(69,69,69,0.8);
-    margin: -10px -13px -10px -20px;
-    padding: 30px 33px 20px;
+#panels.nav > li {
+    margin:0;
+    width:10vh;
+    box-sizing:border-box;
+    float:right;
+    background:radial-gradient(at 40% 50%, rgba(67,67,67,1), rgba(67,67,67,0) 70%);
+}
+#panels.nav > li > a {
+    position:relative;
+    color:gray;
+    background:none;
+    font-size:calc(1vh + 1vw);
+    padding: calc(1vh + 1vw);
+    margin:0;
     border-radius:0;
+    left: calc(1vh - 1vw);
 }
-#panels + .tab-content {
+#panels.nav > li:first-child {
+    z-index: 150;
+    position: relative;
+    margin:0;
+    float:left;
+}
+#panels.nav > li:first-child > a { 
+    line-height: calc(2vw + 4vh) !important;
+    font-size: calc(2vw + 4vh) !important;
+    font-family: serif;
+    font-weight: 200;
+    padding: 1vh 0 0 calc(1vh + 1vw);
+    margin: 0;
+    background: none;
+}
+
+#panels.nav + .tab-content {
     z-index: 10;
     position: absolute;
     top: 0;
@@ -113,21 +57,8 @@ body {overflow:hidden;
     width: 39vw;
 }
 
-#panels.nav {
-    z-index: 50;
-    position: relative;
-}
-#panels.nav > li {
-    margin:1vh;
-    float:right;
-}
-#panels.nav > li > a {
-    color:gray;
-    font-size:2.4vh;
-}
-
 /***Console***/
-
+#ascrail2000-hr{ visibility:hidden; }
 #console-panel {
     position: absolute;
     top: 7.3vh;
@@ -146,7 +77,6 @@ body {overflow:hidden;
     pointer-events:none;
     background: linear-gradient(00deg, rgba(68,68,68,0) 70%, rgba(68,68,68,1)  98%);
 }
-
 #console {
     position: absolute;
     bottom: 0;
@@ -183,7 +113,7 @@ body {overflow:hidden;
     color:rgb(200,200,200);
     margin-top: 1vh;
 }
-hr {
+#console hr {
   margin: .5vh 0 0 3px;
   border: 1px rgba(168,168,168,.1);
   border-style: inset;
@@ -194,9 +124,6 @@ hr {
 #console .error {
     color:red;
 }
-#ascrail2000-hr{
-    visibility:hidden;
-}
 
 
 /***Plot***/
@@ -204,12 +131,11 @@ hr {
     position: absolute;
     top: 10vh;
     margin: 1vh;
-    width: 95%;
+    width: 96%;
     height: auto;
 }
 
 /***Configuration***/
-
 #config-panel {
     position: absolute;
     top:12vh;
@@ -238,8 +164,6 @@ hr {
     color: white;
     border: none;
 }
-
-
 
 /***Help***/
 #help iframe {

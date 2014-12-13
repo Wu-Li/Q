@@ -27,12 +27,12 @@ $( function () {
         Q.console.css("position","absolute");
       }
   }); 
-  $("#Data").niceScroll({
+  $(".shiny-datatable-output").niceScroll({
       cursorwidth:'1px',
       cursorborder:'groove rgba(200,200,200,0.25)',
       railalign:'right',
       cursoropacitymax:.5
-  });
+  });          
   
   //Prompt
   Q.prompt = $("#prompt");
@@ -79,14 +79,15 @@ $( function () {
         var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
         var ph = $("#panelHeight");
         var pw = $("#panelWidth");
-        var c = w - $('.tabs-above:first-child').width();
+        var c = w - $('#tabs-wrapper .tabs-above').width();
         pw.val(c/8);
         ph.val(h);
+        //$("#tabs-wrapper .tabs-above").css("width",w - c);
         $("#panels + .tab-content").css("width",c);
   });
   
-  $(".tabs-above:first-child").resizable({
-    alsoResize: "#tabs, .active .qmap, .tabs-above:first-child",
+  $("#tabs-wrapper").resizable({
+    alsoResize: "#tabs-wrapper, #tabs-wrapper .tabs-above, #tabs, .active .qmap",
     handles:"w",
     minWidth: 300,
     containment: 'parent',
@@ -112,7 +113,7 @@ $( function () {
         Shiny.onInputChange("panelWidth",pw.val());
         Shiny.onInputChange("panelHeight",ph.val());
         $("#panels + .tab-content").css("width",c);
-        $("#plot img").width('95%');
+        $("#plot img").width('96%');
         $('.iframeCover').remove();
     }
   });

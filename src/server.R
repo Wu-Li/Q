@@ -9,7 +9,7 @@
 }
 shinyServer(function(input, output, session) {
     
-    ###Session###
+###Session###
 {
     console <- new.env()
     .Q$clear <- function() {
@@ -35,6 +35,13 @@ shinyServer(function(input, output, session) {
         help = NA,
         plot = NA
     )
+    observe({ 
+        w <- as.integer(input$panelWidth)
+        #print(paste0(
+            options(width=w)
+        #,' -> ',w))
+         
+    })
     observe({ 
         if (input$submit > 0) {
             entry <- isolate(input$prompt)
@@ -92,7 +99,6 @@ shinyServer(function(input, output, session) {
 
 ##Console##
 {
-    observe({ options(width=input$panelWidth) })
     .Q$toConsole <- function(lines,type,hover){
         mw <- paste0('width:',8*as.integer(options('width')),'px;')
         lapply(lines,function(line) {
@@ -214,16 +220,11 @@ shinyServer(function(input, output, session) {
     })
     
     #Load
-    observe({ if (input$load == 0) { return(NULL) }
-              idea <- mongo.find.one(qbase,qb$path)
-              js <- paste0('Q.models.["',input$tabs,'"].setIdea(',idea,')')
-              .Q$updateJS(session,'jsLoad',js)
-    })
-    #   observe({ if (is.null(input$jsLoad)) { return(NULL) }
-    #     .Q$updateJS(session,)
-    #     
-    #     
-    #   })
+#     observe({ if (input$load == 0) { return(NULL) }
+#               idea <- mongo.find.one(qbase,qb$path)
+#               js <- paste0('Q.models.["',input$tabs,'"].setIdea(',idea,')')
+#               .Q$updateJS(session,'jsLoad',js)
+#     })
     
     #Select
     .Q$select <- function(query = NA) {
@@ -234,7 +235,6 @@ shinyServer(function(input, output, session) {
     }
     .Q$getMap <- function(inputId) { 
         eval( parse(text = paste0('input$',inputId))) 
-        
     }
     .Q$runMap <- function(inputId = NULL) {
         if (is.null(inputId)) { inputId = input$tabs }
@@ -244,7 +244,7 @@ shinyServer(function(input, output, session) {
                 tryCatch({ eval( parse(text=node), envir=console ) },
                          error = function(e) { e } )
             },how = 'replace') 
-        } 
+        }
     }
     .Q$drawMap <- function(title,query) {
     }
@@ -259,7 +259,7 @@ shinyServer(function(input, output, session) {
         console$Names      <- .Q$getMap('Names')[[1]]
         console$Sources    <- .Q$getMap('Sources')[[1]]
     })    
-    output$Data <- renderTable(mtcars)
+    output$Data <- renderDataTable(mtcars)
     
     
     ###Computer Algebra System###
