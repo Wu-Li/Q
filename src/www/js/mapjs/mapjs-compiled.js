@@ -3207,6 +3207,19 @@ jQuery.fn.updateNodeContent = function (nodeContent, resourceTranslator) {
 			if (span.length === 0) {
 				span = jQuery('<span>').attr('data-mapjs-role', 'title').appendTo(self);
                 span.addClass('node-title');
+                span.keydown(function (e) {
+                    switch (e.keyCode) {
+                        case 192://`
+                            if (e.ctrlKey) {
+                                $("#prompt").val(this.textContent);
+                                $("#prompt").attr("value", this.textContent);
+                                $("#prompt").trigger('change');
+                                $("#prompt").focus();
+                                return true;
+                            } 
+                            return false;
+                    }
+        	    });
 			}
 			return span;
 		},
@@ -3511,7 +3524,6 @@ jQuery.fn.updateReorderBounds = function (border, box) {
 		top: box.y + box.height / 2 - element.height() / 2,
 		left: border.x - (border.edge === 'left' ? element.width() : 0)
 	});
-
 };
 
 (function () {
@@ -3532,6 +3544,7 @@ jQuery.fn.updateReorderBounds = function (border, box) {
 	jQuery.fn.createNode = function (node) {
 		var newNode = jQuery('<div>')
 			.attr({'id': nodeKey(node.id), 'tabindex': 0, 'data-mapjs-role': 'node' })
+            .attr({'name': node.id })
 			.css({display: 'block', position: 'absolute'})
 			.addClass('mapjs-node')
 			.appendTo(this);

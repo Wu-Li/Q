@@ -141,6 +141,15 @@
     box-shadow: inset 1px 1px 10px black;
 }
 
+/**Map Nodes**/
+.mapjs-node:before {
+    content:attr(name);
+    position:absolute;
+    top:-20px;
+    left:0;
+    color:#777;
+}
+
 /***Tables***/
 #ascrail2001-hr{ visibility:hidden; }
 .shiny-datatable-output {

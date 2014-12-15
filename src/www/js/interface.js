@@ -36,11 +36,11 @@ $( function () {
   
   //Prompt
   Q.prompt = $("#prompt");
-  $(document).keydown( function(e) {
+  $('.tabs-above').keydown( function(e) {
         switch (e.keyCode) {
-            case 192://grave
-                Q.prompt.focus();
-                return false;
+             case 192://`
+                    $("#prompt").focus();
+                    return false;
         }
   });
   Q.prompt.keydown( function(e) {
@@ -84,6 +84,11 @@ $( function () {
         ph.val(h);
         //$("#tabs-wrapper .tabs-above").css("width",w - c);
         $("#panels + .tab-content").css("width",c);
+  });
+  
+  $("#tabs > li > a").click( function (e){
+        var mapId = '#' + (this.text).trim();
+        $(mapId).trigger('active');
   });
   
   $("#tabs-wrapper").resizable({

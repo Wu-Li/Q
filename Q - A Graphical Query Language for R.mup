@@ -4,176 +4,225 @@
   "formatVersion": 2,
   "ideas": {
     "11": {
-      "title": "Panels",
-      "id": 249,
+      "title": "Interface",
+      "id": 18,
+      "ideas": {
+        "1": {
+          "title": "Panels",
+          "id": 2,
+          "ideas": {
+            "1": {
+              "title": "Console",
+              "id": 5,
+              "ideas": {}
+            },
+            "2": {
+              "title": "Plot",
+              "id": 6,
+              "attr": {
+                "style": {}
+              }
+            },
+            "3": {
+              "title": "Configuration",
+              "id": 7
+            },
+            "4": {
+              "title": "Help",
+              "id": 8
+            }
+          },
+          "attr": {
+            "style": {},
+            "icon": {
+              "url": "internal:1/b7fcae1e-9080-8965-83fe-4cb7c8cf46d5/",
+              "width": 25,
+              "height": 25,
+              "position": "left"
+            },
+            "progress": "passing",
+            "collapsed": true
+          }
+        },
+        "14": {
+          "title": "Prompt",
+          "id": 4,
+          "attr": {
+            "style": {},
+            "collapsed": true
+          },
+          "ideas": {
+            "1": {
+              "title": "code completion",
+              "id": 273
+            },
+            "2": {
+              "title": "syntax highlighting",
+              "id": 277
+            },
+            "3": {
+              "title": "multiline input",
+              "id": 278
+            }
+          }
+        },
+        "2.5": {
+          "title": "Tabs",
+          "id": 271,
+          "attr": {
+            "style": {},
+            "collapsed": true
+          },
+          "ideas": {
+            "1": {
+              "title": "maps",
+              "id": 25,
+              "ideas": {
+                "1": {
+                  "title": "Queries",
+                  "id": 45,
+                  "ideas": {
+                    "1": {
+                      "title": "Q",
+                      "id": 59
+                    }
+                  },
+                  "attr": {
+                    "style": {}
+                  }
+                },
+                "2": {
+                  "title": "Data",
+                  "id": 46,
+                  "attr": {
+                    "style": {}
+                  },
+                  "ideas": {
+                    "1": {
+                      "title": "dataTable",
+                      "id": 265
+                    }
+                  }
+                },
+                "5": {
+                  "title": "Views",
+                  "id": 49,
+                  "ideas": {
+                    "1": {
+                      "title": "HTML",
+                      "id": 266
+                    }
+                  },
+                  "attr": {
+                    "style": {}
+                  }
+                },
+                "6": {
+                  "title": "Styles",
+                  "id": 50,
+                  "ideas": {
+                    "1": {
+                      "title": "CSS",
+                      "id": 267
+                    }
+                  },
+                  "attr": {
+                    "style": {}
+                  }
+                },
+                "7": {
+                  "title": "Tests",
+                  "id": 51,
+                  "ideas": {
+                    "1": {
+                      "title": "QUnit",
+                      "id": 62
+                    }
+                  },
+                  "attr": {
+                    "style": {}
+                  }
+                },
+                "9": {
+                  "title": "Sources",
+                  "id": 53,
+                  "ideas": {
+                    "2": {
+                      "title": "Data Connections",
+                      "id": 55
+                    },
+                    "3": {
+                      "title": "R packages",
+                      "id": 57,
+                      "attr": {
+                        "style": {}
+                      }
+                    },
+                    "4": {
+                      "title": "js Libraries",
+                      "id": 58,
+                      "attr": {
+                        "style": {}
+                      }
+                    }
+                  },
+                  "attr": {
+                    "style": {}
+                  }
+                },
+                "19": {
+                  "title": "Names",
+                  "id": 52,
+                  "ideas": {
+                    "1": {
+                      "title": "Namespace hierarchies",
+                      "id": 56
+                    }
+                  },
+                  "attr": {
+                    "style": {}
+                  }
+                },
+                "20": {
+                  "title": "Algebra",
+                  "id": 268,
+                  "ideas": {
+                    "1": {
+                      "title": "MathJax",
+                      "id": 269
+                    },
+                    "2": {
+                      "title": "Yacas",
+                      "id": 270
+                    }
+                  }
+                }
+              },
+              "attr": {
+                "style": {},
+                "collapsed": true
+              }
+            },
+            "2": {
+              "title": "Names",
+              "id": 274
+            },
+            "3": {
+              "title": "Operators",
+              "id": 275
+            },
+            "4": {
+              "title": "Draw",
+              "id": 276
+            }
+          }
+        }
+      },
       "attr": {
         "style": {}
-      },
-      "ideas": {
-        "1": {
-          "title": "console",
-          "id": 252
-        },
-        "2": {
-          "title": "prompt",
-          "id": 253
-        },
-        "3": {
-          "title": "config",
-          "id": 254
-        },
-        "4": {
-          "title": "help",
-          "id": 255
-        }
       }
     },
-    "21": {
-      "title": "Maps",
-      "id": 250,
-      "attr": {
-        "style": {}
-      },
-      "ideas": {
-        "1": {
-          "title": "Queries",
-          "id": 256
-        },
-        "2": {
-          "title": "Data",
-          "id": 257
-        },
-        "3": {
-          "title": "Views",
-          "id": 258
-        },
-        "4": {
-          "title": "Styles",
-          "id": 259
-        },
-        "5": {
-          "title": "Tests",
-          "id": 260
-        },
-        "6": {
-          "title": "Sources",
-          "id": 261
-        }
-      }
-    },
-    "22": {
-      "title": "Prompt",
-      "id": 251,
-      "attr": {
-        "style": {}
-      }
-    },
-    "23": {
-      "title": "function by query",
-      "id": 262,
-      "ideas": {
-        "1": {
-          "title": "()",
-          "id": 263
-        },
-        "2": {
-          "title": "{}",
-          "id": 264,
-          "ideas": {}
-        }
-      }
-    },
-    "-73": {
-      "title": "Pitch",
-      "id": 207,
-      "attr": {
-        "style": {},
-        "collapsed": true
-      },
-      "ideas": {
-        "1": {
-          "title": "Brings R to the touch screen and smartpad",
-          "id": 29,
-          "attr": {
-            "style": {
-              "background": "#808080"
-            }
-          }
-        },
-        "2": {
-          "title": "Built on the principles of R, console driven, visual results, low barrier to entry without sacrificing depth",
-          "id": 30,
-          "attr": {
-            "style": {
-              "background": "#808080"
-            }
-          }
-        },
-        "3": {
-          "title": "Stores code in a graph database",
-          "id": 31,
-          "attr": {
-            "style": {
-              "background": "#808080"
-            }
-          }
-        },
-        "4": {
-          "title": "Visual syntax",
-          "id": 32,
-          "attr": {
-            "style": {
-              "background": "#808080"
-            }
-          }
-        },
-        "5": {
-          "title": "Rapid prototyping",
-          "id": 33,
-          "attr": {
-            "style": {
-              "background": "#808080"
-            }
-          }
-        },
-        "6": {
-          "title": "A better Graphing Calculator",
-          "id": 35,
-          "attr": {
-            "style": {
-              "background": "#808080"
-            }
-          }
-        }
-      }
-    },
-    "-95": {
-      "title": "Query Language",
-      "id": 205,
-      "ideas": {
-        "1": {
-          "title": "select",
-          "id": 212
-        },
-        "2": {
-          "title": "where",
-          "id": 213
-        },
-        "3": {
-          "title": "update",
-          "id": 214
-        },
-        "4": {
-          "title": "insert",
-          "id": 215
-        }
-      },
-      "attr": {
-        "collapsed": true,
-        "style": {}
-      }
-    },
-    "-105": {
+    "16": {
       "title": "Models",
       "id": 206,
       "ideas": {
@@ -415,7 +464,7 @@
                               "id": 133,
                               "ideas": {
                                 "1": {
-                                  "title": "{title:{child:grandchildren}} ",
+                                  "title": "{title:{'1':child.value, ",
                                   "id": 138,
                                   "attr": {
                                     "style": {
@@ -757,8 +806,7 @@
             }
           },
           "attr": {
-            "style": {},
-            "collapsed": true
+            "style": {}
           }
         },
         "5": {
@@ -803,177 +851,29 @@
         }
       },
       "attr": {
-        "style": {}
+        "style": {},
+        "collapsed": true
       }
     },
-    "-90": {
-      "title": "Interface",
-      "id": 18,
+    "21": {
+      "title": "Language",
+      "id": 205,
       "ideas": {
         "1": {
-          "title": "Panels",
-          "id": 2,
-          "ideas": {
-            "1": {
-              "title": "Console",
-              "id": 5,
-              "ideas": {}
-            },
-            "2": {
-              "title": "Plot",
-              "id": 6,
-              "attr": {
-                "style": {}
-              }
-            },
-            "3": {
-              "title": "Configuration",
-              "id": 7
-            },
-            "4": {
-              "title": "Help",
-              "id": 8
-            }
-          },
-          "attr": {
-            "style": {},
-            "collapsed": true
-          }
+          "title": "save",
+          "id": 212
+        },
+        "2": {
+          "title": "new",
+          "id": 213
         },
         "4": {
-          "title": "Maps",
-          "id": 25,
-          "ideas": {
-            "1": {
-              "title": "Queries",
-              "id": 45,
-              "ideas": {
-                "1": {
-                  "title": "default drop off for queries that don't specify a context",
-                  "id": 59
-                }
-              },
-              "attr": {}
-            },
-            "2": {
-              "title": "Data",
-              "id": 46,
-              "attr": {}
-            },
-            "5": {
-              "title": "Views",
-              "id": 49,
-              "ideas": {
-                "1": {
-                  "title": "coffeescript",
-                  "id": 66
-                },
-                "2": {
-                  "title": "rCharts",
-                  "id": 67,
-                  "ideas": {
-                    "1": {
-                      "title": "D3",
-                      "id": 68
-                    },
-                    "2": {
-                      "title": "...",
-                      "id": 69
-                    }
-                  }
-                }
-              },
-              "attr": {
-                "collapsed": true,
-                "style": {}
-              }
-            },
-            "6": {
-              "title": "Styles",
-              "id": 50,
-              "ideas": {
-                "1": {
-                  "title": "SASS",
-                  "id": 65
-                }
-              },
-              "attr": {
-                "collapsed": true,
-                "style": {}
-              }
-            },
-            "7": {
-              "title": "Tests",
-              "id": 51,
-              "ideas": {
-                "1": {
-                  "title": "input domains",
-                  "id": 62
-                },
-                "2": {
-                  "title": "output ranges",
-                  "id": 63
-                },
-                "3": {
-                  "title": "data validation",
-                  "id": 64
-                }
-              },
-              "attr": {
-                "collapsed": true,
-                "style": {}
-              }
-            },
-            "9": {
-              "title": "Sources",
-              "id": 53,
-              "ideas": {
-                "2": {
-                  "title": "Data Connections",
-                  "id": 55
-                },
-                "3": {
-                  "title": "R packages",
-                  "id": 57,
-                  "attr": {
-                    "style": {}
-                  }
-                },
-                "4": {
-                  "title": "js Libraries",
-                  "id": 58,
-                  "attr": {
-                    "style": {}
-                  }
-                }
-              },
-              "attr": {
-                "collapsed": true,
-                "style": {}
-              }
-            },
-            "19": {
-              "title": "Names",
-              "id": 52,
-              "ideas": {
-                "1": {
-                  "title": "Namespace hierarchies",
-                  "id": 56
-                }
-              },
-              "attr": {
-                "style": {}
-              }
-            }
-          },
-          "attr": {
-            "style": {},
-            "collapsed": true
-          }
+          "title": "delete",
+          "id": 215
         },
-        "14": {
-          "title": "Prompt",
-          "id": 4,
+        "0.5": {
+          "title": "select",
+          "id": 214,
           "attr": {
             "style": {}
           }
@@ -981,7 +881,75 @@
       },
       "attr": {
         "style": {},
+        "position": [
+          185,
+          178.18392484130857,
+          1
+        ]
+      }
+    },
+    "-10": {
+      "title": "Positioning",
+      "id": 207,
+      "attr": {
+        "style": {},
         "collapsed": true
+      },
+      "ideas": {
+        "6": {
+          "title": "A better Graphing Calculator",
+          "id": 35,
+          "attr": {
+            "style": {
+              "background": "#808080"
+            }
+          }
+        },
+        "7": {
+          "title": "Brings R to the touch screen and smartpad",
+          "id": 29,
+          "attr": {
+            "style": {
+              "background": "#808080"
+            }
+          }
+        },
+        "8": {
+          "title": "Built on the principles of R, console driven, visual results, low barrier to entry without sacrificing depth",
+          "id": 30,
+          "attr": {
+            "style": {
+              "background": "#808080"
+            }
+          }
+        },
+        "9": {
+          "title": "Stores code in a graph database",
+          "id": 31,
+          "attr": {
+            "style": {
+              "background": "#808080"
+            }
+          }
+        },
+        "10": {
+          "title": "Visual syntax",
+          "id": 32,
+          "attr": {
+            "style": {
+              "background": "#808080"
+            }
+          }
+        },
+        "11": {
+          "title": "Rapid prototyping",
+          "id": 33,
+          "attr": {
+            "style": {
+              "background": "#808080"
+            }
+          }
+        }
       }
     }
   },
@@ -1044,5 +1012,8 @@
         }
       }
     }
+  },
+  "resources": {
+    "1/b7fcae1e-9080-8965-83fe-4cb7c8cf46d5/": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDowMjgwMTE3NDA3MjA2ODExODA4M0MzOEVGNDcyMDg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpBNEFDMjZDOTI4OTUxMUUzQUFENUExOTAyMkIzNDA4MyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpBNEFDMjZDODI4OTUxMUUzQUFENUExOTAyMkIzNDA4MyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChNYWNpbnRvc2gpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MEE4MDExNzQwNzIwNjgxMThBNkREMjU1OTlDRjBDRkMiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MDI4MDExNzQwNzIwNjgxMTgwODNDMzhFRjQ3MjA4NTciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6LMRsBAAAC70lEQVR42uyaXYhMYRjHz5j1uVJISVKbSMmFi8Fa1ld2Q+S7FCtlWy5cqN0VEVeIbJuLRT5KNlbJ58gFNspibVvkozQXKJQNS7KLaPyf9jn1enrNzuycOee82/vU72KeOb0z/3Pej//zzESSyaTTG6KP00vCCrFCrBArxKzIi8Vipn73RWALWA46TH0iW8EVUArOgWieYQL6gjqwUcktASdNEjIMXABzRL4TXDdFyHgQB+NE/j1YClpMWCPzwEONiMdgKokwYfvdBG6AoSJ/CcwAb8N+jkRBLTjCC1yN/WAl+P7PORJCEUNAA1gg8j9BBTitPRBDJqIAXAMTRf4jWAbumWBRaM43a0Q8B1NSiQiTkDJwC4wQeVroReBV2E0jff5envf9xXuHwWLwNS3TGKCIfHCG574av9kMHs3I/QYkYjS4CiaLfDtYBW5nbOMDEEF1w2UwSuQTPJVemlBY0d2+qxFxB0zrqQg/hUTALnAeDBTvnQAl4HNWFaIPIgaAU2CNyP8B1aDG65p9Dyj0WMRI0KgR8Y3td41XH+QKOQh2g5tgvkdjT+KTWt6cN3zIxb0+kA6BSmVvj/OizCZo97kPxoj8A7YbT3NxsiZ4vrrRjwv68h6OWcn1wmCRrwdzQVuuLAKdoGvBL1EPHANVGYxFN+A4T9OokqffLXayn/qRqx3F3bUa2NNQcT9I2TIPgOFgO3+hVI2Bi2CWyHeA9Txuzk2b6jRpP/8irtnGTyf6nzEmgEcaEdQYKPZDhO5AbAKzwQeRp/VylqePGiW8qMeKfCsv6lY/bbSMJ2AmeC3yq9no5fPrzdRP0jQG3Cn2zu96QBcJrtheiHwpnzV1jHQG+3SNgSCFOHxHi92+kRKF/DRkY2Ad2NHNphCIEIpPTleDrDHFNW18TX3QpWZ3Qb5oodPV/ZbxjO13U9BFf7o2nqbOCtFTou16ejqNAT8iExtPNmaDUjdUCWsTaETsPx+sECvECrFCrJAs4q8AAwCWn4sqVVd8mQAAAABJRU5ErkJggg=="
   }
 }

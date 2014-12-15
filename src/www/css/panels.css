@@ -61,7 +61,7 @@
 #ascrail2000-hr{ visibility:hidden; }
 #console-panel {
     position: absolute;
-    top: 7.3vh;
+    top: calc(2vw + 4vh);
     left: 0;
     width: 100%;
     bottom: 0;
@@ -109,7 +109,7 @@
 #console div pre:first-child {
     margin-top: 5vh;
 }
-#console .in {
+#console pre.in, pre.js, pre.help {
     color:rgb(200,200,200);
     margin-top: 1vh;
 }

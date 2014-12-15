@@ -9,10 +9,8 @@
             tags$script(src="js/mapjs/lib/underscore-1.4.4.js", type="text/javascript"),
             tags$script(src="js/mapjs/lib/color-0.4.1.min.js"),        
             tags$script(src="js/mapjs/mapjs-compiled.js"),
-            tags$script(src="js/mapjs/attachments.js"),
-            
-            tags$script(src="js/mapBinding.js"),
-            tags$script(src="js/mapKeys.js")
+            tags$script(src="js/mapjs/lib/attachments.js"),
+            tags$script(src="js/mapBinding.js")
         )),
         
         tags$div(id=inputId, class="qmap", value=value,
