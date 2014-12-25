@@ -26,8 +26,8 @@ $.extend(jsBinding, {
       $(el).val(v);
       $(el).trigger('change');
     } catch(e) { 
-      $('#jserr').val(e);
-      $('#jserr').trigger('change');
+      $('#jsError').val(e);
+      $('#jsError').trigger('change');
     }
   },
   subscribe: function(el, callback){

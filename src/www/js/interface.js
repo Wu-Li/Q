@@ -18,7 +18,7 @@ $( function () {
       railalign:'left'
   });
   Q.panels.console.on('change', function() { 
-      $("pre.in").before("<hr>");
+      $("p.in").before("<hr>");
       if(Q.console.height() > Q.panels.console.height()){
         Q.console.css("position","relative");
         Q.panels.console.nice.resize();
@@ -79,10 +79,11 @@ $( function () {
         var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
         var ph = $("#panelHeight");
         var pw = $("#panelWidth");
-        var c = w - $('#tabs-wrapper .tabs-above').width();
+        var tw = $('#tabs-wrapper').width() + (.01 * w);
+        var c = w - tw
+        if (c < 300) { c = 300; }
         pw.val(c/8);
         ph.val(h);
-        //$("#tabs-wrapper .tabs-above").css("width",w - c);
         $("#panels + .tab-content").css("width",c);
   });
   
@@ -113,6 +114,7 @@ $( function () {
         var ph = $("#panelHeight");
         var pw = $("#panelWidth");
         c = w - ui.size.width;
+        if (c < 300) { c = 300; }
         pw.val(c/8);
         ph.val(h);
         Shiny.onInputChange("panelWidth",pw.val());
@@ -130,5 +132,9 @@ $( function () {
         ph.val(h);
         Shiny.onInputChange("panelHeight",ph.val());
   });
+  
+  //Tray
+  $('#undo').click(function(){window.mapModel.undo()})
+  $('#redo').click(function(){window.mapModel.redo()})
 });
 

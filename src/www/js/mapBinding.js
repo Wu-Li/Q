@@ -79,7 +79,9 @@ $.extend(mapBinding, {
         subIdeas.forEach(function(childIdea) {
             var childNode = mapBinding.getNode(childIdea);
             if (typeof(childNode) == 'string') {
-              values.push(childNode);
+                var v = Number(childNode);
+                if(isNaN(v)) { values.push(childNode) }
+                else { values.push(v) }
             } else {
               var gcNames = Object.getOwnPropertyNames(childNode);
               gcNames.forEach(function(name) {

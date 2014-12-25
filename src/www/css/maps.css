@@ -6,7 +6,7 @@
     right: 1vh;
     top: 1vh;
     height: calc(100% - 5vh) !important;
-    width: 60vw;
+    width: 54vw;
     overflow: hidden !important;
     z-index:46;
     max-width:calc(100vw - 10vh);
@@ -15,7 +15,7 @@
     position:absolute;
     width:100% !important;
     height:100% !important;
-    box-shadow: inset 0px 0 40px rgba(0,50,50,.7);
+    box-shadow: inset 0px -3px 40px rgba(0,50,50,.7);
     z-index:46;
     overflow:hidden;
     color:rgb(85,85,85);
@@ -165,22 +165,27 @@
 }
 .dataTables_wrapper { height:100.3%; }
 .shiny-datatable-output table {
-    width: 100%;
+    width: 100% !important;
     font-size: 12px;
     position: relative;
-}
-.shiny-datatable-output .table-bordered{
     border:none;
+    
 }
 .shiny-datatable-output table th, 
 .shiny-datatable-output table td {
     padding: .4vh;
     line-height: 16px;
-    text-align: left;
     vertical-align: top;
     border-width: 1px;
     border-style: solid;
     border-color: rgba(50,50,50,.1);   
+    min-width:40px;
+}
+.shiny-datatable-output table th {
+    text-align: center;
+}
+.shiny-datatable-output table td {
+    text-align: right;
 }
 .table-striped tbody>tr:nth-child(odd)>td, .table-striped tbody>tr:nth-child(odd)>th {
     background-color: rgba(200,200,200,.2);

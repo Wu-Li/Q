@@ -2,7 +2,7 @@
 body {overflow:hidden;
       background:#444;}
 
-*:focus{ outline: 0; }
+*:focus{ outline: none !important; }
 
 .container-fluid {
     position:absolute;
@@ -24,11 +24,11 @@ body {overflow:hidden;
   font-weight:bold;
 }
 
-.tab-content > .tab-pane {
+.tab-content .tab-pane {
     display: block;
     visibility: hidden;
 }
-.tab-content > .tab-pane.active {
+.tab-content .tab-pane.active {
     display: block;
     visibility: visible;
 }
