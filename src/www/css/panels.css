@@ -1,48 +1,57 @@
 /***Sidebar***/
 #panels.nav {
-    z-index: 50;
+    z-index: 20;
     position: relative;
     top: 0;
     right: 0;
     padding: 0;
     margin: 0;
-    height: 0;
     border-style: none;
-    background: #444;
+    overflow:hidden;
+    height:auto;
+    background:linear-gradient(180deg, rgba(67,67,67,.8) 90%,rgba(67,67,67,0) 100%);
 }
 #panels.nav > li {
-    margin:0;
+    margin:-.5vh;
     width:10vh;
     box-sizing:border-box;
     float:right;
-    background:radial-gradient(at 40% 50%, rgba(67,67,67,1), rgba(67,67,67,0) 70%);
 }
 #panels.nav > li > a {
     position:relative;
     color:gray;
     background:none;
     font-size:calc(1vh + 1vw);
-    padding: calc(1vh + 1vw);
+    padding: 3vh;
     margin:0;
     border-radius:0;
-    left: calc(1vh - 1vw);
 }
 #panels.nav > li:first-child {
     z-index: 150;
     position: relative;
     margin:0;
     float:left;
+    padding-bottom:2px;
 }
 #panels.nav > li:first-child > a { 
     line-height: calc(2vw + 4vh) !important;
     font-size: calc(2vw + 4vh) !important;
     font-family: serif;
     font-weight: 200;
-    padding: 1vh 0 0 calc(1vh + 1vw);
-    margin: 0;
-    background: none;
+    padding: 1vh 0 0 2vh;
 }
-
+#panels.nav > li:first-child > a:after {
+    content: 'R';
+    color: rgba(110,135,205,.4);
+    position: relative;
+    left: calc(-1.4vw - 2.2vh);
+    bottom: calc(.2vw + .4vh);
+    font-size: calc(1.4vw + 2.8vh);
+    z-index: -1;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-shadow: none;
+}
 #panels.nav + .tab-content {
     z-index: 10;
     position: absolute;
@@ -51,20 +60,27 @@
     padding: 0;
     bottom: 5vh;
     border-style: none;
-    background: #444;
     overflow: hidden;
     height:94.6vh;
     width: 45vw;
-    min-width:300px;
+    min-width:10vh;
 }
 
+/***Q***/
+div#chat {
+    position: absolute;
+    bottom: 0;
+    color: #CCC;
+    margin-left: 1vh;
+    font-family:cursive;
+}
 /***Console***/
 #ascrail2000-hr{ visibility:hidden; }
 #console-panel {
     position: absolute;
     top: calc(2vw + 4vh);
     left: 0;
-    width: 100%;
+    width: calc(100% - 8px);
     bottom: 0;
     overflow: scroll;
 }
@@ -119,6 +135,9 @@
   border: 1px rgba(168,168,168,.1);
   border-style: inset;
 }
+#console .message {
+    color:darkseagreen;
+}
 #console .warning {
     color:yellow;
 }
@@ -137,6 +156,7 @@
 }
 
 /***Configuration***/
+#panels.nav > li:first-child + li + li { display:none; }
 #config-panel {
     position: absolute;
     top:12vh;

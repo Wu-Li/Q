@@ -2,7 +2,44 @@
 body {overflow:hidden;
       background:#444;}
 
-*:focus{ outline: none !important; }
+*:focus { outline: none !important; }
+* { transition: 
+        margin .5s ease-out, 
+        padding .5s ease-out, 
+        background-color 1.5s ease-out,         
+        box-shadow 1.5s ease-out,
+        opacity .2s ease-out, 
+        border-color .2s ease-out, 
+        border-width    .2s ease-out, 
+        border-spacing .2s ease-out,
+        outline-color .2s ease-out, 
+        outline-width .2s ease-out, 
+        font-size .2s ease-out, 
+        font-weight .2s ease-out, 
+        letter-spacing .2s ease-out, 
+        word-spacing .2s ease-out, 
+        line-height .2s ease-out, 
+        vertical-align .2s ease-out, 
+        text-indent .2s ease-out;
+        /*
+        color .2s ease-out, 
+        background-position .2s ease-out, 
+        top    .2s ease-out,
+        right .2s ease-out, 
+        bottom .2s ease-out, 
+        left .2s ease-out, 
+        z-index    .2s ease-out;
+        height .2s ease-out, 
+        width .2s ease-out, 
+        max-height .2s ease-out, 
+        max-width .2s ease-out, 
+        min-height .2s ease-out, 
+        min-width .2s ease-out, 
+        clip .2s ease-out, 
+        text-shadow .2s ease-out,
+        */
+}
+.mapjs-node { transition: 0; }
 
 .container-fluid {
     position:absolute;
@@ -45,7 +82,7 @@ body {overflow:hidden;
 }
 #prompt-box label  {
     position: absolute;
-    top:25%;
+    top:-.5vh;
     left: .5vh;
     font-size: 4vh;
     color: #ddd;

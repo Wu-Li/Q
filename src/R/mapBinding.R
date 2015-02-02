@@ -1,4 +1,4 @@
-.Q$mapInput <- function(inputId, 
+mapInput <- function(inputId, 
     value = paste0('{"title": "',inputId,'","id": 1,"formatVersion": 2, "ideas": {  } }')) 
 {
     tagList(

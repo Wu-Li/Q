@@ -1,6 +1,7 @@
+canvas { display:block; }
 .mapjs-node {
-	margin: 0;
-	padding: 6px;
+    margin: -10px -5px;
+	padding: 5px;
 	border-radius: 24px;
 	border: 1px solid #777;
 	z-index: 2;
@@ -27,38 +28,36 @@
 	-webkit-user-select: text;
 	-ms-user-select: text;
 }
-.mapjs-node > span {
-	/*white-space: pre-wrap;*/
+.mapjs-node span {
+	white-space: pre-wrap;
 	font-family: monospace;
 	font-weight: bold;
-	font-size: 16px;
+	font-size: 12px;
 	text-align: left;
-	line-height: 200% !important;
+	line-height: 150% !important;
 	display: block;
-	max-width: 300px;
-	/*min-height: 1.5em;
-	min-width: 1em;*/
+	max-width: none;
+	min-height: 1.5em;
+	min-width: 1em;
 	outline: none;
 }
 .mapjs-node.activated {
 	outline: 0;
 	border: 3px dashed #2E9AFE;
-	margin: -2px;
 }
 .mapjs-node:focus {
 	outline: 0;
 	border: 3px dashed green;
-	margin: -2px;
+	margin: -10px;
 	box-shadow: 5px 5px 5px green;
 	z-index: 3;
 }
 .mapjs-node.selected {
 	outline: 0;
-	border: 3px dashed #2E9AFE !important;
+    border: 3px dashed #2E9AFE !important;
     background: #444;
-  color: rgb(240,240,240);
-	margin: -2px;
-	box-shadow: 5px 5px 5px black;
+    color: rgb(240,240,240);
+	box-shadow: 5px 5px 5px rgba(204, 204, 204, 0.8);
 	z-index: 3;
 }
 .mapjs-node.dragging {
@@ -66,15 +65,19 @@
 }
 .mapjs-node.collapsed {
 	box-shadow: 3px 3px 0 #A0A0A0, 4px 4px 0 #333, 6px 6px 0 #707070, 7px 7px 0 #222;
+    margin:-5px;
 }
 .mapjs-node.collapsed.selected {
-	box-shadow: 4px 4px 0 #A0A0A0, 5px 5px 0 #333, 8px 8px 0 #707070, 9px 9px 0 #222, 12px 12px 5px black;
+	box-shadow: 3px 3px 0 #A0A0A0, 4px 4px 0 #333, 6px 7px 0 #707070, 7px 7px 0 #222, 5px 5px 5px rgba(204, 204, 204, 0.8);
 }
 .mapjs-node[mapjs-level="1"] {
-	background-color:#444;
-  color:rgb(240,240,240);
-  border:gray 2px dashed;
-  box-shadow: 5px 5px 5px rgba(204, 204, 204, 0.8);
+    background-color:#22AAE0;
+    margin:0;
+    padding:7px;
+    background-color:#444;
+    color:rgb(240,240,240);
+    border:gray 2px dashed;
+    box-shadow: 5px 5px 5px rgba(204, 204, 204, 0.8);
 }
 .mapjs-node-light {
 	color: #4F4F4F;

@@ -1,0 +1,30 @@
+.mapjs-node.property {
+    background:rgba(  175, 150, 220, 1);
+    margin:-10px;
+    border-right-radius:0px;
+    
+}
+.mapjs-node.call {
+    background:rgba( 100, 150, 175, 1);
+}
+.mapjs-node.expression {
+    
+}
+.mapjs-node.list {
+    background:rgba( 175, 175, 100, 1);
+}
+.mapjs-node.query {
+    background:rgba( 205, 255, 255, 1);
+}
+.mapjs-node.switch {
+    background:rgba( 100, 150, 175, 1);
+}
+.mapjs-node.sum {
+    background:rgba( 150, 225, 125, 1);
+}
+.mapjs-node.nsum {
+    background:rgba( 200, 125,  75, 1);
+}
+.mapjs-node.object {
+    background:rgba( 125, 200, 150, 1);
+}

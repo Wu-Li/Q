@@ -1,13 +1,13 @@
 library(shiny)
+library(rmongodb)
 
-.Q <<- new.env()
 source('R/mapBinding.R')
 source('R/jsBinding.R')
 
 shinyUI(
     fluidPage(
         id="page",
-        title="LSpace",
+        title="QuoiR",
         tags$head(
             tags$link(rel="icon",href="Q.png"),
             #CSS
@@ -15,28 +15,19 @@ shinyUI(
             tags$link(rel="stylesheet",href="js/lib/jquery-ui/jquery-ui.min.css"),
             tags$link(rel="stylesheet",href="css/prompt.css"),
             tags$link(rel="stylesheet",href="css/panels.css"),
-            tags$link(rel="stylesheet",href="css/maps.css"),
+            tags$link(rel="stylesheet",href="css/views.css"),
             tags$link(rel="stylesheet",href="css/mobile.css"),
-            tags$link(rel="stylesheet",href="css/colors.css"),
+            tags$link(rel="stylesheet",href="css/syntax.css"),
             #JS
             tags$script(src = "js/lib/jquery-2.0.2.min.js"),
             tags$script(src = "js/lib/jquery.nicescroll.min.js"),
             tags$script(src = "js/lib/jquery-ui/jquery-ui.min.js"),
-            tags$script(src = "js/interface.js"),
-            withMathJax()
+            tags$script(src = "js/interface.js")
+            #withMathJax()
         ),
         #Tabs
         div(id='tabs-wrapper',
-            tabsetPanel(id="tabs",
-                        selected="Queries",
-                        tabPanel("Names",value="Names",icon=icon("sitemap",class='fa-2x'),.Q$mapInput("Names")),
-                        tabPanel("Sources",value="Sources",icon=icon("code-fork",class='fa-2x'),.Q$mapInput("Sources")),
-                        tabPanel("Tests",value="Tests",icon=icon("tachometer",class='fa-2x'),.Q$mapInput("Tests")), 
-                        tabPanel("Styles",value="Styles",icon=icon("fire",class='fa-2x'),.Q$mapInput("Styles")),
-                        tabPanel("Views",value="Views",icon=icon("eye",class='fa-2x'),.Q$mapInput("Views")),
-                        tabPanel("Data",value="Data",icon=icon("table",class='fa-2x'),dataTableOutput("Data")),
-                        tabPanel("Queries",value="Queries",icon=icon("crosshairs",class='fa-2x'),.Q$mapInput("Queries"))    
-                        ),
+            uiOutput("views"),
             div(id='tray',
                 actionButton("save","",icon=icon("save")),
                 actionButton("redo","",icon=icon("undo",class="fa-flip-horizontal")),
@@ -44,12 +35,12 @@ shinyUI(
                 actionButton("run","",icon=icon("play")),
                 actionButton("print","",icon=icon("external-link",class="fa-flip-horizontal"))
             )
-                        ),
+        ),
         #Panels
         tabsetPanel(id="panels",
                     type="pills",
                     selected="console",
-                    tabPanel("Q",value="Q"),
+                    tabPanel("Q",value="Q",div(id="chat",p("Hello World!"),p("...or whoever you are."),p("May I help you with something?"))),
                     tabPanel("",value="help",icon=icon("question-circle"),
                              div(id="help-panel",
                                  uiOutput("help")
@@ -58,16 +49,16 @@ shinyUI(
                     tabPanel("",value="config",icon=icon("cogs"),
                              div(id='config-panel',
                                  tableOutput("database"),
-                                 .Q$jsInput("dbSave",'dbSave'),
-                                 .Q$jsInput("dbLoad",'dbLoad'),
-                                 .Q$jsInput("js",'js'),
-                                 .Q$jsInput("jsError",'jsError'),
+                                 jsInput("dbSave",'dbSave'),
+                                 jsInput("dbLoad",'dbLoad'),
+                                 jsInput("js",'js'),
+                                 jsInput("jsError",'jsError'),
                                  numericInput("panelWidth","panelWidth",64),
                                  numericInput("panelHeight","panelHeight",950)
                              )
                     ),
                     #conditionalPanel(condition='output.showPlot',
-                        tabPanel("",value="plot",icon=icon("bar-chart-o"),
+                        tabPanel("",value="plot",icon=c(icon("cubes")),
                              plotOutput("plot")   
                     #    )
                     ),

@@ -409,7 +409,7 @@ jQuery.fn.updateNodeContent = function (nodeContent, resourceTranslator) {
                 span.addClass('node-title');
                 span.keydown(function (e) {
                     switch (e.keyCode) {
-                        case 192://`
+                        case 192://grave
                             if (e.ctrlKey) {
                                 $("#prompt").val(this.textContent);
                                 $("#prompt").attr("value", this.textContent);
@@ -417,7 +417,6 @@ jQuery.fn.updateNodeContent = function (nodeContent, resourceTranslator) {
                                 $("#prompt").focus();
                                 return true;
                             } 
-                            return false;
                     }
         	    });
 			}
@@ -459,7 +458,52 @@ jQuery.fn.updateNodeContent = function (nodeContent, resourceTranslator) {
 				});
 			}
 			element.show();
-		},
+		}, 
+        classify = function() {
+            var node = self,
+    	        textBox = self.find('[data-mapjs-role=title]'),
+                content = textBox.innerText(),
+                lastChar = content.substr(content.length - 1);
+                
+            node.removeClass('property');
+            node.removeClass('call');
+            node.removeClass('expression');
+            node.removeClass('list');
+            node.removeClass('query');
+            node.removeClass('switch');
+            node.removeClass('sum');
+            node.removeClass('nsum');
+            
+            switch(lastChar){
+                case '=':
+                    node.addClass('property');
+                    break;
+                case '(':
+                    node.addClass('call');
+                    break;
+                case '{':
+                    node.addClass('expression');
+                    break;
+                case '[':
+                    node.addClass('list');
+                    break;
+                case '$':
+                    node.addClass('query');
+                    break;
+                case '<':
+                    node.addClass('switch');
+                    break;
+                case '+':
+                    node.addClass('sum');
+                    break;
+                case '-':
+                    node.addClass('nsum');
+                    break;
+                case '@':
+                    node.addClass('object');
+                    break;
+            }
+        },
 		updateText = function (title) {
 			var text = MAPJS.URLHelper.stripLink(title) ||
 					(title.length < MAX_URL_LENGTH ? title : (title.substring(0, MAX_URL_LENGTH) + '...')),
@@ -469,8 +513,9 @@ jQuery.fn.updateNodeContent = function (nodeContent, resourceTranslator) {
 
 			element.text(text.trim());
 			self.data('title', title);
-			element.css({'max-width': '', 'min-width': ''});
-            MathJax.Hub.Queue(["Typeset",MathJax.Hub],domElement);
+			element.css({'max-width': 'none', 'min-width': 'none'});
+            classify();
+            //MathJax.Hub.Queue(["Typeset",MathJax.Hub],domElement);
 			if ((domElement.scrollWidth - nodeTextPadding) > domElement.offsetWidth) {
 				element.css('max-width', domElement.scrollWidth + 'px');
 			}
@@ -648,12 +693,12 @@ jQuery.fn.editNode = function (shouldSelectAll) {
 		result = jQuery.Deferred(),
 		clear = function () {
 			detachListeners();
-			textBox.css('word-break', '');
+            textBox.css('word-break', '');
 			textBox.removeAttr('contenteditable');
 			node.shadowDraggable();
 		},
 		finishEditing = function () {
-      var content = textBox.innerText();
+            var content = textBox.innerText();
 			if (content === unformattedText) {
 				return cancelEditing();
 			}

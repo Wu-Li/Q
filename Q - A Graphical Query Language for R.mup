@@ -3,7 +3,134 @@
   "id": 1,
   "formatVersion": 2,
   "ideas": {
-    "11": {
+    "31": {
+      "title": "functions",
+      "id": 279,
+      "ideas": {
+        "1": {
+          "title": "draw",
+          "id": 291
+        },
+        "2": {
+          "title": "print",
+          "id": 295
+        }
+      }
+    },
+    "41": {
+      "title": "methods",
+      "id": 280,
+      "ideas": {
+        "1": {
+          "title": "draw.table",
+          "id": 292
+        },
+        "2": {
+          "title": "draw.map",
+          "id": 294
+        }
+      }
+    },
+    "51": {
+      "title": "classes",
+      "id": 281,
+      "ideas": {
+        "1": {
+          "title": "node",
+          "id": 283
+        },
+        "2": {
+          "title": "edge",
+          "id": 284
+        },
+        "4": {
+          "title": "map",
+          "id": 290
+        },
+        "0.5": {
+          "title": "view",
+          "id": 286,
+          "ideas": {
+            "1": {
+              "title": "context",
+              "id": 288
+            },
+            "2": {
+              "title": "aspects",
+              "id": 296
+            }
+          },
+          "attr": {
+            "style": {}
+          }
+        }
+      }
+    },
+    "-10": {
+      "title": "Positioning",
+      "id": 207,
+      "attr": {
+        "style": {},
+        "collapsed": true
+      },
+      "ideas": {
+        "6": {
+          "title": "A better Graphing Calculator",
+          "id": 35,
+          "attr": {
+            "style": {
+              "background": "#808080"
+            }
+          }
+        },
+        "7": {
+          "title": "Brings R to the touch screen and smartpad",
+          "id": 29,
+          "attr": {
+            "style": {
+              "background": "#808080"
+            }
+          }
+        },
+        "8": {
+          "title": "Built on the principles of R, console driven, visual results, low barrier to entry without sacrificing depth",
+          "id": 30,
+          "attr": {
+            "style": {
+              "background": "#808080"
+            }
+          }
+        },
+        "9": {
+          "title": "Stores code in a graph database",
+          "id": 31,
+          "attr": {
+            "style": {
+              "background": "#808080"
+            }
+          }
+        },
+        "10": {
+          "title": "Visual syntax",
+          "id": 32,
+          "attr": {
+            "style": {
+              "background": "#808080"
+            }
+          }
+        },
+        "11": {
+          "title": "Rapid prototyping",
+          "id": 33,
+          "attr": {
+            "style": {
+              "background": "#808080"
+            }
+          }
+        }
+      }
+    },
+    "-5": {
       "title": "Interface",
       "id": 18,
       "ideas": {
@@ -219,10 +346,11 @@
         }
       },
       "attr": {
-        "style": {}
+        "style": {},
+        "collapsed": true
       }
     },
-    "16": {
+    "-7.5": {
       "title": "Models",
       "id": 206,
       "ideas": {
@@ -855,7 +983,7 @@
         "collapsed": true
       }
     },
-    "21": {
+    "-20": {
       "title": "Language",
       "id": 205,
       "ideas": {
@@ -881,75 +1009,7 @@
       },
       "attr": {
         "style": {},
-        "position": [
-          185,
-          178.18392484130857,
-          1
-        ]
-      }
-    },
-    "-10": {
-      "title": "Positioning",
-      "id": 207,
-      "attr": {
-        "style": {},
         "collapsed": true
-      },
-      "ideas": {
-        "6": {
-          "title": "A better Graphing Calculator",
-          "id": 35,
-          "attr": {
-            "style": {
-              "background": "#808080"
-            }
-          }
-        },
-        "7": {
-          "title": "Brings R to the touch screen and smartpad",
-          "id": 29,
-          "attr": {
-            "style": {
-              "background": "#808080"
-            }
-          }
-        },
-        "8": {
-          "title": "Built on the principles of R, console driven, visual results, low barrier to entry without sacrificing depth",
-          "id": 30,
-          "attr": {
-            "style": {
-              "background": "#808080"
-            }
-          }
-        },
-        "9": {
-          "title": "Stores code in a graph database",
-          "id": 31,
-          "attr": {
-            "style": {
-              "background": "#808080"
-            }
-          }
-        },
-        "10": {
-          "title": "Visual syntax",
-          "id": 32,
-          "attr": {
-            "style": {
-              "background": "#808080"
-            }
-          }
-        },
-        "11": {
-          "title": "Rapid prototyping",
-          "id": 33,
-          "attr": {
-            "style": {
-              "background": "#808080"
-            }
-          }
-        }
       }
     }
   },

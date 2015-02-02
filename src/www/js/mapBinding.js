@@ -115,7 +115,7 @@ $.extend(mapBinding, {
     Q.models[el.id].addEventListener('layoutChangeComplete', subscribe);
   },
   unsubscribe: function(el) {
-    Q.models[el.id].removeEventListener('layoutChangeComplete', subscribe);
+    Q.models[el.id].removeEventListener('layoutChangeComplete', mapBinding.subscribe);
   }
 });
 Shiny.inputBindings.register(mapBinding);

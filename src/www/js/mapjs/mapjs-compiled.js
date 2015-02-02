@@ -1,5 +1,4 @@
 var MAPJS = MAPJS || {};
-/*global console*/
 var observable = function (base) {
 	'use strict';
 	var listeners = [];
@@ -46,7 +45,6 @@ var observable = function (base) {
 	};
 	return base;
 };
-/*global MAPJS */
 MAPJS.URLHelper = {
 	urlPattern: /(https?:\/\/|www\.)[\w-]+(\.[\w-]+)+([\w.,!@?^=%&amp;:\/~+#-]*[\w!@?^=%&amp;\/~+#-])?/i,
 	containsLink : function (text) {
@@ -69,9 +67,6 @@ MAPJS.URLHelper = {
 		return text.replace(MAPJS.URLHelper.urlPattern, '');
 	}
 };
-/*jslint eqeq: true, forin: true, nomen: true*/
-/*jshint unused:false, loopfunc:true */
-/*global _, MAPJS, observable*/
 MAPJS.content = function (contentAggregate, sessionKey) {
 	'use strict';
 	var cachedId,
@@ -988,8 +983,6 @@ MAPJS.content = function (contentAggregate, sessionKey) {
 	init(contentAggregate);
 	return contentAggregate;
 };
-/*jslint nomen: true*/
-/*global _, Color, MAPJS*/
 MAPJS.defaultStyles = { };
 MAPJS.layoutLinks = function (idea, visibleNodes) {
 	'use strict';
@@ -1293,7 +1286,6 @@ MAPJS.calculateTree = function (content, dimensionProvider, margin, rankAndParen
 	}
 	return new MAPJS.Tree(options);
 };
-
 MAPJS.calculateLayout = function (idea, dimensionProvider, margin) {
 	'use strict';
 	var positiveTree, negativeTree, layout, negativeLayout,
@@ -1320,8 +1312,6 @@ MAPJS.calculateLayout = function (idea, dimensionProvider, margin) {
 	negativeLayout.rootNodeId = idea.id;
 	return negativeLayout;
 };
-
-/*global MAPJS*/
 MAPJS.MemoryClipboard = function () {
 	'use strict';
 	var self = this,
@@ -1339,8 +1329,6 @@ MAPJS.MemoryClipboard = function () {
 		contents = clone(c);
 	};
 };
-/*global $, Hammer*/
-/*jslint newcap:true*/
 (function () {
 	'use strict';
 	$.fn.simpleDraggableContainer = function () {
@@ -1481,8 +1469,6 @@ MAPJS.MemoryClipboard = function () {
 		}
 	};
 })();
-/*jslint forin: true, nomen: true*/
-/*global _, MAPJS, observable*/
 MAPJS.MapModel = function (layoutCalculatorArg, selectAllTitles, clipboardProvider, defaultReorderMargin) {
 	'use strict';
 	var self = this,
@@ -2616,7 +2602,6 @@ MAPJS.MapModel = function (layoutCalculatorArg, selectAllTitles, clipboardProvid
        self.dispatchEvent('nodeFocusRequested', nodeId);
     };
 };
-/*global jQuery*/
 jQuery.fn.mapToolbarWidget = function (mapModel) {
 	'use strict';
 	var clickMethodNames = ['insertIntermediate', 'scaleUp', 'scaleDown', 'addSubIdea', 'editNode', 'removeSubIdea', 'toggleCollapse', 'addSiblingIdea', 'undo', 'redo',
@@ -2654,7 +2639,6 @@ jQuery.fn.mapToolbarWidget = function (mapModel) {
 		});
 	});
 };
-/*global jQuery*/
 jQuery.fn.linkEditWidget = function (mapModel) {
 	'use strict';
 	return this.each(function () {
@@ -2694,7 +2678,6 @@ jQuery.fn.linkEditWidget = function (mapModel) {
 		element.mouseleave(element.hide.bind(element));
 	});
 };
-/*global observable, jQuery, FileReader, Image, MAPJS, document, _ */
 MAPJS.getDataURIAndDimensions = function (src, corsProxyUrl) {
 	'use strict';
 	var isDataUri = function (string) {
@@ -2798,7 +2781,6 @@ jQuery.fn.imageDropWidget = function (imageInsertController) {
 	});
 	return this;
 };
-/*global jQuery, Color, _, MAPJS, document, window*/
 MAPJS.DOMRender = {
 	svgPixel: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"></svg>',
 	nodeCacheMark: function (idea, levelOverride) {
@@ -2868,8 +2850,6 @@ jQuery.fn.getDataBox = function () {
 	}
 	return this.getBox();
 };
-
-
 jQuery.fn.animateConnectorToPosition = function (animationOptions, tolerance) {
 	'use strict';
 	var element = jQuery(this),
@@ -2919,7 +2899,6 @@ jQuery.fn.queueFadeIn = function (options) {
 			_.extend({ complete: function () { element.css('opacity', ''); }}, options)
 		);
 };
-
 jQuery.fn.updateStage = function () {
 	'use strict';
 	var data = this.data(),
@@ -2937,7 +2916,6 @@ jQuery.fn.updateStage = function () {
 	this.css(size);
 	return this;
 };
-
 MAPJS.DOMRender.curvedPath = function (parent, child) {
 	'use strict';
 	var horizontalConnector = function (parentX, parentY, parentWidth, parentHeight,
@@ -3066,10 +3044,8 @@ MAPJS.DOMRender.straightPath = function (parent, child) {
 		'position': position
 	};
 };
-
 MAPJS.DOMRender.nodeConnectorPath = MAPJS.DOMRender.curvedPath;
 MAPJS.DOMRender.linkConnectorPath = MAPJS.DOMRender.straightPath;
-
 jQuery.fn.updateConnector = function (canUseData) {
 	'use strict';
 	return jQuery.each(this, function () {
@@ -3106,7 +3082,6 @@ jQuery.fn.updateConnector = function (canUseData) {
 		);
 	});
 };
-
 jQuery.fn.updateLink = function () {
 	'use strict';
 	return jQuery.each(this, function () {
@@ -3192,12 +3167,10 @@ jQuery.fn.updateLink = function () {
 
 	});
 };
-
 jQuery.fn.addNodeCacheMark = function (idea) {
 	'use strict';
 	this.data('nodeCacheMark', MAPJS.DOMRender.nodeCacheMark(idea));
 };
-
 jQuery.fn.updateNodeContent = function (nodeContent, resourceTranslator) {
 	'use strict';
 	var MAX_URL_LENGTH = 25,
@@ -3483,7 +3456,8 @@ jQuery.fn.editNode = function (shouldSelectAll) {
 				e.stopPropagation();
 			} else if (e.which === TAB_KEY_CODE || (e.which === S_KEY_CODE && (e.metaKey || e.ctrlKey))) {
 				finishEditing();
-				e.preventDefault(); /* stop focus on another object */
+                e.stopPropagation();
+				//e.preventDefault(); /* stop focus on another object */
 			} else if (!e.shiftKey && e.which === Z_KEY_CODE && (e.metaKey || e.ctrlKey)) { /* undo node edit on ctrl+z if text was not changed */
 				if (textBox.text() === unformattedText) {
 					cancelEditing();
@@ -3525,7 +3499,6 @@ jQuery.fn.updateReorderBounds = function (border, box) {
 		left: border.x - (border.edge === 'left' ? element.width() : 0)
 	});
 };
-
 (function () {
 	'use strict';
 	var cleanDOMId = function (s) {
@@ -3585,7 +3558,6 @@ jQuery.fn.updateReorderBounds = function (border, box) {
 		return result;
 	};
 })();
-
 MAPJS.DOMRender.viewController = function (mapModel, stageElement, touchEnabled, imageInsertController, resourceTranslator) {
 	'use strict';
 	var viewPort = stageElement.parent(),
@@ -4075,10 +4047,6 @@ MAPJS.DOMRender.viewController = function (mapModel, stageElement, touchEnabled,
 		});
 	});
 };
-
-/*jslint nomen: true, newcap: true, browser: true*/
-/*global MAPJS, $, _, jQuery*/
-
 jQuery.fn.scrollWhenDragging = function (scrollPredicate) {
 	/*jslint newcap:true*/
 	'use strict';
@@ -4156,7 +4124,7 @@ $.fn.domMapWidget = function (activityLog, mapModel, touchEnabled, imageInsertCo
 
 	return this.each(function () {
 		var element = $(this),
-			stage = $('<div>').css({
+			stage = $('<canvas>').css({
 				position: 'relative'
 			}).attr('data-mapjs-role', 'stage').appendTo(element).data({
 				'offsetX': element.innerWidth() / 2,
