@@ -1,19 +1,38 @@
 @media only screen and (max-height: 600px) {
   .fa-2x {
-    font-size: 1em !important;
+    font-size: 4em !important;
+  }
+  .fa-fw {
+    font-size: 2em;
+  }
+  #tabs.nav li a {
+      color:transparent !important;
+      text-shadow:none !important;
+  }
+  #tabs li a i {
+    text-shadow: 0 0 5px rgba(25,25,125,.3);
+    color: rgba(125,125,25,.8);
   }
   button > .fa {
-    font-size: .5em;
+    font-size: .8em;
   }
-  .btn {
-    padding: .5vh;
+  #tray button.btn {
+    padding: 0;
+    height: 40px;
   }
   #prompt-box {
       height:40px;
   }
+  #prompt{
+      font-size:20px;
+  }
+  #tabs-wrapper {
+      height:calc(100% - 36px) !important;
+  }
   #panels.nav + .tab-content {
       height:calc(99.6vh - 40px);
   }
+  
 }
 
 @media (max-width: 767px) {

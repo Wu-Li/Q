@@ -1,0 +1,1181 @@
+{
+  "title": "QuoiR",
+  "id": 1,
+  "formatVersion": 2,
+  "ideas": {
+    "1": {
+      "title": "TODO\n\n",
+      "id": 306,
+      "ideas": {
+        "1": {
+          "title": "panels",
+          "id": 299,
+          "ideas": {
+            "1": {
+              "title": "Console",
+              "id": 302,
+              "ideas": {},
+              "attr": {
+                "style": {
+                  "background": "#00CC00"
+                },
+                "progress": "passing"
+              }
+            },
+            "2": {
+              "title": "Inspector",
+              "id": 303,
+              "ideas": {
+                "1": {
+                  "title": "tabs",
+                  "id": 345,
+                  "attr": {
+                    "style": {
+                      "background": "#993300"
+                    },
+                    "progress": "1"
+                  }
+                },
+                "3.5": {
+                  "title": "graphs",
+                  "id": 376,
+                  "ideas": {
+                    "1": {
+                      "title": "D3",
+                      "id": 366,
+                      "ideas": {
+                        "1": {
+                          "title": "rCharts",
+                          "id": 367,
+                          "attr": {
+                            "style": {
+                              "background": "#993300"
+                            },
+                            "progress": "1"
+                          }
+                        }
+                      },
+                      "attr": {
+                        "style": {
+                          "background": "#993300"
+                        },
+                        "progress": "1"
+                      }
+                    },
+                    "3": {
+                      "title": "ggplot",
+                      "id": 377,
+                      "attr": {
+                        "style": {
+                          "background": "#00CC00"
+                        },
+                        "progress": "passing"
+                      }
+                    }
+                  },
+                  "attr": {
+                    "style": {
+                      "background": "#FFCC00"
+                    },
+                    "progress": "in-progress"
+                  }
+                }
+              },
+              "attr": {
+                "style": {
+                  "background": "#FFCC00"
+                },
+                "progress": "in-progress",
+                "collapsed": true
+              }
+            },
+            "3": {
+              "title": "Help",
+              "id": 304,
+              "ideas": {
+                "1": {
+                  "title": "web version",
+                  "id": 349,
+                  "attr": {
+                    "style": {
+                      "background": "#FFCC00"
+                    },
+                    "progress": "in-progress"
+                  }
+                },
+                "2": {
+                  "title": "package styles",
+                  "id": 351,
+                  "attr": {
+                    "style": {
+                      "background": "#FFCC00"
+                    },
+                    "progress": "in-progress"
+                  }
+                },
+                "0.5": {
+                  "title": "base styles",
+                  "id": 378,
+                  "attr": {
+                    "style": {
+                      "background": "#00CC00"
+                    },
+                    "progress": "passing"
+                  }
+                },
+                "0.75": {
+                  "title": "local version",
+                  "id": 380,
+                  "attr": {
+                    "style": {
+                      "background": "#00CC00"
+                    },
+                    "progress": "passing"
+                  }
+                }
+              },
+              "attr": {
+                "style": {
+                  "background": "#FFCC00"
+                },
+                "progress": "in-progress",
+                "collapsed": true
+              }
+            }
+          },
+          "attr": {
+            "style": {
+              "background": "#FFCC00"
+            },
+            "progress": "in-progress"
+          }
+        },
+        "2": {
+          "title": "views",
+          "id": 307,
+          "ideas": {
+            "7": {
+              "title": "dynamic views",
+              "id": 373,
+              "ideas": {
+                "1": {
+                  "title": "new view button",
+                  "id": 338,
+                  "attr": {
+                    "style": {
+                      "background": "#993300"
+                    },
+                    "progress": "1"
+                  }
+                },
+                "6": {
+                  "title": "multiple results",
+                  "id": 371,
+                  "attr": {
+                    "style": {
+                      "background": "#993300"
+                    },
+                    "progress": "1"
+                  }
+                },
+                "1.5": {
+                  "title": "close view button",
+                  "id": 388,
+                  "attr": {
+                    "style": {
+                      "background": "#993300"
+                    },
+                    "progress": "1"
+                  }
+                },
+                "0.5": {
+                  "title": "colorize / widths",
+                  "id": 400,
+                  "attr": {
+                    "style": {
+                      "background": "#993300"
+                    },
+                    "progress": "1"
+                  }
+                },
+                "3.75": {
+                  "title": "views reference class",
+                  "id": 494,
+                  "attr": {
+                    "style": {
+                      "background": "#FFCC00"
+                    },
+                    "progress": "in-progress"
+                  }
+                }
+              },
+              "attr": {
+                "style": {
+                  "background": "#FFCC00"
+                },
+                "progress": "in-progress",
+                "collapsed": true
+              }
+            },
+            "8": {
+              "title": "maps",
+              "id": 309,
+              "ideas": {
+                "3": {
+                  "title": "contexts",
+                  "id": 434,
+                  "ideas": {
+                    "1": {
+                      "title": "R",
+                      "id": 435,
+                      "ideas": {
+                        "1.5": {
+                          "title": "operators",
+                          "id": 446,
+                          "attr": {
+                            "style": {
+                              "background": "#993300"
+                            },
+                            "progress": "1"
+                          }
+                        }
+                      },
+                      "attr": {
+                        "style": {
+                          "background": "#FFCC00"
+                        },
+                        "progress": "in-progress"
+                      }
+                    },
+                    "2": {
+                      "title": "CSS",
+                      "id": 436,
+                      "ideas": {},
+                      "attr": {
+                        "style": {
+                          "background": "#FFCC00"
+                        },
+                        "progress": "in-progress"
+                      }
+                    },
+                    "3": {
+                      "title": "HTML",
+                      "id": 437,
+                      "ideas": {},
+                      "attr": {
+                        "style": {
+                          "background": "#993300"
+                        },
+                        "progress": "1"
+                      }
+                    },
+                    "4": {
+                      "title": "JS",
+                      "id": 438,
+                      "ideas": {},
+                      "attr": {
+                        "style": {
+                          "background": "#993300"
+                        },
+                        "progress": "1"
+                      }
+                    },
+                    "0.5": {
+                      "title": "node styles",
+                      "id": 447,
+                      "attr": {
+                        "style": {
+                          "background": "#FFCC00"
+                        },
+                        "progress": "in-progress"
+                      }
+                    }
+                  },
+                  "attr": {
+                    "style": {
+                      "background": "#FFCC00"
+                    },
+                    "progress": "in-progress"
+                  }
+                },
+                "4": {
+                  "title": "update map binding",
+                  "id": 477,
+                  "attr": {
+                    "style": {
+                      "background": "#FFCC00"
+                    },
+                    "progress": "in-progress"
+                  }
+                },
+                "2.75": {
+                  "title": "UX\n",
+                  "id": 464,
+                  "ideas": {
+                    "1": {
+                      "title": "hotkeys",
+                      "id": 454,
+                      "ideas": {},
+                      "attr": {
+                        "style": {
+                          "background": "#FFCC00"
+                        },
+                        "progress": "in-progress",
+                        "attachment": {
+                          "contentType": "text/html",
+                          "content": "' - quote<div># - comment (disable)</div>"
+                        }
+                      }
+                    },
+                    "0.5": {
+                      "title": "tray",
+                      "id": 466,
+                      "attr": {
+                        "style": {
+                          "background": "#00CC00"
+                        },
+                        "progress": "passing"
+                      }
+                    }
+                  },
+                  "attr": {
+                    "style": {
+                      "background": "#FFCC00"
+                    },
+                    "progress": "in-progress"
+                  }
+                }
+              },
+              "attr": {
+                "style": {
+                  "background": "#FFCC00"
+                },
+                "progress": "in-progress",
+                "collapsed": true
+              }
+            },
+            "9": {
+              "title": "perspectives",
+              "id": 362,
+              "ideas": {
+                "3": {
+                  "title": "graphs",
+                  "id": 359,
+                  "attr": {
+                    "style": {
+                      "background": "#993300"
+                    },
+                    "progress": "1"
+                  }
+                },
+                "6": {
+                  "title": "R markdown",
+                  "id": 381,
+                  "attr": {
+                    "style": {
+                      "background": "#993300"
+                    },
+                    "progress": "1"
+                  }
+                },
+                "7": {
+                  "title": "HTML page",
+                  "id": 382,
+                  "attr": {
+                    "style": {
+                      "background": "#993300"
+                    },
+                    "progress": "1"
+                  },
+                  "ideas": {}
+                },
+                "12": {
+                  "title": "text editor",
+                  "id": 398,
+                  "ideas": {
+                    "1": {
+                      "title": "syntax highlighting",
+                      "id": 491,
+                      "attr": {
+                        "style": {
+                          "background": "#993300"
+                        },
+                        "progress": "1"
+                      }
+                    }
+                  },
+                  "attr": {
+                    "style": {
+                      "background": "#993300"
+                    },
+                    "progress": "1"
+                  }
+                },
+                "1.5": {
+                  "title": "data table",
+                  "id": 374,
+                  "attr": {
+                    "style": {
+                      "background": "#FFCC00"
+                    },
+                    "progress": "in-progress"
+                  }
+                }
+              },
+              "attr": {
+                "style": {
+                  "background": "#FFCC00"
+                },
+                "progress": "in-progress",
+                "collapsed": true
+              }
+            }
+          },
+          "attr": {
+            "style": {
+              "background": "#FFCC00"
+            },
+            "progress": "in-progress"
+          }
+        },
+        "3": {
+          "title": "qbase",
+          "id": 433,
+          "ideas": {
+            "1": {
+              "title": "source files",
+              "id": 478,
+              "ideas": {
+                "1": {
+                  "title": "load from Mongo",
+                  "id": 479,
+                  "attr": {
+                    "style": {
+                      "background": "#993300"
+                    },
+                    "progress": "1"
+                  }
+                },
+                "2": {
+                  "title": "file from map",
+                  "id": 480,
+                  "attr": {
+                    "style": {
+                      "background": "#993300"
+                    },
+                    "progress": "1"
+                  }
+                },
+                "3": {
+                  "title": "map from file",
+                  "id": 481,
+                  "attr": {
+                    "style": {
+                      "background": "#993300"
+                    },
+                    "progress": "1"
+                  }
+                }
+              },
+              "attr": {
+                "style": {
+                  "background": "#993300"
+                },
+                "progress": "1",
+                "collapsed": true
+              }
+            },
+            "2": {
+              "title": "save views",
+              "id": 482,
+              "attr": {
+                "style": {
+                  "background": "#993300"
+                },
+                "progress": "1"
+              }
+            },
+            "3": {
+              "title": "load views",
+              "id": 483,
+              "attr": {
+                "style": {
+                  "background": "#993300"
+                },
+                "progress": "1"
+              }
+            },
+            "4": {
+              "title": "query syntax",
+              "id": 484,
+              "attr": {
+                "style": {
+                  "background": "#993300"
+                },
+                "progress": "1"
+              }
+            }
+          },
+          "attr": {
+            "style": {
+              "background": "#993300"
+            },
+            "progress": "1"
+          }
+        },
+        "4": {
+          "title": "CAS",
+          "id": 310,
+          "ideas": {
+            "1": {
+              "title": "MathJax",
+              "id": 311,
+              "attr": {
+                "style": {
+                  "background": "#993300"
+                },
+                "progress": "1"
+              }
+            },
+            "2": {
+              "title": "equation graphs",
+              "id": 503,
+              "ideas": {},
+              "attr": {
+                "style": {
+                  "background": "#993300"
+                },
+                "progress": "1"
+              }
+            },
+            "0.5": {
+              "title": "yacas",
+              "id": 365,
+              "ideas": {
+                "1": {
+                  "title": "context",
+                  "id": 496,
+                  "attr": {
+                    "style": {
+                      "background": "#993300"
+                    },
+                    "progress": "1"
+                  }
+                },
+                "2": {
+                  "title": "perspective",
+                  "id": 497,
+                  "attr": {
+                    "style": {
+                      "background": "#993300"
+                    },
+                    "progress": "1"
+                  }
+                }
+              },
+              "attr": {
+                "style": {
+                  "background": "#993300"
+                },
+                "progress": "1",
+                "collapsed": true
+              }
+            }
+          },
+          "attr": {
+            "style": {
+              "background": "#993300"
+            },
+            "progress": "1"
+          }
+        },
+        "5": {
+          "title": "UASS",
+          "id": 420,
+          "ideas": {
+            "1": {
+              "title": "login",
+              "id": 421,
+              "attr": {
+                "style": {
+                  "background": "#993300"
+                },
+                "progress": "1"
+              }
+            },
+            "2": {
+              "title": "storage",
+              "id": 422,
+              "ideas": {
+                "1": {
+                  "title": "offline",
+                  "id": 424,
+                  "ideas": {},
+                  "attr": {
+                    "style": {
+                      "background": "#993300"
+                    },
+                    "progress": "1"
+                  }
+                },
+                "4": {
+                  "title": "export",
+                  "id": 471,
+                  "attr": {
+                    "style": {
+                      "background": "#993300"
+                    },
+                    "progress": "1"
+                  }
+                }
+              },
+              "attr": {
+                "style": {
+                  "background": "#993300"
+                },
+                "progress": "1",
+                "collapsed": true
+              }
+            }
+          },
+          "attr": {
+            "style": {
+              "background": "#993300"
+            },
+            "progress": "1"
+          }
+        },
+        "6": {
+          "title": "community",
+          "id": 432,
+          "ideas": {
+            "1": {
+              "title": "tutorial",
+              "id": 429,
+              "attr": {
+                "style": {
+                  "background": "#993300"
+                },
+                "progress": "1"
+              }
+            },
+            "3": {
+              "title": "SEO/Buzz",
+              "id": 431,
+              "attr": {
+                "style": {
+                  "background": "#993300"
+                },
+                "progress": "1"
+              }
+            },
+            "0.5": {
+              "title": "community site",
+              "id": 430,
+              "attr": {
+                "style": {
+                  "background": "#993300"
+                },
+                "progress": "1"
+              }
+            }
+          },
+          "attr": {
+            "style": {
+              "background": "#993300"
+            },
+            "progress": "1"
+          }
+        }
+      },
+      "attr": {
+        "style": {
+          "background": "#FFCC00"
+        },
+        "progress": "in-progress"
+      }
+    },
+    "-22.5": {
+      "title": "moonshots",
+      "id": 402,
+      "ideas": {
+        "3": {
+          "title": "tools",
+          "id": 458,
+          "ideas": {
+            "3": {
+              "title": "data driven audio",
+              "id": 403,
+              "attr": {
+                "style": {
+                  "background": "#993366"
+                },
+                "progress": "2"
+              }
+            },
+            "5": {
+              "title": "svg sketchpad",
+              "id": 410,
+              "attr": {
+                "style": {
+                  "background": "#993366"
+                },
+                "progress": "2"
+              }
+            },
+            "6": {
+              "title": "LSpace",
+              "id": 418,
+              "attr": {
+                "style": {
+                  "background": "#993366"
+                },
+                "progress": "2"
+              },
+              "ideas": {
+                "1": {
+                  "title": "answer sets",
+                  "id": 405,
+                  "attr": {
+                    "style": {
+                      "background": "#993366"
+                    },
+                    "progress": "2"
+                  }
+                },
+                "2": {
+                  "title": "proof assistant",
+                  "id": 406,
+                  "attr": {
+                    "style": {
+                      "background": "#993366"
+                    },
+                    "progress": "2"
+                  }
+                }
+              }
+            },
+            "7": {
+              "title": "splays",
+              "id": 419,
+              "attr": {
+                "style": {
+                  "background": "#993366"
+                },
+                "progress": "2"
+              }
+            },
+            "0.5": {
+              "title": "Q",
+              "id": 409,
+              "attr": {
+                "style": {
+                  "background": "#993366"
+                },
+                "progress": "2"
+              }
+            }
+          },
+          "attr": {
+            "style": {
+              "background": "#993366"
+            },
+            "progress": "2"
+          }
+        },
+        "8": {
+          "title": "UX",
+          "id": 416,
+          "ideas": {
+            "1": {
+              "title": "spiral menus",
+              "id": 411,
+              "attr": {
+                "style": {
+                  "background": "#993366"
+                },
+                "progress": "2"
+              }
+            },
+            "2": {
+              "title": "perspective dial",
+              "id": 413,
+              "attr": {
+                "style": {
+                  "background": "#993366"
+                },
+                "progress": "2"
+              }
+            },
+            "3": {
+              "title": "tabbable nodes",
+              "id": 473,
+              "attr": {
+                "style": {
+                  "background": "#993366"
+                },
+                "progress": "2"
+              }
+            }
+          },
+          "attr": {
+            "style": {
+              "background": "#993366"
+            },
+            "progress": "2"
+          }
+        }
+      },
+      "attr": {
+        "style": {
+          "background": "#993366"
+        },
+        "progress": "2",
+        "collapsed": true
+      }
+    },
+    "-11.25": {
+      "title": "horizon",
+      "id": 453,
+      "ideas": {
+        "2": {
+          "title": "UX",
+          "id": 485,
+          "ideas": {
+            "1": {
+              "title": "split view",
+              "id": 417,
+              "attr": {
+                "style": {
+                  "background": "#00CCFF"
+                },
+                "progress": "under-review"
+              }
+            },
+            "2": {
+              "title": "node menus",
+              "id": 383,
+              "attr": {
+                "style": {
+                  "background": "#00CCFF"
+                },
+                "progress": "under-review"
+              }
+            },
+            "3": {
+              "title": "node attachments",
+              "id": 452,
+              "attr": {
+                "style": {
+                  "background": "#00CCFF"
+                },
+                "progress": "under-review"
+              }
+            },
+            "4": {
+              "title": "multi-line prompt",
+              "id": 451,
+              "attr": {
+                "style": {
+                  "background": "#00CCFF"
+                },
+                "progress": "under-review"
+              }
+            }
+          },
+          "attr": {
+            "style": {
+              "background": "#00CCFF"
+            },
+            "progress": "under-review"
+          }
+        },
+        "3": {
+          "title": "contexts",
+          "id": 490,
+          "ideas": {
+            "1": {
+              "title": "ontology",
+              "id": 440,
+              "attr": {
+                "style": {
+                  "background": "#00CCFF"
+                },
+                "progress": "under-review"
+              }
+            },
+            "2": {
+              "title": "sources",
+              "id": 443,
+              "attr": {
+                "style": {
+                  "background": "#00CCFF"
+                },
+                "progress": "under-review"
+              }
+            },
+            "3": {
+              "title": "tests",
+              "id": 492,
+              "ideas": {
+                "1": {
+                  "title": "QUnit",
+                  "id": 502,
+                  "attr": {
+                    "style": {
+                      "background": "#00CCFF"
+                    },
+                    "progress": "under-review"
+                  }
+                }
+              },
+              "attr": {
+                "style": {
+                  "background": "#00CCFF"
+                },
+                "progress": "under-review"
+              }
+            },
+            "4": {
+              "title": "sitemap / storyboard",
+              "id": 493,
+              "attr": {
+                "style": {
+                  "background": "#00CCFF"
+                },
+                "progress": "under-review"
+              }
+            }
+          },
+          "attr": {
+            "style": {
+              "background": "#00CCFF"
+            },
+            "progress": "under-review"
+          }
+        },
+        "4": {
+          "title": "perspectives",
+          "id": 486,
+          "ideas": {
+            "1": {
+              "title": "spreadsheet",
+              "id": 408,
+              "attr": {
+                "style": {
+                  "background": "#00CCFF"
+                },
+                "progress": "under-review"
+              }
+            },
+            "2": {
+              "title": "canvas",
+              "id": 459,
+              "attr": {
+                "style": {
+                  "background": "#00CCFF"
+                },
+                "progress": "under-review"
+              }
+            }
+          },
+          "attr": {
+            "style": {
+              "background": "#00CCFF"
+            },
+            "progress": "under-review"
+          }
+        },
+        "5": {
+          "title": "apps",
+          "id": 470,
+          "ideas": {
+            "1": {
+              "title": "drive app",
+              "id": 467,
+              "attr": {
+                "style": {
+                  "background": "#00CCFF"
+                },
+                "progress": "under-review"
+              }
+            },
+            "2": {
+              "title": "itunes app",
+              "id": 468,
+              "attr": {
+                "style": {
+                  "background": "#00CCFF"
+                },
+                "progress": "under-review"
+              }
+            },
+            "3": {
+              "title": "android app",
+              "id": 469,
+              "attr": {
+                "style": {
+                  "background": "#00CCFF"
+                },
+                "progress": "under-review"
+              }
+            }
+          },
+          "attr": {
+            "style": {
+              "background": "#00CCFF"
+            },
+            "progress": "under-review"
+          }
+        },
+        "4.5": {
+          "title": "UASS",
+          "id": 498,
+          "ideas": {
+            "1": {
+              "title": "storage",
+              "id": 472,
+              "ideas": {
+                "1": {
+                  "title": "google drive",
+                  "id": 425,
+                  "ideas": {},
+                  "attr": {
+                    "style": {
+                      "background": "#00CCFF"
+                    },
+                    "progress": "under-review"
+                  }
+                },
+                "2": {
+                  "title": "dropbox",
+                  "id": 426,
+                  "attr": {
+                    "style": {
+                      "background": "#00CCFF"
+                    },
+                    "progress": "under-review"
+                  }
+                },
+                "3": {
+                  "title": "github export",
+                  "id": 500,
+                  "attr": {
+                    "style": {
+                      "background": "#00CCFF"
+                    },
+                    "progress": "under-review"
+                  }
+                }
+              },
+              "attr": {
+                "style": {
+                  "background": "#00CCFF"
+                },
+                "progress": "under-review"
+              }
+            },
+            "2": {
+              "title": "code sharing",
+              "id": 499,
+              "attr": {
+                "style": {
+                  "background": "#00CCFF"
+                },
+                "progress": "under-review"
+              }
+            },
+            "3": {
+              "title": "collaborative  sessions",
+              "id": 501,
+              "attr": {
+                "style": {
+                  "background": "#00CCFF"
+                },
+                "progress": "under-review"
+              }
+            }
+          },
+          "attr": {
+            "style": {
+              "background": "#00CCFF"
+            },
+            "progress": "under-review"
+          }
+        }
+      },
+      "attr": {
+        "style": {
+          "background": "#00CCFF"
+        },
+        "progress": "under-review",
+        "collapsed": true
+      }
+    },
+    "-32.5": {
+      "title": "unsorted",
+      "id": 504,
+      "ideas": {
+        "1": {
+          "title": "register side effects of functions",
+          "id": 505
+        }
+      }
+    }
+  },
+  "links": [],
+  "attr": {
+    "storyboards": [
+      "Storyboard 1"
+    ],
+    "storyboard-scenes": [
+      {
+        "storyboards": {
+          "Storyboard 1": 8
+        },
+        "type": "with-children"
+      }
+    ],
+    "progress-statuses": {
+      "1": {
+        "description": "Not Started",
+        "style": {
+          "background": "#993300"
+        },
+        "priority": "1"
+      },
+      "2": {
+        "description": "Moonshot",
+        "style": {
+          "background": "#993366"
+        },
+        "priority": "20"
+      },
+      "in-progress": {
+        "description": "In Progress",
+        "style": {
+          "background": "#FFCC00"
+        },
+        "priority": "2"
+      },
+      "under-review": {
+        "description": "Deferred",
+        "style": {
+          "background": "#00CCFF"
+        },
+        "priority": "10"
+      },
+      "passing": {
+        "description": "Done",
+        "style": {
+          "background": "#00CC00"
+        }
+      }
+    },
+    "style": {
+      "background": "#993366"
+    },
+    "progress": "2"
+  },
+  "resources": {}
+}

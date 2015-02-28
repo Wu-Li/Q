@@ -12,9 +12,9 @@ $( function () {
     Q.console.map = $("#consoleMap");
     Q.panels.console = $("#console-panel");
     Q.panels.console.nice = Q.panels.console.niceScroll({ 
-    cursorwidth:'5px',
-    cursorborder:'groove rgba(200,200,200,0.25)',
-    railalign:'left'
+        cursorwidth:'5px',
+        cursorborder:'groove rgba(200,200,200,0.25)',
+        railalign:'left'
     });
     Q.panels.console.on('change', function() { 
         $("p.in").before("<hr>");
@@ -43,6 +43,42 @@ $( function () {
         }
     });
     Q.prompt.keydown( function(e) {
+        if(this.value.length == 0) {
+            switch(e.keyCode){
+                case 107:
+                    this.value = 'ans+';
+                    return false;
+                case 109:
+                    this.value = 'ans-';
+                    return false;
+                case 106:
+                    this.value = 'ans*';
+                    return false;
+                case 111:
+                    this.value = 'ans/';
+                    return false;
+                case 187:
+                    if(e.shiftKey){
+                        this.value = 'ans+';
+                        return false;
+                    } else return true;
+                case 189:
+                    if(!e.shiftKey){
+                        this.value = 'ans-';
+                        return false;
+                    } else return true;
+                case 56:
+                    if(e.shiftKey) {
+                        this.value = 'ans*';
+                        return false;
+                    } else return true;
+                case 191:
+                    if(!e.shiftKey) {
+                        this.value = 'ans/';
+                        return false;
+                    } else return true;
+            }
+        }
         switch (e.keyCode) {
             case 13://enter
                 var entry = this.value;
@@ -81,9 +117,10 @@ $( function () {
         var pw = $("#panelWidth");
         var tw = $('#tabs-wrapper').width() + (.01 * w);
         var c = w - tw
-        if (c < 300) { pw.val(300/8); }
+        if (c < 200) { pw.val(200/8); }
         else { pw.val(c/8)}
         ph.val(h);
+        $("#plot img").css('width',c);
         $("#panels + .tab-content").css("width",c);
     });
     
@@ -95,7 +132,7 @@ $( function () {
     $("#tabs-wrapper").resizable({
         alsoResize: "#tabs-wrapper",
         handles:"w",
-        minWidth: 300,
+        minWidth: 240,
         containment: 'parent',
         animate:true,
         distance:10,
@@ -106,7 +143,8 @@ $( function () {
             $(element).append(d);
             });
             var w = $("#plot img").width();
-            $("#plot img").width(w);
+            console.log(w);
+            $("#plot img").width(w + 'px');
         },
         stop: function (event, ui) {
             var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
@@ -114,13 +152,13 @@ $( function () {
             var ph = $("#panelHeight");
             var pw = $("#panelWidth");
             c = w - ui.size.width;
-            if (c < 300) { pw.val(300/8); }
+            if (c < 200) { pw.val(200/8); }
             else { pw.val(c/8) }
             ph.val(h);
             Shiny.onInputChange("panelWidth",pw.val());
             Shiny.onInputChange("panelHeight",ph.val());
             $("#panels + .tab-content").css("width",c);
-            $("#plot img").css('width','96%');
+            $("#plot img").css('width',c);
             $('.iframeCover').remove();
         }
     });

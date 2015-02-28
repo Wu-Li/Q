@@ -1,4 +1,7 @@
 function buildMap(container,mapJSON) {
+  m = JSON.stringify(mapJSON);
+  m = m.replace(/&lt;/g,'<').replace(/&rt;/g,'>');
+  mapJSON = JSON.parse(m);
   var idea = MAPJS.content(mapJSON),
       mapModel = new MAPJS.MapModel(MAPJS.DOMRender.layoutCalculator, []),
       imageInsertController = new MAPJS.ImageInsertController("http://localhost:4999?u=");

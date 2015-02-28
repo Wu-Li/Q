@@ -18,3 +18,11 @@
         rref(m)
     }
 }
+
+#Binary to Char
+blc <- function(l) { laply(l,b2c) }
+b2c <- function(b) {
+    b <- laply(seq(1,nchar(b),1), function(i) substr(b, i, i))
+    b <- rev(b)
+    rawToChar(packBits(as.raw(b)))
+}

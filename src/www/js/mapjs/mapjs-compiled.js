@@ -3243,7 +3243,7 @@ jQuery.fn.updateNodeContent = function (nodeContent, resourceTranslator) {
 			element.text(text.trim());
 			self.data('title', title);
 			element.css({'max-width': '', 'min-width': ''});
-            MathJax.Hub.Queue(["Typeset",MathJax.Hub],domElement);
+            //MathJax.Hub.Queue(["Typeset",MathJax.Hub],domElement);
             if ((domElement.scrollWidth - nodeTextPadding) > domElement.offsetWidth) {
     			element.css('max-width', domElement.scrollWidth + 'px'); 
 			}

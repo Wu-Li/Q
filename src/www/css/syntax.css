@@ -1,11 +1,16 @@
-.mapjs-node.property {
-    background:rgba(  175, 150, 220, 1);
-    margin:-10px;
-    border-right-radius:0px;
+.mapjs-node {
     
 }
+.mapjs-node.property {
+    background:rgba(  175, 150, 220, 1);
+    margin:-5px -15px -5px -5px;
+    border-bottom-right-radius:0px;
+    border-top-right-radius:0px;
+    border-bottom-left-radius:24px;
+    border-top-left-radius:24px;
+}
 .mapjs-node.call {
-    background:rgba( 100, 150, 175, 1);
+    
 }
 .mapjs-node.expression {
     
@@ -16,8 +21,9 @@
 .mapjs-node.query {
     background:rgba( 205, 255, 255, 1);
 }
-.mapjs-node.switch {
-    background:rgba( 100, 150, 175, 1);
+.mapjs-node.index {
+    background: rgba( 150, 175, 175, 1);
+    border-radius: 0;    
 }
 .mapjs-node.sum {
     background:rgba( 150, 225, 125, 1);

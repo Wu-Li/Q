@@ -7,11 +7,15 @@
     top: 1vh;
     margin-left:.3vw;
     height: calc(100% - 5vh) !important;
-    width: calc(100vw - 680px);
+    width: calc(100vw - 45vw);
     overflow: hidden !important;
     z-index:46;
     max-width:calc(100vw - 10vh);
-    min-width: 300px;
+    min-width: 240px;
+}
+#tabs-wrapper .ui-resizable-handle {
+    background:none;
+    height: 90%;
 }
 #tabs-wrapper .tabs-above {
     position:absolute;
@@ -21,32 +25,33 @@
     overflow:hidden;
     border-left: 1px solid rgba(119,119,119,.2);
 }
-#tabs.nav {
+#tabs.nav-tabs {
     position: absolute;
-    height: 10vh !important;
-    width: 100% !important;
+    height: 10vh;
+    width: 100%;
     top: 0;
     right: 0;
     margin: 0;
     z-index: 50;
-    overflow: hidden !important;   
     border-bottom: none;
 }
-#tabs.nav:before {
-      position: absolute;
-      width: 100%;
-      height: 10vh;
-      z-index: -1;
-      margin:1px;
-}
+
 #tabs.nav > li {
-    width: 14.28%;    
     height: 10vh;
     z-index:100;
     margin:0;
-    float:right;
-    overflow:hidden;
+    float:left;
+    border-color: rgba(200,200,200,.3);
+    border-style: solid;
+    border-width: 0;
+    border-left-width:1px;
+    border-bottom-width:1px;
+    /*overflow:hidden;*/
 }
+#tabs.nav > li:first-child { border-left-color:transparent; }
+#tabs.nav > li.active { border-bottom-width:0; }
+
+
 #tabs.nav > li > a {
     text-align: center;
     vertical-align: bottom;
@@ -55,29 +60,41 @@
     font-weight: bold;
     color: #777;
     height: 10vh;
-    padding: calc(4vh - 1.2vw) 1.1vw;
+    padding: calc(4vh - 1.2vw) 5%;
+    margin:0 !important;
     line-height: 3vh;
     box-sizing: border-box;
+    width:100%;
+    border:1px white;
+    overflow:hidden;
 }
-#tabs.nav > li *,
-#tabs.nav > li > a,
-#tabs.nav > li.active > a,
-#tabs.nav > li.active > a:focus,
-#tabs.nav > li.active > a:hover:focus {
-    background:none;
-    border:none;
-    margin-bottom:-1px;
-    text-decoration: none;
-}
-#tabs.nav > li > a:hover,
-#tabs.nav > li.active > a:hover {
-  background: radial-gradient(ellipse at center, rgba(175,200,225,0.3) 0%, rgba(200,200,200,.0) 70%) !important;
+.nav-tabs>li.active > a, 
+.nav-tabs>li.active > a:hover, 
+.nav-tabs>li.active > a:focus {
+    background:none
 }
 #tabs.nav i.fa {
     display: block;
     margin: auto;
 }
 
+#tabs.nav > li:last-child {
+    background: rgba(125,125,125,.4);
+}
+#tabs.nav > li:last-child a { 
+    display:flex; 
+    text-shadow: 0 0 2px #ddd;
+}
+
+button#close {
+    z-index: 100;
+    position: relative;
+    float: right;
+    top: 10vh;
+    background: none;
+    border: none;
+    color: rgba(150,150,150,.3);
+}
 /***Tray***/
 #tray {
   position: absolute;

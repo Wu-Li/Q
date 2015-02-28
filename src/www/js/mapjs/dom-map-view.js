@@ -478,20 +478,17 @@ jQuery.fn.updateNodeContent = function (nodeContent, resourceTranslator) {
                 case '=':
                     node.addClass('property');
                     break;
-                case '(':
+                case ')':
                     node.addClass('call');
                     break;
-                case '{':
+                case '}':
                     node.addClass('expression');
                     break;
-                case '[':
-                    node.addClass('list');
+                case ']':
+                    node.addClass('index');
                     break;
                 case '$':
-                    node.addClass('query');
-                    break;
-                case '<':
-                    node.addClass('switch');
+                    node.addClass('list');
                     break;
                 case '+':
                     node.addClass('sum');

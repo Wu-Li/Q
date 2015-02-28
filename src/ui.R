@@ -16,18 +16,23 @@ shinyUI(
             tags$link(rel="stylesheet",href="css/prompt.css"),
             tags$link(rel="stylesheet",href="css/panels.css"),
             tags$link(rel="stylesheet",href="css/views.css"),
+            tags$link(rel="stylesheet",href="css/transitions.css"),
             tags$link(rel="stylesheet",href="css/mobile.css"),
             tags$link(rel="stylesheet",href="css/syntax.css"),
             #JS
             tags$script(src = "js/lib/jquery-2.0.2.min.js"),
             tags$script(src = "js/lib/jquery.nicescroll.min.js"),
             tags$script(src = "js/lib/jquery-ui/jquery-ui.min.js"),
-            tags$script(src = "js/interface.js")
+            tags$script(src = "js/lib/jquery-ui/jquery.ui.touch-punch.min.js"),
+            tags$script(src = "js/interface.js"),
             #withMathJax()
+            #Meta
+            tags$meta(name='mobile-web-app-cacpable',content='yes')
         ),
         #Tabs
         div(id='tabs-wrapper',
             uiOutput("views"),
+            actionButton("close","",icon=icon('close',class='fa-2x')),
             div(id='tray',
                 actionButton("save","",icon=icon("save")),
                 actionButton("redo","",icon=icon("undo",class="fa-flip-horizontal")),
@@ -40,7 +45,7 @@ shinyUI(
         tabsetPanel(id="panels",
                     type="pills",
                     selected="console",
-                    tabPanel("Q",value="Q",div(id="chat",p("Hello World!"),p("...or whoever you are."),p("May I help you with something?"))),
+                    tabPanel("Q",value="Q",div(id="chat")),
                     tabPanel("",value="help",icon=icon("question-circle"),
                              div(id="help-panel",
                                  uiOutput("help")
@@ -72,7 +77,7 @@ shinyUI(
         ),
         #Prompt
         div(id="prompt-box",
-            textInput("prompt",">",""),
+            textInput("prompt",icon('chevron-right'),""),
             actionButton("submit", "")
         )
             )

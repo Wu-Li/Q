@@ -1,13 +1,12 @@
 ###Server###
 {
-    cat("\014")
     library(shiny)
     library(ggplot2)
     library(pryr)
-    library(jsonlite)   
+    library(plyr)
+    library(jsonlite)
     library(reshape2)
-    library(Ryacas)    
-    options(root='qb')
+    library(Ryacas)       
 }
 
 shinyServer(function(input, output, session) {
@@ -26,25 +25,22 @@ shinyServer(function(input, output, session) {
     source('.//R//helpers.R',local=T)
     source('.//R//CAS.R',local=T)
     clear()    
-    print("--Session--")
+    pp('--Session: ',begin <- Sys.time())
 }
 
 ##Panel Controller##
 {
     prompt <- reactiveValues(
-        commands = c('exit','path','classify','ls'),
-        maps = lapply(c('Queries','Data','Views','Styles','Tests','Sources','Names'),function(x) paste0(x,'()')),
+        commands = c('ls'),
         panel = NA,
         help = NA,
-        plot = NA,
-        ready = F
+        plot = NA
     )
-    observe({ options(width=as.integer(input$panelWidth)) })
+    observe({ options(width=as.integer(input$panelWidth)-3) })
     observe({ 
         if (input$submit == 0) { return(NULL) }
         entry <- isolate(input$prompt)
-        if(is.null(entry)){return(NULL)}
-        if(entry == ''){return(NULL)}
+        if(is.null(entry) || entry == ''){return(NULL)}
         switch(substr(entry, 1, 1), {
             toConsole(paste0("> ",entry),'in','expression')
             prompt$panel <- 'console'
@@ -76,7 +72,6 @@ source('.//R//inspector.R',local=T)
 source('.//R//help.R',local=T)
 ##Database##
 source('.//R//qbase.R',local=T)
-
 ##Views##
 source('.//R//views.R',local=T)  
 
