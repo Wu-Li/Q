@@ -1,6 +1,8 @@
 mapInput <- function(inputId, 
-    value = paste0('{"title": "',inputId,'","id": 1,"formatVersion": 2, "ideas": {  } }')) 
-{
+                     value=list(a=1,b=2,c=list(d=3,e=list(f=4,5)))
+) {
+    value$`_id` <- NULL
+    idea <- toJSON(list(title=inputId,children=value),auto_unbox=T)
     tagList(
         singleton(tags$head(
             tags$script(src="js/mapjs/lib/jquery.hotkeys.js"),
@@ -26,11 +28,14 @@ mapInput <- function(inputId,
             tags$script(src="js/mapjs/attachments.js"),
             tags$script(src="js/mapBinding.js")
         )),
-        
-        tags$div(id=inputId, class="qmap", value=value,
+        tags$div(id=inputId, class="qmap", value=idea,
                  tags$script(paste0(
-                    'mapBinding.setValue($("#',inputId,'"),',value,');'
+                    'mapBinding.setValue($("#',inputId,'"),',idea,');'
                  ))
         )        
     )
 }
+
+registerInputHandler('Q.mapBinding',function(x,session,name){
+    return(x[[1]])
+},force=T)

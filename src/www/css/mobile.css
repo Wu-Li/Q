@@ -1,17 +1,8 @@
 @media only screen and (max-height: 600px) {
-  .fa-2x {
-    font-size: 4em !important;
-  }
-  .fa-fw {
-    font-size: 2em;
-  }
   #tabs.nav li a {
       color:transparent !important;
       text-shadow:none !important;
-  }
-  #tabs li a i {
-    text-shadow: 0 0 5px rgba(25,25,125,.3);
-    color: rgba(125,125,25,.8);
+      padding:calc(5vh - 1.2vw) 5%;
   }
   button > .fa {
     font-size: .8em;

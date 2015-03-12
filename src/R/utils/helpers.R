@@ -5,6 +5,9 @@ pp <- function(...) { print(paste0(...)) }
 ev <- function(...) { eval(parse(text=paste0(...))) }
 yax <- function(...) { yacas(expression(...)) }
 rvtl <- function(...) reactiveValuesToList(...)
+jso <- function(x,list) {
+    evaluate.JS(toJSON(paste0(x,'=',toJSON(list,auto_unbox=T))))
+}
 
 #UI
 clear <- function() {
@@ -23,7 +26,14 @@ what <- function(...) {
     w <- gsub('\\\\','',w)
     w <- gsub('\\\"','\\\'',w)
 }
-
+if.not <-  function(x,y) {
+    tryCatch({
+        if(is.null(x) 
+           || is.na(x) 
+           || x == F) return(y)
+        return(x)
+    },error=function(e) return(y))
+}
 #String manipulation
 left  <- function(x, n) substr(x, 1, n)
 right <- function(x, n) substr(x, nchar(x)-n+1, nchar(x))

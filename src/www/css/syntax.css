@@ -10,7 +10,7 @@
     border-top-left-radius:24px;
 }
 .mapjs-node.call {
-    
+
 }
 .mapjs-node.expression {
     
@@ -33,4 +33,14 @@
 }
 .mapjs-node.object {
     background:rgba( 125, 200, 150, 1);
+}
+
+#tabs.nav i.fa.fa-square-o.fa-2x.fa-fw:after {
+content: '';
+position: absolute;
+left: 2em;
+top: 22%;
+font-family: monospace;
+color: rgb(90,100,150);
+font-weight: bold;
 }

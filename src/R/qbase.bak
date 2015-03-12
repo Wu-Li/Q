@@ -1,0 +1,73 @@
+ select <- function(collection,query=NULL,id=NULL) {
+        path <- paste0('qb','.',collection)
+        if      (!is.null(id))    cursor <- find(path,list(`_id`=id)) 
+        else if (!is.null(query)) cursor <- find(path,query)  
+        else                      cursor <- find(path) 
+        ideas <- mongo.cursor.to.list(cursor)
+        if(length(ideas)==0) {
+            toConsole(paste0('$("',collection,'") returned no matches'),'warning','message')
+            return()
+        } else if (length(ideas)==1) {
+            toConsole(paste0('$("',collection,'") returned ',length(ideas),' match'),'message','message')
+            ideas <- lapply(ideas, function(idea) {
+                t <- idea$title
+                if(is.null(t)) return(NULL)
+                idea$`_id` <- mongo.oid.to.string(idea$`_id`)
+                idea <- toJSON(idea,auto_unbox=T)
+                idea <- structure(idea,
+                                  class='idea',
+                                  title=t,
+                                  icon=demo[[t]],
+                                  order=sorter(t)
+                )       
+            })
+            ideas[[1]]
+        } else {
+            toConsole(paste0('$("',collection,'") returned ',length(ideas),' matches'),'message','message')
+            ideas <- lapply(ideas, function(idea) {
+                t <- idea$title
+                if(is.null(t)) return(NULL)
+                idea$`_id` <- mongo.oid.to.string(idea$`_id`)
+                idea <- toJSON(idea,auto_unbox=T)
+                idea <- structure(idea,
+                    class='idea',
+                    title=t,
+                    icon=demo[[t]],
+                    order=sorter(t)
+                )       
+            })
+            ideas[[1]]
+        }
+    }
+
+    observe({ 
+        if (input$save == 0) { return(NULL) }
+        getIdea <- paste0('Q.models["',isolate(input$tabs),'"].getIdea()')
+        updateJS(session,'dbSave',getIdea) 
+    })
+        
+    observe({
+        if (is.null(input$dbSave)) { return(NULL) }
+        path <- paste0(attr(qbase,'db'),'.',isolate(input$tabs))
+        save <- isolate(input$dbSave)
+        save <- fromJSON(save)
+        save$`_id` <- isolate(active$views[[input$tabs]]@oid)
+        save(path,save)
+    })
+    save <- function(path,save) {
+        saved <- upsert(path,save)
+        if(saved[[1]]){
+            save.string <- paste0(
+                saved[[2]],path,
+                '(',mongo.count(qbase,path),')',
+                '#',save$`_id`,' <- ',save$title)
+            type <- 'in'
+            hover <- 'message'
+        } else {
+            save.string <- 'Save error'
+            type <- 'error'
+            hover <- 'error'
+        }
+        toConsole(save.string,type,hover)
+        updateTabsetPanel(session,'panels','console')
+    }

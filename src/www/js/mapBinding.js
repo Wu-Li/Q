@@ -1,55 +1,48 @@
-function buildMap(container,mapJSON) {
-  m = JSON.stringify(mapJSON);
-  m = m.replace(/&lt;/g,'<').replace(/&rt;/g,'>');
-  mapJSON = JSON.parse(m);
-  var idea = MAPJS.content(mapJSON),
-      mapModel = new MAPJS.MapModel(MAPJS.DOMRender.layoutCalculator, []),
-      imageInsertController = new MAPJS.ImageInsertController("http://localhost:4999?u=");
-  
-  mapModel.id = container.attr('id');
-  
-  container.domMapWidget(console, mapModel, false, imageInsertController);
-  container.mapToolbarWidget(mapModel);
-  container.attachmentEditorWidget(mapModel);
-  
-  $("[data-mm-action='export-image']").click(function () {
-    MAPJS.pngExport(idea).then(function (url) {
-      window.open(url, '_blank');
-    });
-  });
-  mapModel.setIdea(idea);
-  $('#linkEditWidget').linkEditWidget(mapModel);
-  window.mapModel = mapModel;
-  $('.arrow').click(function () {
-    $(this).toggleClass('active');
-  });
-  imageInsertController.addEventListener('imageInsertError', function (reason) {
-    console.log('image insert error', reason);
-  });
-  container.on('drop', function (e) {
-    var dataTransfer = e.originalEvent.dataTransfer;
-    e.stopPropagation();
-    e.preventDefault();
-    if (dataTransfer && dataTransfer.files && dataTransfer.files.length > 0) {
-      var fileInfo = dataTransfer.files[0];
-      if (/\.mup$/.test(fileInfo.name)) {
-        var oFReader = new FileReader();
-        oFReader.onload = function (oFREvent) {
-          mapModel.setIdea(MAPJS.content(JSON.parse(oFREvent.target.result)));
-        };
-        oFReader.readAsText(fileInfo, 'UTF-8');
-      }
+function asIdea(list) {
+    root = MAPJS.content({"title":list.title});
+    if(list.title=='') return root;
+    function addIdeas(id,ideas) {
+        for(key in ideas) {
+            if(isNaN(parseInt(key))) kid = root.addSubIdea(id,key);
+            else kid = id;
+            if(typeof(ideas[key]) != 'object'){
+                root.addSubIdea(kid,ideas[key].toString());       
+            } else {
+                for(k in ideas[key]){
+                    addIdeas(kid,ideas[key]);
+                }
+            }
+        }
+        kid = null;
+        id = null;
+        ideas = null;
     }
-  });
-  container.on('active', function (e) {
-    window.mapModel = Q.models[this.id];
-  })
+    addIdeas(1,list.children);
+    return root;
+}
+
+var imageInsertController = new MAPJS.ImageInsertController("http://localhost:4999?u=");
+function buildMap(container,mapJSON) {
+  m = JSON.stringify(mapJSON);  
+  m = m.replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&#46;/g,'.');
+  mapJSON = JSON.parse(m);
+  
+  if(mapJSON.hasOwnProperty('children')) var idea = asIdea(mapJSON);    
+  else var idea = MAPJS.content(mapJSON);
+  
+  var mapModel = new MAPJS.MapModel(MAPJS.DOMRender.layoutCalculator, []);
+  mapModel.id = container.attr('id');
+  container.domMapWidget(console, mapModel, false, imageInsertController);
+  mapModel.setIdea(idea);
   return mapModel;
 };
 
 var mapBinding = new Shiny.InputBinding();
 $.extend(mapBinding, {
   find: function(scope) { return $(".qmap"); },
+  getType: function(el) {
+    return "Q.mapBinding" ;
+  },
   hasGrandChildren: function(idea) {
     var subIdeas = idea.sortedSubIdeas();
     var gc = false;
@@ -121,4 +114,4 @@ $.extend(mapBinding, {
     Q.models[el.id].removeEventListener('layoutChangeComplete', mapBinding.subscribe);
   }
 });
-Shiny.inputBindings.register(mapBinding);
+Shiny.inputBindings.register(mapBinding,'Q.mapBinding');

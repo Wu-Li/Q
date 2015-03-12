@@ -478,7 +478,7 @@ jQuery.fn.updateNodeContent = function (nodeContent, resourceTranslator) {
                 case '=':
                     node.addClass('property');
                     break;
-                case ')':
+                case '(':
                     node.addClass('call');
                     break;
                 case '}':

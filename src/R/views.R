@@ -1,109 +1,168 @@
 ##Ideas##
 source('.//R//ideas.R',local=T)
-
 ##Demo##
-source('.//R//demo.R',local=T)  
+source('.//R//utils//demo.R',local=T) 
+##Colorize##
+source('.//R//utils//colorize.R',local=T)
 
-##Open##
+##View##
+{
+    setOldClass('mongo.oid')
+    setOldClass('shiny.tag')
+    View <- setClass(
+        'View',
+        slots=c(
+            title="character",
+            `_id`='mongo.oid',
+            vid='mongo.oid',
+            tabIcon='character',
+            color='character',
+            tab.order='numeric',
+            tab='shiny.tag'
+        ),
+        contains='list'
+    )
+    setMethod(initialize, 'View', 
+              function(.Object,title,content,
+                       `_id`=mongo.oid.create(),
+                       tabIcon='square-o',
+                       color='transparent',
+                       tab.order=1
+              ) {
+                  toid <- paste0(title,'.oid')
+                  vq <- list()
+                  vq[[toid]] <- mongo.oid.to.string(`_id`)
+                  v <- select('Views',vq)
+                  if(!is.null(v)){
+                      vid     <- mongo.oid.from.string(attr(v,'_id'))
+                      tabIcon <- v[[title]]$tabIcon
+                      color   <- v[[title]]$color
+                  } else {
+                      vid <- mongo.oid.create()
+                  }
+                  if(is.null(tabIcon)) tabIcon <- 'square-o'
+                  .Object@title     <- title
+                  .Object@`_id`     <- `_id`
+                  .Object@vid       <- vid
+                  .Object@tabIcon   <- tabIcon
+                  .Object@color     <- color
+                  .Object@tab.order <- tab.order
+                  .Object@tab       <- tabPanel(title,content,value=title,icon=icon(.Object@tabIcon,class='fa-2x'))
+                  style <- list()
+                  selector <- paste0('#',title,', ',get.nav(title,tab.order))
+                  style[[selector]][['background']] <- color
+                  evaluate.CSS(style)
+                  return(.Object)
+              }
+    )
+}
+##Idea##
+{
+    Idea <- setClass(
+        'Idea',
+        slots = list(
+            map='list',
+            context='character'
+        ),
+        contains='View'
+    )
+    setMethod(initialize, 'Idea',
+              function(.Object,title,map=NULL,context='R',...) {
+                  if(is.null(map)) map <- list()
+                  if(is.null(attr(map,'_id'))) attr(map,'_id') <- mongo.oid.to.string(mongo.oid.create())
+                  if(!is.null(attr(map,'context'))) context <- attr(map,'context')
+                  .Object@map <- map
+                  .Object@context <- context
+                  content <- mapInput(title,map)    
+                  id = mongo.oid.from.string(attr(map,'_id'))
+                  callNextMethod(.Object,title=title,content=content,`_id`=id,...) 
+              }
+    )
+}
+
+##Active Views##
 {
     #Timer
-    ready <- list(init=F)#,Styles=F,Data=F,Views=F)
-    lintr <- 100
+    ready <- list(init=F,Styles=F)
     timer <- observe({
         if( !(F %in% ready) ) {
             pp('--Ready:   ',round(Sys.time() - begin,2),'s')
             timer$destroy()
         } else invalidateLater(100,session)
     })
-    #Open Views
-    active <- reactiveValues( map = NA )
+    current <- reactiveValues( 
+        map=NA,
+        view=NA
+    )
     observe({
-        if(is.null(input$tabs)) return(NULL) 
-        active$map <- get.map(input$tabs)
+        if(is.null(input$tabs)) return()
+        current$map <- input[[input$tabs]]
     })
-    open <- reactiveValues( Queries = select('Queries') )
-    observe({ console$Queries <- input$Queries[[1]] })
+    observe({
+        if(is.null(input$tabs)) return()
+        current$view <- active$views[[input$tabs]]
+    })
+    active <- reactiveValues( 
+        views = list( Queries = new('Idea','Queries',select('Queries')) )
+    )
+    observe({ console$Queries <- input$Queries })
+    new.view  <- tabPanel('',mapInput(''),value='new',icon=icon('plus',class='fa-3x'))
     output$views <- renderUI ({
-        open <- rvtl(open)
-        open <- open[!sapply(open,is.null)]
-        order <- sapply(open,attr,'order')
-        open <- open[order(order,decreasing=F)]
-        titles <- c(names(open),'new')
-        tabPanels = lapply(titles, function(t) {
-            if(t=='new') {
-                t <- ''
-                c <- mapInput(t)
-                v <- 'new'
-                i <- icon('plus',class='fa-3x')
-            } else {
-                idea <- open[[t]]    
-                v <- t
-                i <- attr(idea,'icon')
-                c <- mapInput(t,value=idea)
-            }          
-            tabPanel(t,c,value=v,icon=i)
-        })        
+        tabPanels <- lapply(active$views, function(v) v@tab )
+        tabPanels[[length(tabPanels) + 1]] <- new.view
         tabPanels$id <- 'tabs'
         tabPanels$selected <- 'Queries'
         do.call(tabsetPanel, tabPanels)
     })
-    observeEvent( length(rvtl(open)), {
-        open <- rvtl(open)
-        open <- open[!sapply(open,is.null)]
-        L <- length(open)
-        L <- 100/(L + 1)
-        w <- paste0(L,'%')
+    observeEvent( length(active$views), {
+        active.views <- active$views
+        active.views <- active.views[!sapply(active.views,is.null)]
+        w <- paste0(100 / (length(active.views) + 1),'%')
         evaluate.CSS(list(`#tabs.nav > li`=list(width=w)))
-        evaluate.CSS(list(`#new`=list(width=w)))
     })
 }
 
-
 ##Draw##
 {
-    draw <- function(
-        object,
-        title=NULL,
-        icon=NULL,
-        order=NULL
-    ) { 
-        if(is.null(title)) title <- attr(object,'title')
-        if(is.null(icon))  icon  <- attr(object,'icon')
-        if(is.null(order)) order <- attr(object,'order')
-        if(is.null(title)) title <- deparse(substitute(object))
-        if(is.null(icon))  icon  <- icon('square-o',class='fa-2x')
-        if(is.null(order)) order <- length(reactiveValuesToList(open))+1
-        attr(object,'title') <- title
-        attr(object,'icon')  <- icon
-        attr(object,'order') <- order
-        open[[title]] <- object
-        observe( console[[title]] <- input[[title]][[1]] )
+    draw <- function(title) {        
+        ord <- length(active$views) + 1
+        isolate(active$views[[title]] <- new('Idea',title,select(title),tab.order=ord))
+        observe( console[[title]] <- input[[title]] )
         tab(title)
     }
-    new.tab <- reactiveValues(
+    #New Tab
+    tabs <- reactiveValues(
         is.new = F,
         counter = 1
     )
     observe({
         if(is.null(input$tabs)) return()
         if(input$tabs != 'new') return()
-        new.tab$is.new <- T
+        tabs$is.new <- T
     })
-    observeEvent( new.tab$is.new,{
-        if(!new.tab$is.new) return()
-        object <- list('I','II','III')
-        attr(object,'title') <- paste0('Title',new.tab$counter)
-        object <- as.idea.list(object)
-        draw(object)
-        new.tab$counter <- new.tab$counter + 1
-        new.tab$is.new <- F
+    observe({
+        if(!tabs$is.new) return()
+        title <- as.character(as.roman(tabs$counter))
+        draw(title)
+        tabs$counter <- tabs$counter + 1
+        tabs$is.new <- F
     })
-    close <- function(title) {
-        open[[title]] <- NULL
+    #Close
+    close.tab <- function(title) {
+        active$views[[title]] <- NULL
     }
     observeEvent( input$close,{
-        close(input$tabs)
+        close.tab(input$tabs)
     })
+    observe({
+        if(is.null(input$tabs)) return()
+        if(input$tabs=='Queries'){
+            evaluate.CSS(list(`#close`=list(visibility='hidden')))
+        } else {
+            evaluate.CSS(list(`#close`=list(visibility='visible')))
+        }
+    })
+    
 }
 
 ##Print##
@@ -120,31 +179,33 @@ source('.//R//demo.R',local=T)
 {
     run <- function(x) UseMethod('run')
     running <- list()
-    run.map <- function(inputId) { 
-        map <- get.map(inputId)
-        if(is.null(map[1][[1]])) {
-            running[[inputId]] <- observe({
-                map <- isolate(get.map(inputId))
-                if(is.null(map[1][[1]])) {
-                    ready[[inputId]] <<- F
-                    invalidateLater(lintr,session)
+    run.map <- function(title) { 
+        map <- isolate(input[[title]])
+        view <- isolate(active$views[[title]])
+        if(is.null(map)) {
+            running[[title]] <- observe({
+                if(is.null(map)) {
+                    ready[[title]] <<- F
+                    invalidateLater(100,session)
                     return()
                 } else {
-                    class(map) <- c(class(map),attr(map,'context'))
-                    if('CSS' %in% class(map)) evaluate.CSS(map[[1]])
+                    class(map) <- append(class(map),view@context)
+                    if('CSS' %in% class(map)) evaluate.CSS(map)
                     else isolate(evaluate(map))
-                    running[[inputId]]$destroy()
-                    ready[[inputId]] <<- NULL
+                    running[[title]]$destroy()
+                    ready[[title]] <<- NULL
                 }
             })
+            return()
         } 
-        class(map) <- c(attr(map,'context'))
-        map
+        class(map) <- append(class(map),view@context)
+        return(map)
     }
     observe({ 
         if((input$run == 0) && ready$init) return()
+        #if(input$run == 0) return()
         if(is.null(isolate(input$tabs))){
-            invalidateLater(lintr,session)
+            invalidateLater(100,session)
             return()
         }
         tab <- paste0(isolate(input$tabs),'()')
@@ -152,127 +213,4 @@ source('.//R//demo.R',local=T)
         isolate(evaluate(tab))
         ready$init <<- NULL
     })
-}
-
-##Get##
-{
-    get.map <- function(inputId) { 
-        map <- eval( parse(text = paste0('input$',inputId))) 
-        if     (inputId=='Styles')  ctx <- 'CSS'
-        else if(inputId=='Sources') ctx <- 'sources'
-        else                        ctx <- 'R'
-        map <- structure(map,
-                         class='map',
-                         title=inputId,
-                         context=ctx)
-    }
-    get.view <- function(title) {
-        idea <- get.idea(title)
-        view <- structure(as.list(idea)[[title]],
-                          class='view',
-                          title=idea$title,
-                          oid=idea$`_id`)
-    }
-}
-
-##Colorize##
-{
-    gen.scheme <- function(step=20,lower=10,upper=250,
-                           rs=step,rl=lower,ru=upper,
-                           gs=step,gl=lower,gu=upper,
-                           bs=step,bl=lower,bu=upper
-    ) {
-        L <- length(rvtl(open))
-        M <- L%/%2 + L%%2
-        gen.color <- function(step,lower,upper,anchor=c('random','left','right','center')) {
-            lower <- lower %/% step
-            upper <- upper %/% step
-            range <- lower:upper * step
-            while(length(range) < L) range <- rep(range,2)
-            colors <- sort(sample(range,L))
-            if(anchor=='random') anchor <- sample(c('left','right','center'),1)
-            if(anchor=='left') colors <- rev(colors)
-            else if(anchor=='center') colors <- center(colors) 
-            return(colors)
-        }
-        red <- gen.color(rs,rl,ru,'random')
-        green <- gen.color(gs,gl,gu,'random')
-        blue <- gen.color(bs,bl,bu,'random')
-    
-        #combine
-        scheme <- paste0('rgba(',red,',',green,',',blue,',.2)')
-        mapply(function(t,c) {
-            tab.colors[[t]] <<- c
-        },names(rvtl(open)),scheme,SIMPLIFY=F)
-        lapply(names(rvtl(open)),apply.color)
-        return(data.frame(red,green,blue,row.names=names(rvtl(open))))
-    }
-    tab.colors <- list(
-        Queries='rgba( 205, 255,  255, .2)',
-        Data=   'rgba( 200, 125,   75, .2)',
-        Views=  'rgba( 175, 175,  100, .2)',
-        Styles= 'rgba( 150, 225,  125, .2)',
-        Classes='rgba( 125, 200,  150, .2)',
-        Sources='rgba( 100, 150,  175, .2)',
-        Tests=  'rgba(  75, 100,  200, .2)'
-    )
-    get.nav <- function(title) {
-        selector <- '#tabs.nav > li:first-child'
-        i <- attr(rvtl(open)[[title]],'order') - 1
-        if(i > 0) {
-            nli <- paste0(rep(' + li',i),collapse='')
-            selector <- paste0(selector,nli)    
-        }
-        return(selector)
-    }
-    
-    apply.color <- function(title) {
-        selector <- get.nav(title)
-        selector <- paste0('#',title,', ',selector)
-        attribute <- 'background'
-        color <- tab.colors[[title]]
-        style <- list()
-        style[[selector]][[attribute]] <- color
-        evaluate.CSS(style)
-        return(c(title,color))
-    }
-}
-
-### View #RC##
-{
-    setOldClass('mongo.oid')
-    setOldClass('shiny.tag')
-    setOldClass('idea')
-    view <- setRefClass(
-        'view',
-        fields = list(
-            title='character',
-            icon='shiny.tag',
-            context='character',
-            oid='mongo.oid',
-            map='list',
-            idea='idea'                            
-        ),
-        methods = list(
-            initialize=function(title,...){
-                title <<- title
-                icon <<- icon('table')
-                context <<- 'R'
-                oid <<- mongo.oid.create()
-                map <<- list(title=title)
-            },
-            draw=function(){
-                #draw
-            },
-            save=function(){
-                #save
-            },
-            print=function(){
-                #print
-            },
-            run=function(){
-                #run  
-            }
-        )
-    )
 }

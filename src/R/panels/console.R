@@ -51,20 +51,14 @@ evaluate <- function(entry) {
     prompt$panel <- 'console'
     if (entry == 'clear') { return(clear()) }
     if (entry %in% prompt$commands) { entry <- paste0(entry,'()') }  
-    maps <- lapply(names(open),function(n) paste0(n,'()'))
+    maps <- isolate(lapply(names(active$views),function(n) paste0(n,'()')))
     if (entry %in% maps) { entry <- paste0('run.map("',substr(entry, 1, nchar(entry)-2),'")') }
-    if (grepl("@",entry)) {
-        entry <- gsub("@(?=\\()", "run.map", entry, perl=T) 
-        entry <- gsub("@(?=[A-Za-z])", ".map[[1]]$", entry, perl=T) 
-        #entry <- gsub("@(?=[[])", ".map[[1]]", entry, perl=T) 
-        entry <- gsub("@", ".map[1]", entry)
-    } 
-    console$.map <- isolate(active$map)
-    #entry <- gsub("\\$(?=\\()", "select", entry, perl=T) 
+    entry <- gsub("\\$(?=\\()", "select", entry, perl=T) 
     tryCatch(
         {
-            values <- eval(parse(text=entry), console )
+            values <- isolate(eval(parse(text=entry), console ))
             if ('R' %in% class(values)) {
+                values <- as.list(values)
                 rapply(values,evaluate)
             } else if('CSS' %in% class(values)) {
                 lapply(values,evaluate.CSS)
@@ -79,7 +73,7 @@ evaluate <- function(entry) {
         warning = function(w){
             w <- sub('simpleWarning in eval(expr, envir, enclos)','warning',w,fixed=T)
             toConsole(w,'warning')
-            values <- suppressWarnings( eval(parse(text=entry), console ) )
+            isolate(values <- suppressWarnings( eval(parse(text=entry), console ) ))
             toConsole(capture.output(values),'out',.try(paste0(class(eval(values)),collapse=' ')))
             ans <<- values
         },

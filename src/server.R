@@ -22,7 +22,7 @@ shinyServer(function(input, output, session) {
         hovers  = NULL,
         widths  = NULL
     )
-    source('.//R//helpers.R',local=T)
+    source('.//R//utils//helpers.R',local=T)
     source('.//R//CAS.R',local=T)
     clear()    
     pp('--Session: ',begin <- Sys.time())
@@ -65,14 +65,16 @@ shinyServer(function(input, output, session) {
     })
 }
 ##Console##
-source('.//R//console.R',local=T)
+source('.//R//panels//console.R',local=T)
 ##Inspector##
-source('.//R//inspector.R',local=T)
+source('.//R//panels//inspector.R',local=T)
 ##Help##
-source('.//R//help.R',local=T)
+source('.//R//panels//help.R',local=T)
 ##Database##
 source('.//R//qbase.R',local=T)
 ##Views##
-source('.//R//views.R',local=T)  
+source('.//R//Views.R',local=T) 
+##Graphs##
+source('.//R//Graphs.R',local=T)
 
 })###

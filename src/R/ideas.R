@@ -23,7 +23,7 @@ as.list.idea <- function(idea) {
             paste0(fun,args,')')
         } else lapply(idea$ideas,as.list.idea)
     } else node <- idea$title
-    if('formatVersion' %in% names(idea)) attr(node,'title') <- idea$title
+    #if('formatVersion' %in% names(idea)) attr(node,'title') <- idea$title
     return(node)
 }
 as.idea <- function(x) UseMethod('as.idea',x)

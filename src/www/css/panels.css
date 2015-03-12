@@ -80,7 +80,7 @@ div#chat {
     position: absolute;
     top: calc(2vw + 4vh);
     left: 0;
-    width: calc(100% - 8px);
+    width: 100%;
     bottom: 0;
     overflow: scroll;
 }
@@ -134,6 +134,7 @@ div#chat {
   margin: .5vh 0 0 3px;
   border: 1px rgba(168,168,168,.1);
   border-style: inset;
+  width: 98%;
 }
 #console .message {
     color:darkseagreen;

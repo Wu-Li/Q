@@ -109,21 +109,6 @@ $( function () {
         }
     });
     
-    
-    $(window).resize( function() {
-        var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-        var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-        var ph = $("#panelHeight");
-        var pw = $("#panelWidth");
-        var tw = $('#tabs-wrapper').width() + (.01 * w);
-        var c = w - tw
-        if (c < 200) { pw.val(200/8); }
-        else { pw.val(c/8)}
-        ph.val(h);
-        $("#plot img").css('width',c);
-        $("#panels + .tab-content").css("width",c);
-    });
-    
     $("#tabs > li > a").click( function (e){
         var mapId = '#' + (this.text).trim();
         $(mapId).trigger('active');
@@ -161,6 +146,19 @@ $( function () {
             $("#plot img").css('width',c);
             $('.iframeCover').remove();
         }
+    });
+    $(window).resize( function() {
+        var w = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+        var h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        var ph = $("#panelHeight");
+        var pw = $("#panelWidth");
+        var tw = $('#tabs-wrapper').width();
+        var c = w - tw
+        if (c < 200) { pw.val(200/8); }
+        else { pw.val(c/8)}
+        ph.val(h);
+        $("#plot img").css('width',c);
+        $("#panels + .tab-content").css("width",c);
     });
     $(window).resize();
     

@@ -3,8 +3,6 @@
 #tabs-wrapper {
     position: relative;
     float: right;
-    right: 1vh;
-    top: 1vh;
     margin-left:.3vw;
     height: calc(100% - 5vh) !important;
     width: calc(100vw - 45vw);
@@ -58,7 +56,7 @@
     font-size: 1.2vw;
     font-family: serif;
     font-weight: bold;
-    color: #777;
+    color: #999;
     height: 10vh;
     padding: calc(4vh - 1.2vw) 5%;
     margin:0 !important;
@@ -67,6 +65,9 @@
     width:100%;
     border:1px white;
     overflow:hidden;
+}
+#tabs.nav > li > a > i {
+  color: #999;  
 }
 .nav-tabs>li.active > a, 
 .nav-tabs>li.active > a:hover, 
@@ -79,11 +80,14 @@
 }
 
 #tabs.nav > li:last-child {
-    background: rgba(125,125,125,.4);
+    background: rgba(125,125,125,.4) !important;
 }
 #tabs.nav > li:last-child a { 
     display:flex; 
+}
+#tabs.nav > li:last-child a > i { 
     text-shadow: 0 0 2px #ddd;
+    margin:auto !important;
 }
 
 button#close {
@@ -114,10 +118,17 @@ button#close {
     margin: 0;
     background: none;
     text-shadow: none;
-    border: none;
+    border:none;
+    border-top: solid 1px rgba(119, 119, 119, 0.2);
+    border-right: solid 1px rgba(119, 119, 119, 0.2);
+    border-radius: 0;
     box-shadow: none;
     color: #777;
 }
+#tray button.btn:first-child { 
+    border-right: none;
+}
+
 #run { color: rgba(0,130,0,.5) !important; }
 
 /***Maps***/

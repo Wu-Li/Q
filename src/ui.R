@@ -1,8 +1,8 @@
 library(shiny)
 library(rmongodb)
 
-source('R/mapBinding.R')
-source('R/jsBinding.R')
+source('R//inputs//mapBinding.R')
+source('R//inputs//jsBinding.R')
 
 shinyUI(
     fluidPage(

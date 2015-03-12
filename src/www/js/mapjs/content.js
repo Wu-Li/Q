@@ -121,9 +121,9 @@ MAPJS.content = function (contentAggregate, sessionKey) {
 				counts = _.countBy(parentIdea.ideas, function (v, k) {
 					return k < 0;
 				});
-				if ((counts['true'] || 0) < counts['false']) {
-					childRankSign = -1;
-				}
+				//if ((counts['true'] || 0) < counts['false']) {
+				//	childRankSign = -1;
+				//}
 			}
 			newRank = maxKey(parentIdea.ideas, childRankSign) + childRankSign;
 			return newRank;
