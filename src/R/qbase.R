@@ -1,7 +1,7 @@
 ##Connect##
 {
     qbase <- if (is.null(getOption('local'))) {
-        mongo.create(host="ds043200.mongolab.com:43200/qb",username="qsys",password="snooze4u",db='qb')
+        mongo.create(host="ds043200.mongolab.com:43200/qb",username="qsys",password="****",db='qb')
     } else {
         mlab  <- mongo.create(host="ds043200.mongolab.com:43200/qb"   ,username="qsys",password="snooze4u",db='qb')              
         qback <- mongo.create(host="ds045511.mongolab.com:45511/qback",username="qsys",password="snooze4u",db='qback')
